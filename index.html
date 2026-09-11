@@ -150,6 +150,12 @@
   .fc .hint{font-size:12px;color:var(--muted);margin-top:6px}
   .fc.open .hint{display:none}
 
+  /* aula (ensino antes do treino) */
+  .aula{background:var(--blue-soft);border:1px solid color-mix(in srgb,var(--blue) 25%,var(--line));border-radius:12px;padding:14px 16px;margin:6px 0 14px;font-size:14.5px;line-height:1.65}
+  .aula b{color:var(--ink)}
+  .matfilter{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
+  .matfilter button{border:1px solid var(--line);background:var(--paper);color:var(--ink-2);border-radius:999px;padding:6px 13px;cursor:pointer;font:inherit;font-size:13.5px}
+  .matfilter button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
   /* plano checklist */
   .chk{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line-2)}
   .chk input{margin-top:5px;width:16px;height:16px;accent-color:var(--green);flex:0 0 auto}
@@ -211,8 +217,11 @@
     <div class="grp">Como passar</div>
     <a href="#plano">6. Plano de estudos</a>
     <a href="#memoria">Fixar na memória</a>
-    <a href="#simulado">7. Simulado (corrige!)</a>
-    <a href="#flashcards">9. Flashcards</a>
+    <div class="grp">Aula + prática</div>
+    <a href="#treinos-sec">Aulas + treinos por tema</a>
+    <a href="#simulado">Simulado 1</a>
+    <a href="#simulado2">Simulado 2</a>
+    <a href="#flashcards">Flashcards</a>
     <a href="#fontes">10. Fontes oficiais</a>
     <a href="#claude">11. Tutor no Claude Code</a>
   </nav>
@@ -581,6 +590,17 @@
       </ul>
     </div></section>
 
+    <!-- ============ AULAS + TREINOS ============ -->
+    <section id="treinos-sec">
+      <div class="card">
+        <p class="eyebrow">Aula + prática</p>
+        <h2 class="sec">Aulas e treinos por tema</h2>
+        <p>Aqui você <strong>aprende primeiro</strong> (uma aula curta com exemplo) e <strong>treina em seguida</strong>. Em cada questão aparece o gabarito e a <strong>explicação do porquê</strong> — leia mesmo quando acertar: é o que fixa na memória. Tudo aqui dentro; você não precisa pesquisar fora.</p>
+        <div class="matfilter" id="matfilter"></div>
+      </div>
+      <div id="treinos"></div>
+    </section>
+
     <!-- ============ 7. SIMULADO ============ -->
     <section id="simulado"><div class="card">
       <p class="eyebrow">Seção 7 · 40 questões · 4 alternativas · 3 horas</p>
@@ -592,6 +612,14 @@
         <button class="btn ghost" id="limpar">Limpar</button>
         <span class="score" id="scorebox" aria-live="polite"></span>
       </div>
+    </div></section>
+
+    <!-- ============ SIMULADO 2 ============ -->
+    <section id="simulado2"><div class="card">
+      <p class="eyebrow">Prova online 2 · 40 questões · 3 horas</p>
+      <h2 class="sec">Simulado 2 (inédito)</h2>
+      <p>Segunda prova completa no formato Fundep (10 Português · 10 Matemática/RLM · 5 Gerais · 5 Legislação · 10 Específicos). Marque tudo e clique em <strong>Corrigir</strong> — a explicação de cada questão aparece embaixo dela.</p>
+      <div id="quiz-sim2"></div>
     </div></section>
 
     <!-- ============ 9. FLASHCARDS ============ -->
@@ -877,6 +905,193 @@ var FC=[
   document.getElementById("fc-shuffle").onclick=function(){for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}render();};
   var allOpen=false;
   document.getElementById("fc-all").onclick=function(){allOpen=!allOpen;box.querySelectorAll(".fc").forEach(function(c){c.classList.toggle("open",allOpen);});};
+})();
+</script>
+<script>
+/* ===== Motor genérico de provas/treinos (aula + questões + correção) ===== */
+(function(){
+  var L="ABCD".split("");
+  function qHTML(q,n){
+    var h='<div class="q" data-c="'+q.c+'"><div class="qn">Questão '+n+'</div><div class="qt">'+q.t+'</div>';
+    for(var j=0;j<q.o.length;j++){h+='<label class="opt"><input type="radio"><span class="lt">'+L[j]+')</span><span>'+q.o[j]+'</span></label>';}
+    h+='<div class="expl"><b>Gabarito: '+L[q.c]+'.</b> '+q.e+'</div></div>';
+    return h;
+  }
+  function wire(host){
+    var qs=[].slice.call(host.querySelectorAll(".q"));
+    qs.forEach(function(qd,i){[].forEach.call(qd.querySelectorAll("input"),function(inp){inp.name=host.id+"_"+i;});});
+    var b=document.createElement("div"); b.className="simbar";
+    b.innerHTML='<button class="btn cor">Corrigir</button><button class="btn ghost lim">Limpar</button><span class="score sc" aria-live="polite"></span>';
+    host.appendChild(b);
+    b.querySelector(".cor").onclick=function(){
+      var ac=0;
+      qs.forEach(function(qd){
+        var opts=qd.querySelectorAll(".opt"), ins=qd.querySelectorAll("input"), c=+qd.getAttribute("data-c");
+        var sel=qd.querySelector("input:checked");
+        [].forEach.call(opts,function(o){o.classList.remove("right","wrong");});
+        if(opts[c])opts[c].classList.add("right");
+        if(sel){var v=[].indexOf.call(ins,sel); if(v===c)ac++; else if(opts[v])opts[v].classList.add("wrong");}
+        qd.querySelector(".expl").classList.add("show");
+      });
+      var pct=Math.round(ac/qs.length*100);
+      var msg=pct>=70?"Ótimo!":pct>=50?"Bom — revise os erros.":"Releia a aula e refaça.";
+      b.querySelector(".sc").innerHTML="Acertos: <b>"+ac+"</b>/"+qs.length+" ("+pct+"%). "+msg;
+      qs[0].scrollIntoView({behavior:"smooth",block:"start"});
+    };
+    b.querySelector(".lim").onclick=function(){
+      host.querySelectorAll("input:checked").forEach(function(i){i.checked=false;});
+      host.querySelectorAll(".opt").forEach(function(o){o.classList.remove("right","wrong");});
+      host.querySelectorAll(".expl").forEach(function(e){e.classList.remove("show");});
+      b.querySelector(".sc").textContent="";
+    };
+  }
+  function mountList(host,items){ // items: {b},{passage},{t,o,c,e}
+    var h="",n=0;
+    items.forEach(function(q){
+      if(q.b)h+='<div class="blocklabel">'+q.b+'</div>';
+      if(q.passage)h+='<div class="passage">'+q.passage+'</div>';
+      if(q.t){n++;h+=qHTML(q,n);}
+    });
+    host.innerHTML=h; wire(host);
+  }
+  function mountQs(host,qs){var h="";qs.forEach(function(q,i){h+=qHTML(q,i+1);});host.innerHTML=h;wire(host);}
+
+  /* ===================== SIMULADO 2 ===================== */
+  var SIM2=[
+  {b:"Língua Portuguesa (1–10)",passage:"O DMAE mantém programas de educação ambiental nas escolas de Uberlândia. A ideia é simples: crianças que aprendem cedo a não desperdiçar água tornam-se adultos mais conscientes. Não se trata de culpar o cidadão, mas de mostrar que cada gesto conta. Afinal, a água tratada custa caro, e o Cerrado, bioma da região, sofre com estiagens cada vez mais longas."},
+  {t:"O objetivo central do texto é",o:["culpar o cidadão pelo desperdício de água.","defender que a educação ambiental forma adultos mais conscientes no uso da água.","informar o preço da água tratada.","descrever o bioma Cerrado."],c:1,e:"O texto diz explicitamente que “não se trata de culpar o cidadão” e foca em formar adultos conscientes. Preço e bioma são detalhes de apoio, não a ideia central."},
+  {t:"Em “Não se trata de culpar o cidadão, mas de mostrar que cada gesto conta”, a conjunção “mas” indica",o:["conclusão.","adição.","oposição (contraste).","causa."],c:2,e:"“Mas” é conjunção adversativa: opõe “culpar” a “mostrar”. Contraste."},
+  {t:"Assinale a alternativa correta quanto à concordância.",o:["Fazem cinco anos que o programa começou.","Houve reclamações sobre a tarifa.","Existe muitos poços na zona rural.","Tratam-se de água potável."],c:1,e:"“Houve” (haver = existir) é impessoal → singular. “Faz cinco anos” (fazer de tempo é impessoal); “existem poços” (existir concorda); “trata-se de água” (tratar-se de é impessoal)."},
+  {t:"Assinale a alternativa em que a crase foi empregada corretamente.",o:["Vou à pé até a estação.","O pagamento será feito à vista.","Entreguei o relatório à ele.","Refiro-me à Vossa Excelência."],c:1,e:"“À vista” é locução adverbial feminina (tem crase). Erros: “a pé” (masculino), “a ele” (pronome), “a Vossa Excelência” (pronome de tratamento) — nenhum aceita crase."},
+  {t:"Assinale a alternativa que respeita a colocação pronominal da norma-padrão.",o:["Nunca se deve desperdiçar água.","Nunca deve-se desperdiçar água.","Me parece justo economizar.","O servidor que apresentou-se atrasou."],c:0,e:"“Nunca” é palavra atrativa → exige próclise (“nunca SE deve”). Não se inicia frase com pronome oblíquo (“Me parece”); “que” também atrai (“que se apresentou”)."},
+  {t:"Assinale a alternativa com pontuação correta.",o:["A tarifa que subiu, gerou reclamações.","O DMAE, autarquia municipal, cuida da água e do esgoto.","O diretor solicitou, urgência ao setor.","Os moradores que economizam água pagam menos, e os que gastam."],c:1,e:"“Autarquia municipal” é aposto explicativo → vai entre vírgulas. As outras separam indevidamente sujeito/verbo/complemento."},
+  {t:"Em “A água tratada custa caro”, a palavra “caro” é",o:["adjetivo.","advérbio.","substantivo.","preposição."],c:1,e:"Aqui “caro” modifica o verbo “custa” (custa de modo caro) e fica invariável → advérbio. Como adjetivo seria “um produto caro”."},
+  {t:"Em “o Cerrado sofre com estiagens”, a figura de linguagem é",o:["metáfora.","personificação (prosopopeia).","metonímia.","hipérbole."],c:1,e:"Atribui uma ação humana (“sofrer”) a algo não humano (o bioma) → personificação."},
+  {t:"Assinale a palavra formada por composição por aglutinação.",o:["guarda-chuva.","planalto.","infeliz.","cafezinho."],c:1,e:"“Planalto” = plano + alto, com fusão e perda de elementos → aglutinação. “Guarda-chuva” é justaposição; “infeliz” é derivação prefixal; “cafezinho” é sufixal."},
+  {t:"Assinale a alternativa correta pelo Novo Acordo Ortográfico.",o:["A assembléia aprovou o vôo.","A ideia da jiboia é heroica.","O enjôo durou horas.","Ele contém as idéias."],c:1,e:"Paroxítonas com ditongo aberto ei/oi perderam o acento: ideia, jiboia, heroica; “voo/enjoo” também sem acento. As demais usam grafia antiga."},
+
+  {b:"Matemática e RLM (11–20)"},
+  {t:"Quanto é 30% de 8.000 litros?",o:["240 L","2.400 L","800 L","3.000 L"],c:1,e:"30% = 0,30 → 0,30 × 8.000 = 2.400 L."},
+  {t:"Um preço sofre aumento de 25% e depois desconto de 20%. Em relação ao original, o preço final",o:["aumentou 5%.","ficou igual (sem variação).","caiu 5%.","aumentou 45%."],c:1,e:"1,25 × 0,80 = 1,00 → volta ao valor original. Percentuais sucessivos multiplicam, não somam."},
+  {t:"Capital de R$ 5.000 a juros simples de 2% a.m. por 6 meses. O montante é",o:["R$ 600","R$ 5.600","R$ 6.000","R$ 5.060"],c:1,e:"J = 5.000 × 0,02 × 6 = 600; M = 5.000 + 600 = 5.600. (R$ 600 é só o juro — pegadinha.)"},
+  {t:"Se 4 bombas enchem um reservatório em 9 horas, 6 bombas (mesmo ritmo) enchem em",o:["6 horas","13,5 horas","4 horas","9 horas"],c:0,e:"Grandezas inversamente proporcionais: 4×9 = 6×x → x = 6 h. Mais bombas, menos tempo."},
+  {t:"A média das notas 6, 7, 8, 9 e 10 é",o:["7","8","9","7,5"],c:1,e:"(6+7+8+9+10)/5 = 40/5 = 8."},
+  {t:"Ao lançar um dado comum, a probabilidade de sair número par é",o:["1/6","1/3","1/2","2/3"],c:2,e:"Pares: 2, 4, 6 → 3 casos em 6 = 1/2 = 50%."},
+  {t:"De um grupo de 5 pessoas, quantas comissões de 3 pessoas podem ser formadas?",o:["10","60","15","20"],c:0,e:"Ordem não importa → combinação C(5,3) = 10. (60 seria arranjo, onde a ordem importaria.)"},
+  {t:"Na PA 3, 7, 11, 15, …, o 10º termo é",o:["39","40","43","36"],c:0,e:"an = a1 + (n−1)·r = 3 + 9×4 = 39. (Usar n em vez de n−1 dá 43 — pegadinha.)"},
+  {t:"A negação de “Todos os servidores são pontuais” é",o:["Nenhum servidor é pontual.","Algum servidor não é pontual.","Todos os servidores são impontuais.","Alguns servidores são pontuais."],c:1,e:"Negar “todo A é B” = “algum A não é B”. Basta um contraexemplo para derrubar o “todos”."},
+  {t:"Equivale a “Se estuda, então passa”:",o:["Se passa, então estuda.","Se não passa, então não estuda.","Se não estuda, então não passa.","Estuda e não passa."],c:1,e:"Equivalência = contrapositiva: p→q ≡ ~q→~p. “Se não passa, então não estuda.” (A é a recíproca; C é a inversa; D é a negação.)"},
+
+  {b:"Conhecimentos Gerais (21–25)"},
+  {t:"O rio que corta Uberlândia e é uma das principais captações do DMAE é o",o:["Rio São Francisco","Rio Uberabinha","Rio das Velhas","Rio Doce"],c:1,e:"O Uberabinha corta a cidade (afluente do Araguari, bacia do Paranaíba). O São Francisco nasce em MG, mas não é o rio local."},
+  {t:"Minas Gerais é o estado brasileiro com o maior número de",o:["habitantes","municípios","rios","rodovias"],c:1,e:"MG tem 853 municípios — o maior número do país. Em população, é o 2º (atrás de SP)."},
+  {t:"A ANA passou a ser reguladora de referência nacional do saneamento pela",o:["Lei 9.433/1997","Lei 11.445/2007","Lei 14.026/2020 (Novo Marco do Saneamento)","Lei 4.320/1964"],c:2,e:"O Novo Marco (14.026/2020) deu à ANA o papel de reguladora de referência e fixou metas de universalização (99% água, 90% esgoto até 2033)."},
+  {t:"O bioma predominante na região de Uberlândia é o",o:["Mata Atlântica","Cerrado","Caatinga","Pantanal"],c:1,e:"Uberlândia fica no Triângulo Mineiro, em área de Cerrado — o que agrava a questão das estiagens."},
+  {t:"A Política Nacional de Recursos Hídricos (Lei 9.433/1997) adota como unidade de gestão",o:["o município","o estado","a bacia hidrográfica","a microrregião"],c:2,e:"A bacia hidrográfica é a unidade de gestão; a água é bem público, com outorga e cobrança pelo uso e comitês de bacia."},
+
+  {b:"Legislação (26–30)"},
+  {t:"São formas de vacância de cargo público, EXCETO",o:["exoneração","demissão","aposentadoria","nomeação"],c:3,e:"Nomeação é forma de PROVIMENTO (ocupa o cargo). As outras são vacância (desocupam)."},
+  {t:"O servidor efetivo adquire estabilidade após",o:["a posse","2 anos","3 anos de efetivo exercício","5 anos"],c:2,e:"CF art. 41: 3 anos de efetivo exercício, com avaliação especial de desempenho."},
+  {t:"Pela Constituição, o prazo de validade do concurso público é de",o:["até 1 ano, sem prorrogação","até 2 anos, prorrogável uma vez por igual período","4 anos","indeterminado"],c:1,e:"CF art. 37, III: até 2 anos, prorrogável uma única vez por igual período."},
+  {t:"O controle externo do Município é exercido",o:["pelo Prefeito","pela Câmara Municipal, com auxílio do Tribunal de Contas","pelo Ministério Público","pelo próprio DMAE"],c:1,e:"CF art. 31: controle externo pela Câmara, com auxílio do Tribunal de Contas (parecer prévio, afastado só por 2/3)."},
+  {t:"Assinale uma penalidade disciplinar prevista para o servidor público.",o:["advertência","fiança","interdição","tombamento"],c:0,e:"Advertência é a penalidade mais branda (depois: suspensão, demissão, cassação de aposentadoria, destituição). As demais não são sanções disciplinares."},
+
+  {b:"Conhecimentos Específicos (31–40)"},
+  {t:"Na Lei 14.133/2021, a modalidade usada para alienar bens imóveis ou móveis inservíveis é",o:["pregão","leilão","concurso","concorrência"],c:1,e:"Leilão: alienação de bens, critério maior lance. Pregão é para bens/serviços comuns; concurso para trabalho técnico/artístico."},
+  {t:"A modalidade para bens e serviços comuns, com critério de menor preço, é",o:["concurso","leilão","pregão","diálogo competitivo"],c:2,e:"Pregão = bens e serviços comuns, menor preço ou maior desconto, conduzido por pregoeiro."},
+  {t:"O documento que registra fielmente o que ocorreu numa reunião é a",o:["ofício","ata","portaria","requerimento"],c:1,e:"Ata: registro fiel (data, presentes, deliberações), sem parágrafos vazios; correção com “digo” ou “em tempo”."},
+  {t:"No método PEPS, a saída de estoque é valorada pelo preço",o:["mais recente","mais antigo (o primeiro que entrou)","médio","mais alto"],c:1,e:"PEPS/FIFO: o primeiro que entra é o primeiro que sai → a saída usa o preço mais antigo; o estoque final fica pelos preços recentes."},
+  {t:"Na curva ABC, a classe A caracteriza-se por",o:["poucos itens e alto valor","muitos itens e baixo valor","itens sem valor","itens perecíveis"],c:0,e:"Classe A ≈ 20% dos itens e 80% do valor → controle rigoroso. (B: 30/15; C: 50/5.)"},
+  {t:"A ordem correta dos estágios da despesa pública é",o:["pagamento, empenho, liquidação","empenho, liquidação, pagamento","liquidação, empenho, pagamento","empenho, pagamento, liquidação"],c:1,e:"Empenha, Liquida, Paga: empenho reserva a verba; liquidação confere a entrega; pagamento quita."},
+  {t:"O instrumento orçamentário com vigência de 4 anos é o",o:["LOA","LDO","PPA","LRF"],c:2,e:"PPA planeja (4 anos); LDO orienta (anual); LOA executa (orçamento do ano)."},
+  {t:"Na hierarquia de necessidades de Maslow, o nível mais alto é o de",o:["necessidades fisiológicas","segurança","autorrealização","estima"],c:2,e:"Ordem: fisiológicas → segurança → sociais → estima → autorrealização (topo)."},
+  {t:"Segundo Herzberg, o salário é um fator",o:["motivacional","higiênico","de autorrealização","de liderança"],c:1,e:"Fatores higiênicos (salário, condições, chefia) evitam a insatisfação; os motivacionais (reconhecimento, responsabilidade) geram satisfação."},
+  {t:"O princípio da administração pública que exige a divulgação dos atos para transparência e eficácia é o da",o:["legalidade","impessoalidade","publicidade","eficiência"],c:2,e:"Publicidade (o “P” do LIMPE): o ato precisa ser publicado para produzir efeitos e permitir o controle."}
+  ];
+  mountList(document.getElementById("quiz-sim2"),SIM2);
+
+  /* ===================== TREINOS (aula + questões) ===================== */
+  var TREINOS=[
+  {mat:"Português",titulo:"Aula + treino: Crase",aula:"Crase é a fusão da preposição <b>a</b> com o artigo <b>a(s)</b> (ou com o “a” de <i>aquele/aquela/aquilo</i>). Só existe diante de palavra <b>feminina</b>. <b>Teste infalível:</b> troque a palavra feminina por uma masculina — se surgir <b>“ao”</b>, tem crase; se surgir só <b>“a”</b>, não tem.<br>Ex.: “Vou <b>à</b> escola” → “Vou <b>ao</b> colégio” (crase). “Vou <b>a</b> pé” → “Vou <b>a</b> nado” (sem crase).<br><b>Sempre tem:</b> às vezes, à noite, à vista, à moda de, à medida que, e horas definidas (às 8h). <b>Nunca tem:</b> antes de verbo, de palavra masculina, de pronome (a ela, a você, a Vossa Excelência) e de cidade que não pede artigo (“vou a Uberlândia”).",qs:[
+    {t:"Em qual alternativa a crase foi empregada corretamente?",o:["Ela se dedica à leitura.","Cheguei à pé.","Refiro-me à ela.","Fui à cavalo."],c:0,e:"“Dedicar-se a algo” + “a leitura” (fem., com artigo) = à. Troca: “ao estudo” → ao → crase. As outras são masculino/pronome (sem crase)."},
+    {t:"Assinale a frase SEM erro de crase.",o:["Fui à Uberlândia visitar o DMAE.","Pague a taxa à vista.","Estou disposto à ajudar.","Refiro-me à Vossa Excelência."],c:1,e:"“À vista” é locução adverbial feminina. Erros: cidade sem artigo (“a Uberlândia”), antes de verbo (“a ajudar”), pronome de tratamento (“a Vossa Excelência”)."},
+    {t:"“A empresa presta serviço ___ população.” Complete corretamente.",o:["a","à","há","ah"],c:1,e:"“Prestar serviço a” + “a população” (fem., com artigo) = à. Troca pelo masculino: “ao povo” → ao → crase."},
+    {t:"Assinale a alternativa em que NÃO deve haver crase.",o:["Chegou às 9 horas.","Vou à feira.","Ele começou a estudar.","Entreguei o ofício à diretora."],c:2,e:"Antes de verbo (“a estudar”) nunca há crase. As demais são feminino com artigo/locução → crase correta."}
+  ]},
+  {mat:"Português",titulo:"Aula + treino: Concordância verbal",aula:"Verbos <b>impessoais</b> não têm sujeito e ficam sempre no <b>singular</b>:<br>• <b>Haver</b> no sentido de <i>existir</i> ou de <i>tempo</i>: “Houve problemas”, “Havia muita gente”, “Há dez anos”. Nunca “houveram”.<br>• <b>Fazer</b> indicando tempo: “Faz dois anos”, “Fazia meses”. Nunca “fazem dois anos”.<br>Já <b>existir</b> é pessoal e <b>concorda</b>: “Existem problemas”.<br>Partícula <b>se</b>: “Vende<b>m</b>-se casas” (voz passiva, concorda) × “Precisa-se de funcionários” (indeterminação, singular).",qs:[
+    {t:"Assinale a alternativa correta.",o:["Houveram falhas no sistema.","Existe falhas no sistema.","Fazem cinco anos que trabalho aqui.","Havia muitas falhas no sistema."],c:3,e:"“Havia” (haver) é impessoal → singular, mesmo com “muitas falhas”. Erros: “houveram”, “existem falhas”, “faz cinco anos”."},
+    {t:"“___ dez anos que o DMAE ampliou a rede.” Complete.",o:["Fazem","Faz","Fazes","Fizeram"],c:1,e:"“Fazer” indicando tempo decorrido é impessoal → “Faz dez anos”."},
+    {t:"“Na zona rural, ___ muitos poços artesianos.” Complete.",o:["existe","existem","havia de existir","tem"],c:1,e:"“Existir” é verbo pessoal e concorda com o sujeito “poços” → “existem”."},
+    {t:"Assinale a concordância correta com a partícula “se”.",o:["Vende-se casas.","Vendem-se casas.","Aluga-se apartamentos.","Conserta-se sapatos."],c:1,e:"Voz passiva sintética: o verbo concorda com o sujeito paciente. “Casas são vendidas” → “Vendem-se casas”. As outras deveriam concordar (alugam-se, consertam-se)."}
+  ]},
+  {mat:"Português",titulo:"Aula + treino: Pontuação",aula:"A vírgula <b>nunca</b> separa o sujeito do verbo, nem o verbo do complemento. É <b>obrigatória</b> para isolar aposto (“O DMAE, autarquia municipal, …”), vocativo (“Senhor diretor, …”) e oração adverbial anteposta (“Quando chove, os reservatórios enchem”).<br><b>Explicativa × restritiva</b> muda o sentido: “Os servidores<b>,</b> que faltaram<b>,</b> foram advertidos” = <i>todos</i> faltaram (explicativa, entre vírgulas). “Os servidores que faltaram foram advertidos” = <i>só</i> os que faltaram (restritiva, sem vírgula).",qs:[
+    {t:"Assinale a pontuação correta.",o:["O diretor, assinou o documento.","Quando chove, os reservatórios enchem.","Os moradores que economizam, pagam menos.","Ele solicitou, água ao setor."],c:1,e:"Oração adverbial anteposta (“Quando chove”) pede vírgula. As outras separam indevidamente sujeito do verbo ou verbo do complemento."},
+    {t:"“Os candidatos, que estudaram, passaram” significa que",o:["só alguns candidatos estudaram.","todos os candidatos estudaram.","ninguém estudou.","a frase está errada."],c:1,e:"Vírgulas = oração explicativa → refere-se a TODOS os candidatos. Sem vírgulas seria restritiva (só alguns)."},
+    {t:"Assinale a alternativa em que a vírgula está ERRADA.",o:["Uberlândia, cidade do Triângulo, cresceu muito.","A tarifa, subiu em janeiro.","Senhor prefeito, aprove o projeto.","Depois da chuva, a barragem encheu."],c:1,e:"“A tarifa” é sujeito e não pode ser separado do verbo “subiu” por vírgula."},
+    {t:"Para isolar o aposto explicativo, a forma correta é",o:["O DMAE autarquia municipal cuida da água.","O DMAE, autarquia municipal, cuida da água.","O DMAE; autarquia municipal; cuida da água.","O DMAE: autarquia municipal: cuida da água."],c:1,e:"O aposto explicativo fica entre vírgulas."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Porcentagem e juros",aula:"<b>Porcentagem:</b> x% = x/100. Aumentar p% = ×(1 + p/100); descontar p% = ×(1 − p/100). <b>Aumentos/descontos sucessivos multiplicam</b> (não somam): +10% e +20% = 1,10 × 1,20 = 1,32 → +32%.<br><b>Juros simples:</b> J = C·i·t e M = C + J.<br><b>Juros compostos:</b> M = C·(1+i)ᵗ (juro sobre juro). Taxa e tempo na <b>mesma unidade</b>. Pegadinha: pedem o <b>montante</b> e você marca só o <b>juro</b>.",qs:[
+    {t:"R$ 1.000 a juros compostos de 10% ao mês por 2 meses. O montante é",o:["R$ 1.200","R$ 1.210","R$ 1.100","R$ 1.021"],c:1,e:"M = 1.000 × (1,1)² = 1.000 × 1,21 = 1.210."},
+    {t:"Um produto de R$ 200 sofre +10% e depois −10%. O preço final é",o:["R$ 200","R$ 198","R$ 202","R$ 180"],c:1,e:"200 × 1,10 × 0,90 = 198. Não volta ao original, porque os percentuais incidem sobre valores diferentes."},
+    {t:"Juros simples: R$ 2.000 a 3% ao mês por 5 meses. O juro é",o:["R$ 300","R$ 2.300","R$ 30","R$ 600"],c:0,e:"J = 2.000 × 0,03 × 5 = 300. (R$ 2.300 seria o montante.)"},
+    {t:"Uma tarifa de R$ 80 aumenta 25%. O novo valor é",o:["R$ 100","R$ 105","R$ 20","R$ 96"],c:0,e:"80 × 1,25 = 100. (R$ 20 é só o aumento.)"}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Raciocínio lógico",aula:"<b>De Morgan:</b> ~(p e q) = (~p) ou (~q); ~(p ou q) = (~p) e (~q).<br>A negação de <b>“Se p então q”</b> é <b>“p e não q”</b> (não é “se não p então não q”!).<br><b>Quantificadores:</b> a negação de “Todo A é B” é “Algum A não é B”; a de “Algum A é B” é “Nenhum A é B”.<br><b>Equivalência</b> de “Se p então q” = <b>contrapositiva</b> “Se não q então não p”.",qs:[
+    {t:"A negação de “Choveu e o reservatório encheu” é",o:["Não choveu e não encheu.","Não choveu ou não encheu.","Se choveu, encheu.","Choveu ou encheu."],c:1,e:"~(p e q) = (~p) ou (~q): “Não choveu ou o reservatório não encheu”."},
+    {t:"A negação de “Se estudo, então passo” é",o:["Se não estudo, não passo.","Estudo e não passo.","Passo e estudo.","Se passo, estudo."],c:1,e:"~(p → q) = p e ~q: “Estudo e não passo”."},
+    {t:"A negação de “Todos os poços estão secos” é",o:["Nenhum poço está seco.","Algum poço não está seco.","Todos os poços têm água.","Alguns poços estão secos."],c:1,e:"Negar “todo A é B” = “algum A não é B”. Basta um poço com água."},
+    {t:"É equivalente a “Se é servidor, então prestou concurso”:",o:["Se prestou concurso, é servidor.","Se não prestou concurso, não é servidor.","É servidor e não prestou concurso.","Não prestou concurso e é servidor."],c:1,e:"Equivalência = contrapositiva (~q → ~p): “Se não prestou concurso, então não é servidor”. A é a recíproca."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Licitações (Lei 14.133/2021)",aula:"Desde 30/12/2023, a <b>Lei 14.133/2021</b> é a <b>única</b> lei geral de licitações (revogou a 8.666, o pregão e o RDC). Aplica-se ao DMAE (autarquia).<br><b>5 modalidades (art. 28):</b> pregão, concorrência, concurso, leilão e diálogo competitivo. <b>Convite e tomada de preços não existem mais.</b><br><b>Fases (art. 17):</b> preparatória → edital → propostas → <b>julgamento → habilitação</b> (invertida) → recursal → homologação.<br><b>Dispensa (art. 75):</b> dá pra competir, mas a lei permite não licitar. <b>Inexigibilidade (art. 74):</b> competição inviável (fornecedor exclusivo, artista consagrado, notória especialização).",qs:[
+    {t:"NÃO é modalidade da Lei 14.133/2021:",o:["concorrência","tomada de preços","leilão","diálogo competitivo"],c:1,e:"Tomada de preços (e convite) foram extintas. As 5 modalidades são pregão, concorrência, concurso, leilão e diálogo competitivo."},
+    {t:"Contratar fornecedor exclusivo, sem concorrentes possíveis, é caso de",o:["dispensa","inexigibilidade","pregão","concurso"],c:1,e:"Inexigibilidade (art. 74): a competição é inviável. Dispensa é quando dá pra competir, mas a lei autoriza não licitar."},
+    {t:"Pela regra da Lei 14.133, a habilitação ocorre",o:["antes da apresentação das propostas","depois do julgamento das propostas","antes do edital","após a homologação"],c:1,e:"Fases invertidas: julga-se primeiro e só se habilita o vencedor (art. 17). A ordem tradicional exige justificativa."},
+    {t:"A modalidade para bens e serviços comuns, pelo menor preço, é o",o:["concurso","leilão","pregão","diálogo competitivo"],c:2,e:"Pregão. Concurso é trabalho técnico/artístico; leilão é alienação de bens."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Arquivologia (3 idades)",aula:"<b>Teoria das três idades</b> do documento:<br>• <b>Corrente</b> — uso frequente (valor primário/administrativo).<br>• <b>Intermediário</b> — uso raro, aguarda destinação.<br>• <b>Permanente</b> — valor secundário (histórico/probatório); <b>guarda definitiva, nunca é eliminado</b>.<br>Mover do corrente p/ intermediário = <b>transferência</b>; p/ o permanente = <b>recolhimento</b>. Quem define prazos é a <b>tabela de temporalidade</b>. Sigilo (LAI): ultrassecreto 25, secreto 15, reservado 5 anos.",qs:[
+    {t:"Documento de valor secundário (histórico/probatório) fica no arquivo",o:["corrente","intermediário","permanente","é eliminado após 5 anos"],c:2,e:"Valor secundário = arquivo permanente = guarda definitiva; nunca é eliminado."},
+    {t:"Passar um documento do arquivo corrente para o intermediário chama-se",o:["recolhimento","transferência","eliminação","empréstimo"],c:1,e:"Transferência (corrente → intermediário). Recolhimento é a ida para o permanente."},
+    {t:"Define os prazos de guarda e a destinação dos documentos:",o:["o protocolo","a tabela de temporalidade","o organograma","o inventário"],c:1,e:"Tabela de temporalidade, aprovada por comissão de avaliação."},
+    {t:"Pela LAI, o prazo máximo de sigilo (ultrassecreto) é de",o:["5 anos","15 anos","25 anos","permanente"],c:2,e:"Ultrassecreto 25 anos; secreto 15; reservado 5."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Redação oficial",aula:"Pelo <b>Manual de Redação da Presidência</b> (3ª ed.), o <b>padrão ofício</b> unificou aviso, ofício e memorando.<br><b>Fechos:</b> <b>Respeitosamente</b> para autoridade <b>superior</b>; <b>Atenciosamente</b> para <b>mesma hierarquia ou inferior</b> (mnemônico: “Respeitosamente pra cima, Atenciosamente pro lado e pra baixo”).<br><b>Tratamento:</b> <b>Vossa Excelência</b> (prefeito, juiz, deputado, secretário) e <b>Vossa Senhoria</b> (demais). Use <b>Vossa</b> ao falar COM a pessoa e <b>Sua</b> ao falar DELA; concordância na 3ª pessoa. Abolidos DD. e Ilmo.",qs:[
+    {t:"Ofício de um servidor ao Prefeito deve terminar com",o:["Atenciosamente,","Respeitosamente,","Cordialmente,","Abraços,"],c:1,e:"Autoridade de hierarquia superior → “Respeitosamente,”."},
+    {t:"O tratamento adequado ao Prefeito é",o:["Vossa Senhoria","Vossa Excelência","Vossa Magnificência","Vossa Santidade"],c:1,e:"Vossa Excelência (autoridades altas). Vossa Magnificência é para reitor; Vossa Santidade, para o Papa."},
+    {t:"O padrão ofício unificou",o:["ata, edital e portaria","aviso, ofício e memorando","contrato e convênio","decreto e lei"],c:1,e:"O padrão ofício reúne aviso, ofício e memorando num mesmo modelo."},
+    {t:"Usa-se “Vossa Excelência” quando",o:["se fala sobre a autoridade ausente","se fala diretamente com a autoridade","só em textos orais","só em bilhetes"],c:1,e:"“Vossa” = falando COM a pessoa; “Sua Excelência” = falando DELA."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Orçamento público",aula:"Três leis orçamentárias:<br>• <b>PPA</b> (Plano Plurianual): <b>4 anos</b>, diretrizes, objetivos e metas.<br>• <b>LDO</b>: <b>anual</b>, define metas e prioridades e <b>orienta a LOA</b>.<br>• <b>LOA</b>: o orçamento do ano.<br>Mnemônico: <b>“PPA planeja, LDO orienta, LOA executa”</b>.<br><b>Estágios da despesa:</b> <b>empenho → liquidação → pagamento</b> (“Empenha, Liquida, Paga”). LRF: gasto com pessoal do Município ≤ <b>60%</b> da receita corrente líquida.",qs:[
+    {t:"O instrumento orçamentário de 4 anos é o",o:["LOA","LDO","PPA","LRF"],c:2,e:"PPA (Plano Plurianual): 4 anos."},
+    {t:"Orienta a elaboração da LOA e vale para o ano seguinte:",o:["PPA","LDO","balanço patrimonial","empenho"],c:1,e:"A LDO (anual) define metas/prioridades e orienta a LOA."},
+    {t:"A ordem correta dos estágios da despesa é",o:["liquidação, empenho, pagamento","empenho, liquidação, pagamento","pagamento, liquidação, empenho","empenho, pagamento, liquidação"],c:1,e:"Empenho (reserva) → liquidação (confere a entrega) → pagamento (quita)."},
+    {t:"Verificar que o material/serviço foi efetivamente entregue corresponde à",o:["empenho","liquidação","pagamento","previsão"],c:1,e:"Liquidação: apura o direito do credor pela entrega do bem/serviço."}
+  ]},
+  {mat:"Legislação",titulo:"Aula + treino: Servidor e Constituição",aula:"<b>Princípios do art. 37 (LIMPE):</b> Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência (razoabilidade e proporcionalidade são <b>implícitos</b>).<br><b>Provimento × vacância:</b> provimento é OCUPAR o cargo (nomeação, promoção, readaptação, reintegração, recondução, aproveitamento); vacância é DESOCUPAR (exoneração, demissão, aposentadoria, posse em outro cargo, falecimento).<br><b>Estabilidade:</b> após <b>3 anos</b> de efetivo exercício. <b>Concurso:</b> validade de até <b>2 anos, prorrogável 1 vez</b>. O DMAE é <b>autarquia</b> (administração indireta).",qs:[
+    {t:"NÃO é forma de provimento de cargo público:",o:["nomeação","promoção","exoneração","reintegração"],c:2,e:"Exoneração é forma de VACÂNCIA (desocupa o cargo). As demais são provimento."},
+    {t:"A estabilidade do servidor é adquirida após",o:["a posse","2 anos","3 anos de efetivo exercício","5 anos"],c:2,e:"CF art. 41: 3 anos de efetivo exercício + avaliação especial de desempenho."},
+    {t:"NÃO é princípio expresso do art. 37 (LIMPE):",o:["moralidade","eficiência","razoabilidade","publicidade"],c:2,e:"Razoabilidade é princípio implícito. Os expressos são Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência."},
+    {t:"Quanto à administração, o DMAE é entidade da administração",o:["direta","indireta (autarquia)","privada","federal"],c:1,e:"Autarquia = administração indireta, direito público, autonomia administrativa e financeira; é municipal, não federal."}
+  ]}
+  ];
+
+  var tv=document.getElementById("treinos");
+  TREINOS.forEach(function(tr,ti){
+    var card=document.createElement("div"); card.className="card"; card.style.marginTop="16px"; card.setAttribute("data-mat",tr.mat);
+    card.innerHTML='<p class="eyebrow">'+tr.mat+'</p><h3 style="margin-top:0">'+tr.titulo+'</h3><div class="aula">'+tr.aula+'</div><div class="tq" id="treino-'+ti+'"></div>';
+    tv.appendChild(card);
+    mountQs(document.getElementById("treino-"+ti),tr.qs);
+  });
+
+  /* filtro por matéria */
+  var mats=["Todos"]; TREINOS.forEach(function(t){if(mats.indexOf(t.mat)<0)mats.push(t.mat);});
+  var mf=document.getElementById("matfilter");
+  mf.innerHTML=mats.map(function(m,i){return '<button class="'+(i===0?"on":"")+'" data-m="'+m+'">'+m+'</button>';}).join("");
+  mf.addEventListener("click",function(e){
+    var b=e.target.closest("button"); if(!b)return;
+    [].forEach.call(mf.children,function(x){x.classList.remove("on");}); b.classList.add("on");
+    var m=b.getAttribute("data-m");
+    [].forEach.call(tv.children,function(c){c.style.display=(m==="Todos"||c.getAttribute("data-mat")===m)?"":"none";});
+  });
 })();
 </script>
 </body>
