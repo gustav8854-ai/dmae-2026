@@ -211,6 +211,11 @@
   .desempenho .dlast{margin:0 0 10px;padding-left:20px;font-size:14px}
   .desempenho .dlast li{margin:3px 0}
   .desempenho .dclear{padding:7px 12px;font-size:13px}
+  /* caderno de erros */
+  .dhint{font-size:14px;color:var(--ink-2)}
+  .cadtools{display:flex;gap:10px;flex-wrap:wrap;margin:10px 0 6px}
+  .cadtools .btn{padding:8px 13px;font-size:13.5px}
+  .cadcount{font-family:"Public Sans",sans-serif;font-size:14px;color:var(--muted);font-weight:700}
   @media(max-width:560px){
     .timer{margin-left:0;width:100%;justify-content:space-between;order:3}
     .q .qt{font-size:15.5px} .opt{padding:11px 13px}
@@ -270,6 +275,7 @@
     <a href="#simulado2">Simulado 2</a>
     <a href="#simulado3">Simulado 3</a>
     <a href="#simulado4">Simulado 4</a>
+    <a href="#caderno">Caderno de erros</a>
     <a href="#flashcards">Flashcards</a>
     <div class="grp">3 · Consultar</div>
     <a href="#ficha">Ficha do edital</a>
@@ -979,6 +985,18 @@
       <div id="quiz-sim4"></div>
     </div></section>
 
+    <!-- ============ CADERNO DE ERROS ============ -->
+    <section id="caderno"><div class="card">
+      <p class="eyebrow">Revisar</p>
+      <h2 class="sec">Meu caderno de erros <span id="cad-count" class="cadcount"></span></h2>
+      <p>Toda questão que você errar nos simulados e nos treinos entra aqui <strong>automaticamente</strong> e fica salva no seu navegador. Refaça-as quantas vezes precisar — <strong>rever o próprio erro é o que mais fixa</strong>. Quando acertar, clique em <em>Tirar do caderno as que acertei</em> para ele ir enxugando.</p>
+      <div class="cadtools">
+        <button class="btn ghost" id="cad-remove" type="button">Tirar do caderno as que acertei</button>
+        <button class="btn ghost" id="cad-clear" type="button">Limpar caderno</button>
+      </div>
+      <div id="caderno-list"></div>
+    </div></section>
+
     <!-- ============ 9. FLASHCARDS ============ -->
     <section id="flashcards"><div class="card">
       <p class="eyebrow">Seção 9 · 80 cartões</p>
@@ -1215,7 +1233,7 @@ window.renderDesempenho=function(){
 
   var LT="ABCD".split("");
   document.getElementById("corrigir").onclick=function(){
-    var acertos=0, errs=[];
+    var acertos=0, errs=[], cadErrs=[];
     SIM.forEach(function(q){
       if(!q.n)return;
       var qd=document.getElementById('simq'+q.n);
@@ -1229,6 +1247,7 @@ window.renderDesempenho=function(){
       qd.querySelector('.expl').classList.add('show');
       if(!acertou){
         errs.push({n:q.n,anchor:'simq'+q.n,qt:q.t,you:sel?LT[+sel.value]:'',correct:LT[q.c],expl:q.e});
+        cadErrs.push({label:"Simulado 1",t:q.t,o:q.o,c:q.c,e:q.e});
       }
     });
     var pct=Math.round(acertos/total*100);
@@ -1236,6 +1255,7 @@ window.renderDesempenho=function(){
     document.getElementById("scorebox").innerHTML='Você acertou <b>'+acertos+'</b>/'+total+' ('+pct+'%). '+msg;
     window.renderErrPanel(document.getElementById("simulado"),document.querySelector("#simulado .simbar"),errs,total);
     window.recordScore("sim1","Simulado 1",pct,acertos,total);
+    if(window.saveErrors)window.saveErrors(cadErrs);
   };
   document.getElementById("limpar").onclick=function(){
     box.querySelectorAll('input:checked').forEach(function(i){i.checked=false;});
@@ -1349,7 +1369,7 @@ var FC=[
 (function(){
   var L="ABCD".split("");
   function qHTML(q,n){
-    var h='<div class="q" data-c="'+q.c+'"><div class="qn">Questão '+n+'</div><div class="qt">'+q.t+'</div>';
+    var h='<div class="q" data-c="'+q.c+'"><div class="qn">'+(q.label?q.label:('Questão '+n))+'</div><div class="qt">'+q.t+'</div>';
     for(var j=0;j<q.o.length;j++){h+='<label class="opt"><input type="radio"><span class="lt">'+L[j]+')</span><span>'+q.o[j]+'</span></label>';}
     h+='<div class="expl"><b>Gabarito: '+L[q.c]+'.</b> '+q.e+'</div></div>';
     return h;
@@ -1363,7 +1383,9 @@ var FC=[
     var isSim=host.id.indexOf("quiz-sim")===0;
     if(isSim)window.attachTimer(b,180);
     b.querySelector(".cor").onclick=function(){
-      var ac=0, errs=[];
+      var ac=0, errs=[], cadErrs=[];
+      var card=host.closest(".card"), cardh3=card&&card.querySelector("h3");
+      var lbl=isSim?("Simulado "+host.id.replace("quiz-sim","")):(cardh3?cardh3.textContent.replace("Aula + treino: ",""):"Treino");
       qs.forEach(function(qd,i){
         var opts=qd.querySelectorAll(".opt"), ins=qd.querySelectorAll("input"), c=+qd.getAttribute("data-c");
         var sel=qd.querySelector("input:checked");
@@ -1375,6 +1397,8 @@ var FC=[
         if(!acertou){
           var expl=qd.querySelector(".expl").innerHTML.replace(/^\s*<b>.*?<\/b>\s*/,"");
           errs.push({n:i+1,anchor:qd.id,qt:qd.querySelector(".qt").innerHTML,you:v>=0?L[v]:"",correct:L[c],expl:expl});
+          var oarr=[].map.call(opts,function(o){var sp=o.querySelectorAll("span");return sp[sp.length-1].innerHTML;});
+          cadErrs.push({label:lbl,t:qd.querySelector(".qt").innerHTML,o:oarr,c:c,e:expl});
         }
       });
       var pct=Math.round(ac/qs.length*100);
@@ -1382,6 +1406,7 @@ var FC=[
       b.querySelector(".sc").innerHTML="Acertos: <b>"+ac+"</b>/"+qs.length+" ("+pct+"%). "+msg;
       window.renderErrPanel(host,b,errs,qs.length);
       if(isSim)window.recordScore(host.id,"Simulado "+host.id.replace("quiz-sim",""),pct,ac,qs.length);
+      if(host.id!=="caderno-list"&&window.saveErrors)window.saveErrors(cadErrs);
     };
     b.querySelector(".lim").onclick=function(){
       host.querySelectorAll("input:checked").forEach(function(i){i.checked=false;});
@@ -1401,6 +1426,51 @@ var FC=[
     host.innerHTML=h; wire(host);
   }
   function mountQs(host,qs){var h="";qs.forEach(function(q,i){h+=qHTML(q,i+1);});host.innerHTML=h;wire(host);}
+
+  /* ===== Caderno de erros (salvo no navegador) ===== */
+  window.saveErrors=function(list){
+    if(!list||!list.length)return;
+    var K="dmae:cadernoerros",arr=[];
+    try{arr=JSON.parse(localStorage.getItem(K)||"[]");}catch(e){}
+    var seen={};arr.forEach(function(x){seen[x.id]=1;});
+    list.forEach(function(it){
+      var id=it.label+"§"+it.t;
+      if(!seen[id]){arr.push({id:id,label:it.label,t:it.t,o:it.o,c:it.c,e:it.e});seen[id]=1;}
+    });
+    if(arr.length>200)arr=arr.slice(-200);
+    try{localStorage.setItem(K,JSON.stringify(arr));}catch(e){}
+    if(window.renderCaderno)window.renderCaderno();
+  };
+  window.renderCaderno=function(){
+    var host=document.getElementById("caderno-list");if(!host)return;
+    var arr=[];try{arr=JSON.parse(localStorage.getItem("dmae:cadernoerros")||"[]");}catch(e){}
+    var cnt=document.getElementById("cad-count");if(cnt)cnt.textContent=arr.length?("· "+arr.length):"";
+    if(!arr.length){host.innerHTML='<p class="dhint">Seu caderno está vazio. Assim que você errar questões nos simulados ou treinos, elas aparecem aqui para você refazer.</p>';return;}
+    mountQs(host,arr);
+  };
+  (function(){
+    var rm=document.getElementById("cad-remove"),cl=document.getElementById("cad-clear");
+    if(rm)rm.onclick=function(){
+      var arr=[];try{arr=JSON.parse(localStorage.getItem("dmae:cadernoerros")||"[]");}catch(e){}
+      var qs=document.querySelectorAll("#caderno-list .q");
+      if(!arr.length||qs.length!==arr.length){window.renderCaderno();return;}
+      var keep=[];
+      [].forEach.call(qs,function(qd,i){
+        var ins=qd.querySelectorAll("input"),sel=qd.querySelector("input:checked");
+        var ok=sel&&[].indexOf.call(ins,sel)===+qd.getAttribute("data-c");
+        if(!ok)keep.push(arr[i]);
+      });
+      try{localStorage.setItem("dmae:cadernoerros",JSON.stringify(keep));}catch(e){}
+      window.renderCaderno();
+      var host=document.getElementById("caderno");if(host)host.scrollIntoView({behavior:"smooth",block:"start"});
+    };
+    if(cl)cl.onclick=function(){
+      if(!confirm("Apagar todas as questões do caderno de erros?"))return;
+      try{localStorage.removeItem("dmae:cadernoerros");}catch(e){}
+      window.renderCaderno();
+    };
+    window.renderCaderno();
+  })();
 
   /* ===================== SIMULADO 2 ===================== */
   var SIM2=[
@@ -1686,6 +1756,12 @@ var FC=[
     {t:"Se sen x = √2/2, um valor possível de x é",o:["30°","45°","60°","90°"],c:1,e:"sen 45° = √2/2."},
     {t:"Pela relação fundamental, se cos x = 0, então sen²x vale",o:["0","½","1","2"],c:2,e:"sen²x + cos²x = 1 → sen²x = 1 − 0 = 1."}
   ]},
+  {mat:"Matemática",titulo:"Aula + treino: Matrizes e determinantes",aula:"<b>Matriz</b> é uma tabela de números (linhas × colunas). <b>Soma/subtração:</b> só entre matrizes de mesma ordem, elemento a elemento. <b>Multiplicação por número:</b> multiplica todos os elementos. <b>Produto de matrizes:</b> linha × coluna, e <b>a ordem importa (A·B ≠ B·A)</b>.<br><b>Determinante 2×2:</b> para [[a, b],[c, d]], det = <b>a·d − b·c</b>.<br><b>Pegadinhas:</b> somar matrizes de ordens diferentes (não existe) e errar o sinal do determinante (é a·d <b>menos</b> b·c).",qs:[
+    {t:"O determinante da matriz [[3, 2],[1, 4]] é",o:["10","14","12","5"],c:0,e:"det = 3·4 − 2·1 = 12 − 2 = 10."},
+    {t:"O determinante de [[5, 2],[3, 1]] é",o:["11","−1","1","13"],c:1,e:"det = 5·1 − 2·3 = 5 − 6 = −1 (cuidado com o sinal)."},
+    {t:"Sobre o produto de matrizes, é correto afirmar que",o:["A·B é sempre igual a B·A.","a ordem dos fatores não altera o resultado.","em geral A·B ≠ B·A.","só se multiplicam matrizes iguais."],c:2,e:"A multiplicação de matrizes NÃO é comutativa: em geral A·B ≠ B·A."},
+    {t:"Só é possível SOMAR duas matrizes quando elas têm",o:["o mesmo determinante.","a mesma ordem (linhas e colunas iguais).","números positivos.","uma única linha."],c:1,e:"Soma exige matrizes de mesma ordem, somando elemento a elemento."}
+  ]},
   {mat:"Específicos",titulo:"Aula + treino: Licitações (Lei 14.133/2021)",aula:"Desde 30/12/2023, a <b>Lei 14.133/2021</b> é a <b>única</b> lei geral de licitações (revogou a 8.666, o pregão e o RDC). Aplica-se ao DMAE (autarquia).<br><b>5 modalidades (art. 28):</b> pregão, concorrência, concurso, leilão e diálogo competitivo. <b>Convite e tomada de preços não existem mais.</b><br><b>Fases (art. 17):</b> preparatória → edital → propostas → <b>julgamento → habilitação</b> (invertida) → recursal → homologação.<br><b>Dispensa (art. 75):</b> dá pra competir, mas a lei permite não licitar. <b>Inexigibilidade (art. 74):</b> competição inviável (fornecedor exclusivo, artista consagrado, notória especialização).",qs:[
     {t:"NÃO é modalidade da Lei 14.133/2021:",o:["concorrência","tomada de preços","leilão","diálogo competitivo"],c:1,e:"Tomada de preços (e convite) foram extintas. As 5 modalidades são pregão, concorrência, concurso, leilão e diálogo competitivo."},
     {t:"Contratar fornecedor exclusivo, sem concorrentes possíveis, é caso de",o:["dispensa","inexigibilidade","pregão","concurso"],c:1,e:"Inexigibilidade (art. 74): a competição é inviável. Dispensa é quando dá pra competir, mas a lei autoriza não licitar."},
@@ -1740,6 +1816,18 @@ var FC=[
     {t:"O documento que informa ao cidadão os serviços, prazos e como acessá-los é a",o:["ata.","Carta de Serviços ao Usuário.","portaria.","certidão."],c:1,e:"A Carta de Serviços ao Usuário é prevista na Lei 13.460."},
     {t:"O canal para o usuário reclamar, sugerir e receber resposta do órgão é a",o:["ouvidoria.","tesouraria.","procuradoria.","almoxarifado."],c:0,e:"A ouvidoria recebe e encaminha manifestações dos usuários."}
   ]},
+  {mat:"Específicos",titulo:"Aula + treino: Informática básica",aula:"<b>Windows/arquivos:</b> pastas organizam arquivos; extensões indicam o tipo (.docx texto, .xlsx planilha, .pdf, .jpg imagem). <b>Atalhos:</b> Ctrl+C copiar, Ctrl+V colar, Ctrl+X recortar, Ctrl+Z desfazer, Ctrl+S salvar, Ctrl+P imprimir.<br><b>Word (texto):</b> formatação, marcadores, cabeçalho.<br><b>Excel/Calc (planilha):</b> fórmula começa com <b>=</b>; intervalo com dois-pontos (A1:A10); <b>=SOMA()</b>, <b>=MÉDIA()</b>, <b>=CONT.NÚM()</b> (conta números), <b>=SE(teste; valor_se_verdadeiro; valor_se_falso)</b>.<br><b>Internet/e-mail:</b> <b>Para</b> (destinatário), <b>Cc</b> (cópia visível), <b>Cco</b> (cópia oculta); anexos; nunca abrir link/anexo suspeito (phishing).",qs:[
+    {t:"Em uma planilha, para somar as células de B2 até B10 usa-se",o:["=SOMA(B2;B10)","=SOMA(B2:B10)","=SOMAR(B2-B10)","SOMA(B2:B10)"],c:1,e:"Intervalo usa dois-pontos e a fórmula começa com “=”: =SOMA(B2:B10). Com “;” somaria só B2 e B10."},
+    {t:"O atalho Ctrl+Z serve para",o:["salvar.","desfazer a última ação.","colar.","imprimir."],c:1,e:"Ctrl+Z = desfazer. Salvar é Ctrl+S; colar Ctrl+V; imprimir Ctrl+P."},
+    {t:"Para enviar um e-mail a alguém sem que os outros destinatários vejam o endereço, usa-se o campo",o:["Para.","Cc.","Cco (cópia oculta).","Assunto."],c:2,e:"Cco (cópia carbono oculta) esconde o endereço dos demais. Cc é cópia visível."},
+    {t:"A fórmula =SE(A1>=6;\"Aprovado\";\"Reprovado\") retorna \"Aprovado\" quando",o:["A1 for menor que 6.","A1 for igual ou maior que 6.","A1 estiver vazia.","A1 for texto."],c:1,e:"A função SE testa a condição: se A1>=6 é verdadeiro, retorna o 1º valor (\"Aprovado\")."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Técnica legislativa e documentos (LC 95)",aula:"A <b>LC 95/1998</b> define como se redige uma lei. Estrutura: <b>artigo</b> (unidade básica, “Art.”), desdobrado em <b>parágrafos</b> (§), <b>incisos</b> (I, II, III — algarismos romanos), <b>alíneas</b> (a, b, c) e <b>itens</b> (1, 2, 3).<br><b>Ordem lógica:</b> artigo → parágrafo → inciso → alínea → item.<br><b>Documentos oficiais</b> (padrão ofício): <b>ata</b> (registro de reunião), <b>memorando/ofício</b> (comunicação), <b>requerimento</b> (pedido), <b>parecer</b> (opinião técnica), <b>portaria</b> (ato de autoridade). Vocativo a autoridade: “Senhor” + cargo.",qs:[
+    {t:"Na estrutura de um artigo de lei, os desdobramentos indicados por I, II, III são",o:["parágrafos.","incisos.","alíneas.","itens."],c:1,e:"Incisos usam algarismos romanos (I, II, III). Alíneas usam letras (a, b, c); itens usam números."},
+    {t:"O documento que registra o que foi tratado e decidido em uma reunião é a",o:["portaria.","ata.","requerimento.","certidão."],c:1,e:"Ata registra fielmente os fatos e deliberações de uma reunião."},
+    {t:"As alíneas de um dispositivo legal são indicadas por",o:["algarismos romanos.","letras minúsculas (a, b, c).","números (1, 2, 3).","o símbolo §."],c:1,e:"Alíneas = letras minúsculas. O § indica parágrafo; romanos são incisos."},
+    {t:"O ato pelo qual uma autoridade administrativa expede instruções internas é a",o:["ata.","portaria.","ata de registro de preços.","nota fiscal."],c:1,e:"Portaria: ato administrativo interno de autoridade (nomeações, instruções, regras internas)."}
+  ]},
   {mat:"Conhecimentos Gerais",titulo:"Aula + treino: Saneamento e água (leis)",aula:"<b>Lei 11.445/2007</b> (diretrizes do saneamento) define os <b>4 componentes</b>: abastecimento de água, esgotamento sanitário, limpeza urbana/resíduos sólidos e drenagem de águas pluviais. <b>Lei 14.026/2020 (Novo Marco):</b> metas até 31/12/2033 — <b>99% da população com água e 90% com coleta e tratamento de esgoto</b>; a <b>ANA</b> tornou-se reguladora de referência. <b>Lei 9.433/1997</b> (Política Nacional de Recursos Hídricos): água é bem público de valor econômico; a <b>bacia hidrográfica</b> é a unidade de gestão; há outorga, cobrança pelo uso e comitês de bacia. <b>ODS 6</b> (Agenda 2030): água potável e saneamento.",qs:[
     {t:"Os componentes do saneamento básico (Lei 11.445) são",o:["água, esgoto, energia e transporte.","água, esgoto, limpeza urbana/resíduos e drenagem.","apenas água e esgoto.","água, saúde e educação."],c:1,e:"São quatro: água, esgoto, resíduos sólidos/limpeza urbana e drenagem pluvial. Energia não entra."},
     {t:"A meta do Novo Marco do Saneamento até 2033 é",o:["100% de água e de esgoto.","99% de água e 90% de esgoto.","90% de água e 99% de esgoto.","80% de tudo."],c:1,e:"Lei 14.026/2020: 99% com água potável e 90% com coleta e tratamento de esgoto."},
@@ -1757,6 +1845,12 @@ var FC=[
     {t:"A estabilidade do servidor é adquirida após",o:["a posse","2 anos","3 anos de efetivo exercício","5 anos"],c:2,e:"CF art. 41: 3 anos de efetivo exercício + avaliação especial de desempenho."},
     {t:"NÃO é princípio expresso do art. 37 (LIMPE):",o:["moralidade","eficiência","razoabilidade","publicidade"],c:2,e:"Razoabilidade é princípio implícito. Os expressos são Legalidade, Impessoalidade, Moralidade, Publicidade e Eficiência."},
     {t:"Quanto à administração, o DMAE é entidade da administração",o:["direta","indireta (autarquia)","privada","federal"],c:1,e:"Autarquia = administração indireta, direito público, autonomia administrativa e financeira; é municipal, não federal."}
+  ]},
+  {mat:"Legislação",titulo:"Aula + treino: Constituição e serviço público",aula:"<b>Administração direta</b> (órgãos do próprio ente: ministérios, secretarias) × <b>indireta</b> (entidades com personalidade própria: autarquias, fundações, empresas públicas, sociedades de economia mista). O <b>DMAE é autarquia</b>.<br><b>Acesso a cargos:</b> concurso público (art. 37, II) para efetivos; cargos em comissão são de livre nomeação e exoneração.<br><b>Serviços públicos</b> devem observar continuidade, generalidade, modicidade e cortesia. <b>Serviços essenciais</b> (Lei 7.783) — água, esgoto, energia, saúde, transporte — têm greve limitada (atendimento das necessidades inadiáveis).",qs:[
+    {t:"São entidades da administração INDIRETA:",o:["ministérios e secretarias.","autarquias, fundações e empresas públicas.","o Congresso e as Câmaras.","os Tribunais."],c:1,e:"Administração indireta = autarquias, fundações públicas, empresas públicas e sociedades de economia mista."},
+    {t:"O cargo de livre nomeação e exoneração, sem concurso, é o",o:["cargo efetivo.","cargo em comissão.","emprego público.","cargo vitalício."],c:1,e:"Cargo em comissão (de confiança) é de livre nomeação e exoneração; o efetivo exige concurso."},
+    {t:"Água e esgoto são classificados pela Lei 7.783 como serviços",o:["supérfluos.","essenciais.","facultativos.","privados."],c:1,e:"São serviços essenciais; em greve, deve-se garantir o atendimento das necessidades inadiáveis da população."},
+    {t:"A tarifa acessível ao usuário atende ao princípio do serviço público chamado",o:["modicidade.","publicidade.","anualidade.","legalidade."],c:0,e:"Modicidade: tarifas módicas, acessíveis. Continuidade, generalidade e cortesia são outros princípios do serviço público."}
   ]}
   ];
 
