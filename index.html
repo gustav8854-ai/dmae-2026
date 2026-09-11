@@ -170,6 +170,34 @@
   .chk input{margin-top:5px;width:16px;height:16px;accent-color:var(--green);flex:0 0 auto}
   .chk label{cursor:pointer}
   .chk.done label{color:var(--muted);text-decoration:line-through}
+  h4.wk{margin:22px 0 4px;color:var(--blue);font-size:.98rem;border-bottom:2px solid var(--line-2);padding-bottom:5px}
+  .callout{background:var(--paper-2);border:1px solid var(--line-2);border-left:4px solid var(--green);border-radius:12px;padding:16px 20px}
+  /* domínio por prioridade */
+  .prband{display:flex;align-items:center;gap:12px;margin:30px 0 6px}
+  .prband .tag{font-weight:800;font-size:.85rem;color:#fff;padding:4px 12px;border-radius:20px;letter-spacing:.03em}
+  .prband.p1 .tag{background:var(--p1,#c0392b)} .prband.p2 .tag{background:var(--p2,#d68910)} .prband.p3 .tag{background:var(--p3,#5d6d7e)}
+  .prband h3{margin:0;font-size:1.05rem;color:var(--ink)}
+  .prband .cnt{margin-left:auto;font-size:.82rem;color:var(--muted)}
+  .domgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+  @media(max-width:760px){.domgrid{grid-template-columns:1fr}}
+  .domc{background:var(--paper-2);border:1px solid var(--line-2);border-radius:12px;padding:14px 16px}
+  .domc h4{margin:0 0 7px;color:var(--blue);font-size:1rem;display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .domc h4 .mt{font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+  .domc p{margin:0 0 8px;font-size:.93rem;line-height:1.5}
+  .domc .na{margin:0;font-size:.9rem;background:var(--paper);border-left:3px solid var(--green);border-radius:0 8px 8px 0;padding:8px 11px}
+  .domc .na b{color:var(--green)}
+  /* painel Revise seus erros */
+  .errpanel{margin-top:16px;background:var(--paper-2);border:1px solid var(--line-2);border-left:4px solid var(--p1,#c0392b);border-radius:12px;padding:14px 18px}
+  .errpanel h4{margin:0 0 6px;color:var(--p1,#c0392b);font-size:1.05rem}
+  .errpanel>p{margin:0 0 6px;font-size:.93rem}
+  .errpanel ol{margin:8px 0 0;padding-left:22px}
+  .errpanel li{margin-bottom:13px;line-height:1.5}
+  .errpanel .eq{font-style:italic;color:var(--ink-2);margin:3px 0}
+  .errpanel .ei{background:var(--paper);border-radius:8px;padding:7px 11px;margin-top:4px;font-size:.92rem}
+  .errpanel .you{color:var(--p1,#c0392b)} .errpanel .ok{color:var(--green)}
+  .errpanel .tip{font-size:.86rem;color:var(--muted);margin:10px 0 0}
+  .errpanel a{font-weight:700;color:var(--blue)}
+  .errpanel.zero{border-left-color:var(--green)} .errpanel.zero h4{color:var(--green)}
 
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:720px){.grid2{grid-template-columns:1fr}}
@@ -217,10 +245,12 @@
     <a href="#plano">Plano de 7 semanas</a>
     <a href="#memoria">Como fixar na memória</a>
     <div class="grp">1 · Aprender + treinar</div>
+    <a href="#dominio">Domínio por prioridade</a>
     <a href="#treinos-sec">Aulas + treinos por tema</a>
     <div class="grp">2 · Praticar</div>
     <a href="#simulado">Simulado 1</a>
     <a href="#simulado2">Simulado 2</a>
+    <a href="#simulado3">Simulado 3</a>
     <a href="#flashcards">Flashcards</a>
     <div class="grp">3 · Consultar</div>
     <a href="#ficha">Ficha do edital</a>
@@ -588,6 +618,104 @@
         </tbody>
       </table></div>
       <p class="peg">Melhor horário: a matéria difícil vai no <strong>1º bloco após um descanso</strong> (pico de atenção). A releitura antes de dormir aproveita a consolidação no sono. <strong>Dormir 7–8 h vale mais que 1 h extra à meia-noite.</strong></p>
+
+      <h3 style="margin-top:34px">Plano dia a dia com horários (até a prova)</h3>
+      <p>Calendário fechado de <strong>hoje (10/09) até 31/10</strong> — cada dia já tem o que estudar. No <strong>dia da prova (01/11) só uma revisão leve pela manhã</strong>. Marque cada dia conforme faz; o progresso fica salvo no navegador. Se faltar tempo num dia, empurre o bloco 3 para o dia seguinte — <strong>nunca pule o simulado de sábado</strong>.</p>
+
+      <div class="tw"><table>
+        <thead><tr><th>Modelo de horário</th><th>Blocos</th></tr></thead>
+        <tbody>
+        <tr><td class="k">Dias úteis (seg–sex)</td><td>Ao acordar <b>20 min</b> flashcards do dia anterior · almoço <b>15 min</b> notícias/Gerais · <b>19h00</b> bloco 1 (teoria da matéria difícil, 50 min) · <b>20h00</b> bloco 2 (questões da mesma matéria, 50 min) · <b>21h00</b> bloco 3 (lei seca/revisão, 40 min).</td></tr>
+        <tr><td class="k">Sábado</td><td><b>08h30–11h30</b> simulado completo cronometrado (3 h) · <b>14h00–15h30</b> correção + caderno de erros.</td></tr>
+        <tr><td class="k">Domingo</td><td><b>09h00–11h00</b> revisão leve: refazer os erros da semana + flashcards. Resto do dia: descanso.</td></tr>
+        </tbody>
+      </table></div>
+
+      <div id="diario-list">
+        <h4 class="wk">Esta semana (10–13/09) · preparar o terreno</h4>
+        <div class="chk"><input type="checkbox" id="d1"><label for="d1"><b>Qui 10/09 (hoje):</b> 19h baixar Edital Consolidado, as 6 leis, a Lei 14.133 e o Manual de Redação · 20h conferir inscrição/boleto (vence 14/09) · 21h ler a Ficha técnica e o edital verticalizado deste site.</label></div>
+        <div class="chk"><input type="checkbox" id="d2"><label for="d2"><b>Sex 11/09:</b> 19h Português — <a href="#treinos-sec">aula+treino de Interpretação</a> · 20h aula+treino de Crase · 21h 15 flashcards de Português.</label></div>
+        <div class="chk"><input type="checkbox" id="d3"><label for="d3"><b>Sáb 12/09:</b> 08h30 <a href="#simulado">Simulado 1</a> completo cronometrado (diagnóstico, 3 h) · 14h correção e montagem do <b>caderno de erros</b> por matéria.</label></div>
+        <div class="chk"><input type="checkbox" id="d4"><label for="d4"><b>Dom 13/09:</b> 09h revisar os erros do diagnóstico e anotar suas 3 matérias mais fracas. Descanso.</label></div>
+
+        <h4 class="wk">Semana 1 (14–20/09) · Port. base · Mat. %/juros · Lei 14.133 · Lei Orgânica</h4>
+        <div class="chk"><input type="checkbox" id="d5"><label for="d5"><b>Seg 14/09:</b> 19h Matemática — porcentagem · 20h <a href="#treinos-sec">treino Porcentagem e juros</a> · 21h Lei Orgânica (1ª leitura, parte 1).</label></div>
+        <div class="chk"><input type="checkbox" id="d6"><label for="d6"><b>Ter 15/09:</b> 19h Português — interpretação e coesão · 20h treino Coesão e coerência · 21h flashcards.</label></div>
+        <div class="chk"><input type="checkbox" id="d7"><label for="d7"><b>Qua 16/09:</b> 19h Matemática — regra de três e juros · 20h refazer treino de juros · 21h Lei Orgânica (1ª leitura, parte 2).</label></div>
+        <div class="chk"><input type="checkbox" id="d8"><label for="d8"><b>Qui 17/09:</b> 19h Específicos — Lei 14.133 (princípios e modalidades) · 20h treino Licitações · 21h montar tabela de modalidades.</label></div>
+        <div class="chk"><input type="checkbox" id="d9"><label for="d9"><b>Sex 18/09:</b> 19h Português — crase · 20h treino Crase · 21h Gerais — treino Uberlândia e Minas Gerais.</label></div>
+        <div class="chk"><input type="checkbox" id="d10"><label for="d10"><b>Sáb 19/09:</b> 08h30 <a href="#simulado2">Simulado 2</a> completo (3 h) · 14h correção + caderno de erros.</label></div>
+        <div class="chk"><input type="checkbox" id="d11"><label for="d11"><b>Dom 20/09:</b> 09h revisar erros da semana + treino Sequências (PA/PG). Descanso.</label></div>
+
+        <h4 class="wk">Semana 2 (21–27/09) · concordância/pontuação · funções/estatística · redação oficial · Estatuto</h4>
+        <div class="chk"><input type="checkbox" id="d12"><label for="d12"><b>Seg 21/09:</b> 19h Português — concordância · 20h treino Concordância · 21h flashcards.</label></div>
+        <div class="chk"><input type="checkbox" id="d13"><label for="d13"><b>Ter 22/09:</b> 19h Matemática — funções (afim/quadrática) · 20h treino Funções · 21h Estatuto — provimento.</label></div>
+        <div class="chk"><input type="checkbox" id="d14"><label for="d14"><b>Qua 23/09:</b> 19h Português — pontuação · 20h treino Pontuação · 21h Estatuto — vacância.</label></div>
+        <div class="chk"><input type="checkbox" id="d15"><label for="d15"><b>Qui 24/09:</b> 19h Específicos — redação oficial · 20h treino Redação Oficial · 21h tabela de fechos e pronomes de tratamento.</label></div>
+        <div class="chk"><input type="checkbox" id="d16"><label for="d16"><b>Sex 25/09:</b> 19h Matemática — estatística (média/moda/mediana) · 20h treino Estatística · 21h Gerais — MG.</label></div>
+        <div class="chk"><input type="checkbox" id="d17"><label for="d17"><b>Sáb 26/09:</b> 08h30 <a href="#simulado3">Simulado 3</a> completo (3 h) · 14h correção + caderno de erros.</label></div>
+        <div class="chk"><input type="checkbox" id="d18"><label for="d18"><b>Dom 27/09:</b> 09h revisar erros + colocação pronominal (leitura). Descanso.</label></div>
+
+        <h4 class="wk">Semana 3 (28/09–04/10) · sintaxe/reescrita · probabilidade/lógica · arquivologia/estoques · PAD</h4>
+        <div class="chk"><input type="checkbox" id="d19"><label for="d19"><b>Seg 28/09:</b> 19h Português — sintaxe do período · 20h treino Sintaxe · 21h flashcards.</label></div>
+        <div class="chk"><input type="checkbox" id="d20"><label for="d20"><b>Ter 29/09:</b> 19h Matemática — probabilidade · 20h treino Probabilidade · 21h Estatuto — deveres e proibições.</label></div>
+        <div class="chk"><input type="checkbox" id="d21"><label for="d21"><b>Qua 30/09:</b> 19h Matemática — lógica proposicional · 20h treino Raciocínio lógico · 21h Estatuto — PAD e prazos (tabela).</label></div>
+        <div class="chk"><input type="checkbox" id="d22"><label for="d22"><b>Qui 01/10:</b> 19h Específicos — arquivologia · 20h treino Arquivologia · 21h ciclo de vida do documento (tabela).</label></div>
+        <div class="chk"><input type="checkbox" id="d23"><label for="d23"><b>Sex 02/10:</b> 19h Específicos — estoques e compras · 20h treino Estoques · 21h Gerais — treino Saneamento e água.</label></div>
+        <div class="chk"><input type="checkbox" id="d24"><label for="d24"><b>Sáb 03/10:</b> 08h30 refazer o <a href="#simulado">Simulado 1</a> cronometrado (mire nota maior que o diagnóstico) · 14h correção comparando com 12/09.</label></div>
+        <div class="chk"><input type="checkbox" id="d25"><label for="d25"><b>Dom 04/10:</b> 09h revisar erros + análise combinatória (leitura). Descanso.</label></div>
+
+        <h4 class="wk">Semana 4 (05–11/10) · acentuação/verbos · geometria · Administração/RH · Carreira/Ética</h4>
+        <div class="chk"><input type="checkbox" id="d26"><label for="d26"><b>Seg 05/10:</b> 19h Português — acentuação · 20h treino Acentuação · 21h flashcards.</label></div>
+        <div class="chk"><input type="checkbox" id="d27"><label for="d27"><b>Ter 06/10:</b> 19h Matemática — geometria (áreas/volumes) · 20h treino Geometria · 21h Plano de Carreira do DMAE.</label></div>
+        <div class="chk"><input type="checkbox" id="d28"><label for="d28"><b>Qua 07/10:</b> 19h Português — formação de palavras e verbos · 20h treino Formação · 21h Estrutura do Executivo e do DMAE.</label></div>
+        <div class="chk"><input type="checkbox" id="d29"><label for="d29"><b>Qui 08/10:</b> 19h Específicos — Administração (Maslow/Herzberg/PODC) · 20h treino Administração · 21h Código de Ética.</label></div>
+        <div class="chk"><input type="checkbox" id="d30"><label for="d30"><b>Sex 09/10:</b> 19h Específicos — RH e atendimento · 20h treinos RH + Atendimento ao público · 21h Gerais — Brasil atual.</label></div>
+        <div class="chk"><input type="checkbox" id="d31"><label for="d31"><b>Sáb 10/10:</b> 08h30 refazer o <a href="#simulado2">Simulado 2</a> cronometrado · 14h correção.</label></div>
+        <div class="chk"><input type="checkbox" id="d32"><label for="d32"><b>Dom 11/10:</b> 09h revisar erros + matrizes e trigonometria (noções). Descanso.</label></div>
+
+        <h4 class="wk">Semana 5 (12–18/10) · Específicos finanças/orçamento + 1ª rodada de revisão</h4>
+        <div class="chk"><input type="checkbox" id="d33"><label for="d33"><b>Seg 12/10:</b> 19h Específicos — orçamento (PPA/LDO/LOA) · 20h treino Orçamento · 21h flashcards.</label></div>
+        <div class="chk"><input type="checkbox" id="d34"><label for="d34"><b>Ter 13/10:</b> 19h Específicos — finanças e contabilidade · 20h treino Finanças · 21h Lei 4.320 (estágios da despesa).</label></div>
+        <div class="chk"><input type="checkbox" id="d35"><label for="d35"><b>Qua 14/10:</b> 19h–21h revisão — refazer 20 erros do caderno (Português + Matemática) · Lei Orgânica (2ª leitura, tabela).</label></div>
+        <div class="chk"><input type="checkbox" id="d36"><label for="d36"><b>Qui 15/10:</b> 19h–21h revisão — refazer 20 erros (Específicos + Legislação) · Estatuto (2ª leitura, tabela).</label></div>
+        <div class="chk"><input type="checkbox" id="d37"><label for="d37"><b>Sex 16/10:</b> 19h Matemática — revisar %, juros e regra de três (refazer treinos) · 21h Gerais — revisão Uberlândia/MG/saneamento.</label></div>
+        <div class="chk"><input type="checkbox" id="d38"><label for="d38"><b>Sáb 17/10:</b> 08h30 refazer o <a href="#simulado3">Simulado 3</a> cronometrado · 14h correção.</label></div>
+        <div class="chk"><input type="checkbox" id="d39"><label for="d39"><b>Dom 18/10:</b> 09h revisar erros + flashcards de Específicos e Legislação. Descanso.</label></div>
+
+        <h4 class="wk">Semana 6 (19–25/10) · revisão 2 dos campeões + flashcards</h4>
+        <div class="chk"><input type="checkbox" id="d40"><label for="d40"><b>Seg 19/10:</b> 19h–21h Português campeões — crase, concordância, pontuação (refazer treinos) · flashcards de Português.</label></div>
+        <div class="chk"><input type="checkbox" id="d41"><label for="d41"><b>Ter 20/10:</b> 19h–21h Matemática campeões — juros, %, probabilidade, lógica (refazer) · flashcards de Matemática.</label></div>
+        <div class="chk"><input type="checkbox" id="d42"><label for="d42"><b>Qua 21/10:</b> 19h–21h Específicos campeões — Lei 14.133, orçamento, arquivologia (refazer) · flashcards de Específicos.</label></div>
+        <div class="chk"><input type="checkbox" id="d43"><label for="d43"><b>Qui 22/10:</b> 19h–21h Legislação campeões — LIMPE, provimento/vacância, prazos do PAD (tabelas) · flashcards de Legislação.</label></div>
+        <div class="chk"><input type="checkbox" id="d44"><label for="d44"><b>Sex 23/10:</b> 19h refazer o <a href="#simulado">Simulado 1</a> revendo só as erradas · 21h Gerais — revisão relâmpago.</label></div>
+        <div class="chk"><input type="checkbox" id="d45"><label for="d45"><b>Sáb 24/10:</b> 08h30 refazer o simulado em que tirou a pior nota · 14h correção final por matéria.</label></div>
+        <div class="chk"><input type="checkbox" id="d46"><label for="d46"><b>Dom 25/10:</b> 09h reler o caderno de erros inteiro + flashcards embaralhados. Descanso.</label></div>
+
+        <h4 class="wk">Semana 7 (26–31/10) · reta final — só revisão, nada novo</h4>
+        <div class="chk"><input type="checkbox" id="d47"><label for="d47"><b>Seg 26/10:</b> revisar caderno de erros (Português + Matemática) + flashcards. <b>Nada de matéria nova.</b></label></div>
+        <div class="chk"><input type="checkbox" id="d48"><label for="d48"><b>Ter 27/10:</b> revisar caderno de erros (Específicos + Legislação) + tabelas de prazos.</label></div>
+        <div class="chk"><input type="checkbox" id="d49"><label for="d49"><b>Qua 28/10:</b> refazer as questões que mais errou + mnemônicos (LIMPE · PPA/LDO/LOA · Empenha-Liquida-Paga).</label></div>
+        <div class="chk"><input type="checkbox" id="d50"><label for="d50"><b>Qui 29/10:</b> simulado leve (20 questões mistas) + revisar · reler fórmulas de Matemática.</label></div>
+        <div class="chk"><input type="checkbox" id="d51"><label for="d51"><b>Sex 30/10:</b> revisão relâmpago de flashcards e tabelas · conferir local, horário (Turno B) e comprovante de inscrição.</label></div>
+        <div class="chk"><input type="checkbox" id="d52"><label for="d52"><b>Sáb 31/10:</b> <b>DESCANSO.</b> Sem estudar matéria. Checklist: documento oficial com foto, comprovante impresso, caneta preta transparente, água, roupa separada, despertador. Dormir cedo (7–8 h).</label></div>
+      </div>
+
+      <div class="callout" style="margin-top:22px">
+        <h3 style="margin-top:0">🗓️ Dia da prova — domingo 01/11 (só revisão pela manhã)</h3>
+        <p><b>Nada de matéria nova.</b> A prova é no <b>Turno B</b> (confira o horário exato no seu cartão de confirmação) — organize a manhã para chegar <b>1 hora antes</b> com folga.</p>
+        <div class="tw"><table>
+          <thead><tr><th>Horário</th><th>O quê</th></tr></thead>
+          <tbody>
+          <tr><td class="k">Ao acordar</td><td>Café reforçado. Sem estudar nada pesado.</td></tr>
+          <tr><td class="k">Revisão leve · 30–40 min</td><td>Reler só: mnemônicos (LIMPE · PPA/LDO/LOA · Empenha-Liquida-Paga · fechos da redação oficial), a tabela de prazos e 10 flashcards campeões. Depois <b>feche o material</b>.</td></tr>
+          <tr><td class="k">Antes de sair</td><td>Conferir documento com foto + comprovante + caneta preta transparente. Ir ao banheiro.</td></tr>
+          <tr><td class="k">Chegar 1 h antes</td><td>Respirar, não discutir matéria com ninguém na porta (só gera insegurança).</td></tr>
+          <tr><td class="k">Na prova (3 h)</td><td>Ler cada <b>comando</b> com calma (INCORRETA / EXCETO / “a sequência”). Ritmo ≈ <b>4,5 min por questão</b>. Comece pelo que domina; marque as difíceis para voltar. <b>Não deixe questão em branco</b> — chute com eliminação. Reserve 15 min para passar o gabarito a limpo.</td></tr>
+          </tbody>
+        </table></div>
+        <p class="peg" style="margin-bottom:0">Lembrete do desempate: em empate, quem fez mais pontos em <strong>Conhecimentos Específicos</strong> passa na frente — por isso Específicos teve peso extra no plano.</p>
+      </div>
     </div></section>
 
     <section id="memoria"><div class="card">
@@ -610,6 +738,174 @@
         <li><strong>"Respeitosamente pra cima, Atenciosamente pro lado e pra baixo."</strong></li>
         <li>5 certos das compras: material, quantidade, tempo, preço, fonte.</li>
       </ul>
+    </div></section>
+
+    <!-- ============ DOMÍNIO POR PRIORIDADE ============ -->
+    <section id="dominio"><div class="card">
+      <p class="eyebrow">Domínio por prioridade</p>
+      <h2 class="sec">Dominar cada P1, P2 e P3 — do jeito certo</h2>
+      <p>A prova tem 40 questões. <strong>Dominar os P1 já resolve a maior parte da nota</strong> — são os temas que <em>caem com certeza e pesam</em>. Estude nesta ordem: <strong>primeiro TODOS os P1</strong>, depois os P2, e só então os P3. Em cada tema você tem duas linhas: <b>Entenda</b> (o conceito do jeito certo, para nunca mais esquecer) e <b class="okc">🎯 Na prova</b> (o movimento exato na hora de marcar). Pratique cada um nas <a href="#treinos-sec">aulas + treinos</a>.</p>
+
+      <div class="prband p1"><span class="tag">P1</span><h3>Cai com certeza e pesa — domine 100%</h3><span class="cnt">comece por aqui</span></div>
+      <div class="domgrid">
+
+        <div class="domc"><h4>Interpretação de texto <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> três níveis — <i>compreensão</i> (o que o texto diz), <i>inferência</i> (o que se conclui logicamente dele) e <i>extrapolação</i> (ir além do texto — quase sempre a alternativa <b>errada</b>). A resposta certa está sempre ancorada no texto. Separe a ideia central (tese) das secundárias (exemplos, detalhes).</p>
+          <p class="na"><b>🎯 Na prova:</b> leia o enunciado antes do texto. Elimine alternativas com “sempre/todo/nunca” quando o texto restringe, e as que são verdade no mundo real mas não estão escritas ali.</p></div>
+
+        <div class="domc"><h4>Coesão e coerência <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> coesão = amarração (pronomes que retomam termos; conectivos que ligam ideias). Coerência = sentido sem contradição. Cada conectivo tem um valor: <i>mas/porém</i> = oposição, <i>portanto/logo</i> = conclusão, <i>porque/pois</i> = causa, <i>embora/ainda que</i> = concessão.</p>
+          <p class="na"><b>🎯 Na prova:</b> “a que se refere o termo X?” → volte e ache o antecedente exato. Ao trocar um conectivo, teste se a relação lógica continua verdadeira.</p></div>
+
+        <div class="domc"><h4>Concordância <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> o verbo concorda com o sujeito. <i>Haver</i> (= existir) e <i>fazer</i> (= tempo) são impessoais, não têm sujeito → ficam no <b>singular</b>: “Houve problemas”, “Faz dois anos”. Mas <i>existir</i> tem sujeito e concorda: “Existem problemas”. Voz passiva: “Vendem-se casas” (casas são vendidas → plural).</p>
+          <p class="na"><b>🎯 Na prova:</b> ache o verbo e pergunte “quem?”. Se for haver/fazer no sentido de existir/tempo → singular. <b>“Houveram” e “fazem X anos” são sempre erro.</b></p></div>
+
+        <div class="domc"><h4>Crase <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> crase = preposição <i>a</i> + artigo <i>a(s)</i>, só diante de palavra feminina. Teste infalível: troque por uma palavra masculina — se virar <b>“ao”</b>, tem crase; se virar “a”, não tem. Locuções femininas sempre têm: às vezes, à noite, à vista, à medida que, às 8h.</p>
+          <p class="na"><b>🎯 Na prova:</b> nunca há crase antes de verbo, de masculino nem de pronome (a ela, a você). Cidade: “vou a Uberlândia” (sem), mas “vou à Uberlândia dos meus sonhos” (com). O teste do “ao” resolve quase tudo.</p></div>
+
+        <div class="domc"><h4>Pontuação <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> a vírgula <b>nunca</b> separa sujeito do verbo, nem verbo do objeto. É obrigatória para isolar vocativo e aposto, separar oração adverbial deslocada e a oração adjetiva <i>explicativa</i> (entre vírgulas).</p>
+          <p class="na"><b>🎯 Na prova:</b> adjetiva <b>explicativa</b> (com vírgula) fala de <i>todos</i>: “Os servidores, que fizeram concurso, ...” = todos fizeram. <b>Restritiva</b> (sem vírgula) = só uma parte. A vírgula muda o sentido — é a pegadinha clássica.</p></div>
+
+        <div class="domc"><h4>Morfossintaxe <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> morfologia = a classe da palavra (as 10 classes); sintaxe = a função na frase (sujeito, objeto, predicativo, adjunto, aposto). A mesma palavra muda de classe conforme o uso.</p>
+          <p class="na"><b>🎯 Na prova:</b> “que” pode ser pronome relativo (retoma um nome: “o livro <i>que</i> li”) ou conjunção integrante (“espero <i>que</i> venha”). Adjunto adnominal (“amor <i>de</i> mãe”) × complemento nominal (“amor <i>à</i> pátria”).</p></div>
+
+        <div class="domc"><h4>Sintaxe do período <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> orações <i>coordenadas</i> (independentes: aditiva “e”, adversativa “mas”, conclusiva “logo”, explicativa “pois”) e <i>subordinadas</i> (dependentes: substantivas, adjetivas e adverbiais — causa, condição, concessão, tempo...).</p>
+          <p class="na"><b>🎯 Na prova:</b> o conectivo revela a relação. “Pois” <i>antes</i> do verbo = causa/explicação; <i>depois</i> do verbo = conclusão. “Embora/ainda que” = concessão (verbo no subjuntivo).</p></div>
+
+        <div class="domc"><h4>Funções (1º e 2º grau) <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> afim <i>y = ax + b</i> é reta (a = inclinação). Quadrática <i>y = ax² + bx + c</i> é parábola; raízes por Bhaskara; vértice em <i>x<sub>v</sub> = −b/2a</i> e <i>y<sub>v</sub> = −Δ/4a</i>. Se <i>a &gt; 0</i>, concavidade para cima → ponto de <b>mínimo</b>.</p>
+          <p class="na"><b>🎯 Na prova:</b> se pedem o <b>valor</b> mínimo/máximo, é o <i>y<sub>v</sub></i> (não o <i>x<sub>v</sub></i>, que é <i>onde</i> ocorre). a&gt;0 = mínimo; a&lt;0 = máximo.</p></div>
+
+        <div class="domc"><h4>Porcentagem, PA/PG e juros <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> aumentos sucessivos <b>multiplicam</b> fatores: +10% e depois +20% = ×1,10 × 1,20 = ×1,32 → <b>32%</b> (não 30%). Juros simples <i>J = C·i·t</i> (linear); compostos <i>M = C·(1+i)ᵗ</i> (exponencial). PA: <i>aₙ = a₁ + (n−1)·r</i>.</p>
+          <p class="na"><b>🎯 Na prova:</b> veja se pedem o <b>juro</b> (só J) ou o <b>montante</b> (C + J). Cuidado com o <i>n−1</i>. Mais de um período quase sempre = juros compostos.</p></div>
+
+        <div class="domc"><h4>Combinatória e probabilidade <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> <i>arranjo</i> = a ordem importa (senha, pódio, ranking); <i>combinação</i> = a ordem não importa (comissão, grupo). Probabilidade = casos favoráveis ÷ casos possíveis. “Pelo menos um” = 1 − P(nenhum).</p>
+          <p class="na"><b>🎯 Na prova:</b> pergunte “trocar a ordem cria um caso novo?”. Sim → arranjo; não → combinação. Sem reposição, o total diminui a cada retirada (muda o denominador).</p></div>
+
+        <div class="domc"><h4>Estatística <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> média = soma ÷ quantidade; moda = o valor que mais aparece; <b>mediana = o valor central com os dados ordenados</b> (se a quantidade for par, é a média dos dois centrais). Desvio padrão = √variância.</p>
+          <p class="na"><b>🎯 Na prova:</b> mediana <b>sempre ordenando primeiro</b> (pegadinha nº 1). Não confunda moda (frequência) com média (soma).</p></div>
+
+        <div class="domc"><h4>Raciocínio lógico <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> conectivos: e (∧), ou (∨), se...então (→). Negações (De Morgan): ~(p∧q) = ~p ∨ ~q; ~(p∨q) = ~p ∧ ~q; e <b>~(p→q) = p ∧ ~q</b>. A equivalente de “p→q” é a contrapositiva “~q→~p”.</p>
+          <p class="na"><b>🎯 Na prova:</b> a negação de “Se chove, levo guarda-chuva” é “<b>Chove E não levo</b>” — não é “se não chove...”. Equivalente = contrapositiva; <b>não</b> a recíproca (q→p).</p></div>
+
+        <div class="domc"><h4>Uberlândia <span class="mt">Conh. Gerais</span></h4>
+          <p><b>Entenda:</b> Triângulo Mineiro, bioma Cerrado, cortada pelo rio Uberabinha (bacia do Paranaíba). Emancipada em <b>1888</b> como São Pedro de Uberabinha; virou <b>Uberlândia em 1929</b>. É a <b>2ª maior cidade de MG</b>, polo logístico/atacadista. O <b>DMAE</b> (autarquia de água e esgoto) foi criado em 1966.</p>
+          <p class="na"><b>🎯 Na prova:</b> guarde os números-âncora: 1888/1929, 2ª de MG, rio Uberabinha, DMAE = autarquia. Tema local + água cai em Gerais <i>e</i> em Específicos.</p></div>
+
+        <div class="domc"><h4>Lei Orgânica de Uberlândia <span class="mt">Legislação</span></h4>
+          <p><b>Entenda:</b> é a “constituição do município”. Define competências do Município, a Câmara (nº de vereadores e quóruns), o processo legislativo, competências do Prefeito e o julgamento das contas (parecer prévio do Tribunal de Contas, que só cai por 2/3 dos vereadores).</p>
+          <p class="na"><b>🎯 Na prova:</b> cobrança <b>literal</b> — decore quóruns e prazos. Faça uma tabela “quem faz o quê” (Prefeito × Câmara). Leia a lei seca (pasta <code>leis/</code>), não presuma pela Constituição federal.</p></div>
+
+        <div class="domc"><h4>Estatuto — LC 040/1992 <span class="mt">Legislação</span></h4>
+          <p><b>Entenda:</b> regime dos servidores de Uberlândia. <b>Provimento</b> (formas de assumir o cargo: nomeação, promoção...) × <b>vacância</b> (formas de deixá-lo: exoneração, demissão, aposentadoria). Posse × exercício. Estágio probatório = <b>3 anos</b> → estabilidade. Deveres × proibições. PAD com prazos próprios.</p>
+          <p class="na"><b>🎯 Na prova:</b> não confunda provimento com vacância. <b>Demissão</b> (punição) × <b>exoneração</b> (sem punição). Os prazos do PAD são os da LC 040 — <b>não</b> os da Lei 8.112 federal.</p></div>
+
+        <div class="domc"><h4>Noções de Administração <span class="mt">Específicos</span></h4>
+          <p><b>Entenda:</b> funções <b>PODC</b> (Planejar, Organizar, Dirigir, Controlar). Maslow (pirâmide: fisiológicas → segurança → sociais → estima → autorrealização). Herzberg: fatores <i>higiênicos</i> (salário, condições — evitam a insatisfação) × <i>motivacionais</i> (reconhecimento — geram satisfação).</p>
+          <p class="na"><b>🎯 Na prova:</b> salário = fator <b>higiênico</b> (não motiva, só evita insatisfação). Autorrealização = topo de Maslow. PODC é a espinha das teorias.</p></div>
+
+        <div class="domc"><h4>RH, Dep. Pessoal e Atendimento <span class="mt">Específicos</span></h4>
+          <p><b>Entenda:</b> 6 processos de gestão de pessoas (agregar, aplicar, recompensar, desenvolver, manter, monitorar). Recrutamento interno × externo. Erros de avaliação (efeito halo). Atendimento: impessoalidade e cortesia; <b>Lei 13.460</b> (Carta de Serviços, ouvidoria).</p>
+          <p class="na"><b>🎯 Na prova:</b> efeito halo = uma qualidade contamina toda a avaliação. Lei 13.460 = direitos do <b>usuário</b>. Impessoalidade = sem privilégio a conhecidos.</p></div>
+
+        <div class="domc"><h4>Almoxarifado, Estoques e Compras <span class="mt">Específicos</span></h4>
+          <p><b>Entenda:</b> <b>PEPS/FIFO</b> (primeiro que entra, primeiro que sai → a saída usa o preço mais antigo); UEPS; custo médio. <b>Curva ABC</b>: classe A = poucos itens de alto valor → controle rígido. Os “5 certos” da compra: material, quantidade, tempo, preço e fonte.</p>
+          <p class="na"><b>🎯 Na prova:</b> no PEPS, o <b>estoque final</b> fica avaliado pelos preços <b>recentes</b>. Classe A ≈ 20% dos itens e 80% do valor.</p></div>
+
+        <div class="domc"><h4>Arquivos, Redação Oficial e Documentos <span class="mt">Específicos</span></h4>
+          <p><b>Entenda:</b> idades do arquivo — <i>corrente</i> (uso frequente, perto do setor) → <i>intermediária</i> (pouco uso, aguarda prazo) → <i>permanente</i> (valor histórico, <b>nunca se elimina</b>). Redação oficial: impessoalidade, clareza, formalidade. Fechos: “Respeitosamente” (a superior) / “Atenciosamente” (a igual/inferior).</p>
+          <p class="na"><b>🎯 Na prova:</b> arquivo permanente nunca é descartado. Vocativo a autoridade = “Senhor” + cargo (não “Excelentíssimo”). Memorando/aviso/ofício foram unificados no <b>padrão ofício</b>.</p></div>
+
+        <div class="domc"><h4>Licitações, Constituição e Servidor <span class="mt">Específicos</span></h4>
+          <p><b>Entenda:</b> <b>Lei 14.133/2021</b> é a atual (revogou a 8.666). Modalidades: pregão, concorrência, concurso, leilão e diálogo competitivo (<b>acabaram Convite e Tomada de Preços</b>). Princípios do art. 37 da CF = <b>LIMPE</b>. Cargo efetivo exige concurso; estágio probatório 3 anos.</p>
+          <p class="na"><b>🎯 Na prova:</b> Convite e Tomada de Preços <b>não existem mais</b> (pegadinha campeã). Pregão = bens e serviços comuns. LIMPE de cor. Nomeação = provimento; exoneração/demissão = vacância.</p></div>
+
+      </div>
+
+      <div class="prband p2"><span class="tag">P2</span><h3>Cai com frequência — garanta os pontos</h3><span class="cnt">depois dos P1</span></div>
+      <div class="domgrid">
+
+        <div class="domc"><h4>Tipos e gêneros textuais <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> <i>tipo</i> = estrutura (narrativo, descritivo, dissertativo-argumentativo, expositivo, injuntivo). <i>Gênero</i> = função social (notícia, crônica, editorial, ofício, charge).</p>
+          <p class="na"><b>🎯 Na prova:</b> não confunda tipo (a forma) com gênero (o uso social). Um mesmo gênero pode ter vários tipos dentro.</p></div>
+
+        <div class="domc"><h4>Sentido figurado <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> denotação (sentido literal) × conotação (figurado). <i>Metáfora</i> = comparação implícita; <i>metonímia</i> = parte pelo todo / autor pela obra (“ler Machado”); hipérbole = exagero; eufemismo = suavizar; ironia.</p>
+          <p class="na"><b>🎯 Na prova:</b> “beber um copo”, “ler Machado” = <b>metonímia</b> (não metáfora). Pergunte se há substituição por proximidade (metonímia) ou por semelhança (metáfora).</p></div>
+
+        <div class="domc"><h4>Formação de palavras <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> <i>derivação</i> (prefixal, sufixal, parassintética, regressiva, imprópria) × <i>composição</i> (justaposição, aglutinação). Parassíntese = prefixo <b>e</b> sufixo ao mesmo tempo, e a palavra não existe sem um deles (“entardecer”).</p>
+          <p class="na"><b>🎯 Na prova:</b> “infelizmente” <b>não</b> é parassíntese (“infeliz” já existe) — é sufixal. “Entardecer” é parassíntese (não existe “entarde” nem “tardecer”).</p></div>
+
+        <div class="domc"><h4>Colocação pronominal <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> <i>próclise</i> (pronome antes) com palavra atrativa: não, nunca, que, advérbios, pronomes. <i>Ênclise</i> (depois) no início da frase e no imperativo. <i>Mesóclise</i> no futuro sem atrativo (“dir-se-ia”).</p>
+          <p class="na"><b>🎯 Na prova:</b> “Me disseram...” no início da frase é <b>erro</b> na norma culta (correto: “Disseram-me”). Havendo “não/que/advérbio”, o pronome vai <b>antes</b> do verbo.</p></div>
+
+        <div class="domc"><h4>Acentuação (Novo Acordo) <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> sem trema; paroxítonas com “ei/oi” abertos perderam o acento (ideia, heroico, assembleia); “voo/creem” sem acento. Mantêm-se os diferenciais “pôde/pôr”.</p>
+          <p class="na"><b>🎯 Na prova:</b> “idéia”, “vôo”, “pára” com acento = grafia <b>antiga</b> (errada hoje). Cuidado quando a banca põe a forma velha como “correta”.</p></div>
+
+        <div class="domc"><h4>Tempos e modos verbais <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> indicativo (certeza) × subjuntivo (hipótese) × imperativo (ordem). Correlação: “Se <b>tivesse</b>..., <b>teria</b>”; futuro do subjuntivo “quando ele <b>vier</b>”, “se ele <b>vir</b>”.</p>
+          <p class="na"><b>🎯 Na prova:</b> “se ele <i>ver</i>” é erro → “se ele <b>vir</b>”. “Quando ele <i>vir</i>” é erro → “quando ele <b>vier</b>”. Verbos pôr, ter, haver caem muito.</p></div>
+
+        <div class="domc"><h4>Conjuntos <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> <i>n(A∪B) = n(A) + n(B) − n(A∩B)</i>. Diagrama de Venn para 2–3 conjuntos. Cadeia numérica: ℕ ⊂ ℤ ⊂ ℚ ⊂ ℝ.</p>
+          <p class="na"><b>🎯 Na prova:</b> “quantos não gostam de nenhum” → some pelo Venn e subtraia do total. Comece sempre preenchendo a <b>interseção</b>.</p></div>
+
+        <div class="domc"><h4>Exponencial e logaritmo <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> exponencial: iguale as bases para comparar expoentes. Logaritmo: log(a·b) = log a + log b; mudança de base.</p>
+          <p class="na"><b>🎯 Na prova:</b> condição de existência do log: logaritmando &gt; 0, base &gt; 0 e base ≠ 1. Alternativa que viola isso está descartada.</p></div>
+
+        <div class="domc"><h4>Geometria <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> áreas (retângulo, triângulo, círculo πr²); volume do cilindro = πr²h; <b>1 m³ = 1.000 litros</b>. Raio = diâmetro ÷ 2.</p>
+          <p class="na"><b>🎯 Na prova:</b> em problema de água, <b>converta m³ → litros</b> (a pegadinha mais comum). Não troque raio por diâmetro.</p></div>
+
+        <div class="domc"><h4>Plano de Carreira e Estruturas <span class="mt">Legislação</span></h4>
+          <p><b>Entenda:</b> Plano de Carreira do DMAE (Lei 12.048/2014): cargos, classes, progressão por tempo × mérito, interstício, jornada 12×36 (operacionais). Administração <i>direta</i> × <i>indireta</i> (autarquias: DMAE, IPREMU). Código de Ética: vedações + Comissão de Ética (censura).</p>
+          <p class="na"><b>🎯 Na prova:</b> o DMAE é <b>autarquia</b> (administração indireta), com autonomia, finalidade água e esgoto. Ética: proibido presente de interessado, uso de informação privilegiada e retardar serviço.</p></div>
+
+        <div class="domc"><h4>Minas Gerais <span class="mt">Conh. Gerais</span></h4>
+          <p><b>Entenda:</b> capital <b>Belo Horizonte</b>; estado com o <b>maior número de municípios do país (853)</b>; economia forte em mineração, agro e indústria.</p>
+          <p class="na"><b>🎯 Na prova:</b> MG = maior nº de <b>municípios</b> (em população é o 2º, atrás de SP). Não confunda “mais municípios” com “mais habitantes”.</p></div>
+
+        <div class="domc"><h4>Água, saneamento e meio ambiente <span class="mt">Conh. Gerais</span></h4>
+          <p><b>Entenda:</b> Lei 11.445 (4 componentes: água, esgoto, resíduos, drenagem); Novo Marco 14.026/2020 (metas 2033: <b>99% água, 90% esgoto</b>); Lei 9.433 (bacia hidrográfica é a unidade de gestão); ODS 6.</p>
+          <p class="na"><b>🎯 Na prova:</b> componentes do saneamento são <b>quatro</b> (energia não entra). Meta 2033 = 99/90. Unidade de gestão da água = bacia hidrográfica.</p></div>
+
+        <div class="domc"><h4>Finanças, Contabilidade e Orçamento <span class="mt">Específicos</span></h4>
+          <p><b>Entenda:</b> instrumentos: <b>PPA</b> (4 anos), <b>LDO</b> (anual, orienta), <b>LOA</b> (anual, executa). Estágios da despesa: <b>empenho → liquidação → pagamento</b>. Lei 4.320. DRE apura lucro/prejuízo.</p>
+          <p class="na"><b>🎯 Na prova:</b> “<b>PPA planeja, LDO orienta, LOA executa</b>”. “<b>Empenha, Liquida, Paga</b>” — nessa ordem (empenho reserva; liquidação confere; pagamento quita).</p></div>
+
+      </div>
+
+      <div class="prband p3"><span class="tag">P3</span><h3>Cai pouco — saiba o essencial e siga</h3><span class="cnt">só depois de P1 e P2</span></div>
+      <div class="domgrid">
+
+        <div class="domc"><h4>Variação linguística <span class="mt">Português</span></h4>
+          <p><b>Entenda:</b> a língua varia por região (diatópica), grupo social (diastrática), situação (diafásica) e tempo (diacrônica). Norma-padrão é uma variedade de prestígio, não a “única certa”.</p>
+          <p class="na"><b>🎯 Na prova:</b> tratar a fala popular como “erro” costuma ser a alternativa <b>incorreta</b>. Variedade ≠ erro.</p></div>
+
+        <div class="domc"><h4>Trigonometria <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> sen 30° = ½, cos 30° = √3/2, tg 45° = 1; relação fundamental sen²x + cos²x = 1; leis dos senos e cossenos.</p>
+          <p class="na"><b>🎯 Na prova:</b> confira qual cateto é o <b>oposto</b> ao ângulo antes de escolher seno ou cosseno (é onde quase todo mundo erra).</p></div>
+
+        <div class="domc"><h4>Matrizes e sistemas <span class="mt">Matemática</span></h4>
+          <p><b>Entenda:</b> produto linha × coluna, e <b>A·B ≠ B·A</b> (a ordem importa). Determinante 2×2 = ad − bc. Sistemas por escalonamento ou Cramer.</p>
+          <p class="na"><b>🎯 Na prova:</b> respeite a ordem do produto e o <b>sinal</b> no determinante (ad <b>menos</b> bc). Erro de sinal derruba a questão.</p></div>
+
+      </div>
+
+      <p class="peg" style="margin-top:22px">Regra de ouro: <strong>não avance para o P2 de uma matéria enquanto o P1 dela ainda erra no simulado.</strong> P1 é onde está a nota; P3 é desempate de minutos finais.</p>
     </div></section>
 
     <!-- ============ AULAS + TREINOS ============ -->
@@ -642,6 +938,14 @@
       <h2 class="sec">Simulado 2 (inédito)</h2>
       <p>Segunda prova completa no formato Fundep (10 Português · 10 Matemática/RLM · 5 Gerais · 5 Legislação · 10 Específicos). Marque tudo e clique em <strong>Corrigir</strong> — a explicação de cada questão aparece embaixo dela.</p>
       <div id="quiz-sim2"></div>
+    </div></section>
+
+    <!-- ============ SIMULADO 3 ============ -->
+    <section id="simulado3"><div class="card">
+      <p class="eyebrow">Prova online 3 · 40 questões · 3 horas</p>
+      <h2 class="sec">Simulado 3 (inédito)</h2>
+      <p>Terceira prova completa no formato Fundep (10 Português · 10 Matemática/RLM · 5 Gerais · 5 Legislação · 10 Específicos). Cronometre 3 horas, marque tudo e clique em <strong>Corrigir</strong>.</p>
+      <div id="quiz-sim3"></div>
     </div></section>
 
     <!-- ============ 9. FLASHCARDS ============ -->
@@ -732,7 +1036,7 @@
 /* ---------- plano checklist ---------- */
 (function(){
   var key="dmae:plano";var st={};try{st=JSON.parse(localStorage.getItem(key)||"{}");}catch(e){}
-  document.querySelectorAll("#plano-list input").forEach(function(c){
+  document.querySelectorAll("#plano-list input, #diario-list input").forEach(function(c){
     if(st[c.id]){c.checked=true;c.closest(".chk").classList.add("done");}
     c.onchange=function(){st[c.id]=c.checked;c.closest(".chk").classList.toggle("done",c.checked);try{localStorage.setItem(key,JSON.stringify(st));}catch(e){}};
   });
@@ -790,13 +1094,36 @@ var SIM=[
 {n:39,t:"Em Maslow, a busca por estabilidade no emprego é necessidade",o:["fisiológica.","de segurança.","social.","de estima."],c:1,e:"Segurança: estabilidade, proteção, emprego seguro."},
 {n:40,t:"NÃO está entre os princípios expressos no caput do art. 37 da CF:",o:["eficiência.","publicidade.","razoabilidade.","moralidade."],c:2,e:"Expressos: LIMPE (legalidade, impessoalidade, moralidade, publicidade, eficiência). Razoabilidade é princípio implícito."}
 ];
+/* Painel "Revise seus erros" — usado por todos os simulados e treinos */
+window.renderErrPanel=function(host,anchorEl,errors,total){
+  var id=host.id+"-errpanel";
+  var old=document.getElementById(id); if(old)old.parentNode.removeChild(old);
+  var d=document.createElement("div"); d.className="errpanel"; d.id=id;
+  if(!errors.length){
+    d.className+=" zero";
+    d.innerHTML='<h4>Você não errou nenhuma! 🎉</h4><p>Acertou todas as '+total+'. Refaça daqui a alguns dias sem olhar — se continuar acertando, está fixado.</p>';
+  } else {
+    var lis=errors.map(function(e){
+      return '<li><a href="#'+e.anchor+'">Questão '+e.n+'</a> — você marcou <b class="you">'+(e.you||'em branco')+'</b>; a certa é <b class="ok">'+e.correct+'</b>.'
+        +'<div class="eq">"'+e.qt+'"</div>'
+        +'<div class="ei"><b>Entenda o porquê:</b> '+e.expl+'</div></li>';
+    }).join("");
+    d.innerHTML='<h4>Revise seus erros — '+errors.length+' de '+total+'</h4>'
+      +'<p><b>Não passe reto:</b> leia o porquê de cada uma. É entendendo o motivo (não decorando a letra) que você fixa na memória e reconhece a mesma pegadinha na prova. Clique no número para reler a questão inteira.</p>'
+      +'<ol>'+lis+'</ol>'
+      +'<p class="tip">Anote cada erro no seu caderno de erros: o que errou · a regra certa · como não repetir. Revise esse caderno em 24 h, 7 dias e 21 dias.</p>';
+  }
+  anchorEl.parentNode.insertBefore(d,anchorEl.nextSibling);
+  d.scrollIntoView({behavior:"smooth",block:"nearest"});
+  return d;
+};
 (function(){
   var box=document.getElementById("sim"),html="";
   SIM.forEach(function(q,i){
     if(q.b){html+='<div class="blocklabel">'+q.b+'</div>';}
     if(q.passage){html+='<div class="passage">'+q.passage+'</div>';}
     if(q.n){
-      html+='<div class="q" data-i="'+i+'"><div class="qn">Questão '+q.n+'</div><div class="qt">'+q.t+'</div>';
+      html+='<div class="q" data-i="'+i+'" id="simq'+q.n+'"><div class="qn">Questão '+q.n+'</div><div class="qt">'+q.t+'</div>';
       "ABCD".split("").forEach(function(L,j){
         html+='<label class="opt"><input type="radio" name="q'+q.n+'" value="'+j+'"><span class="lt">'+L+')</span><span>'+q.o[j]+'</span></label>';
       });
@@ -806,30 +1133,35 @@ var SIM=[
   box.innerHTML=html;
   var total=SIM.filter(function(q){return q.n;}).length;
 
+  var LT="ABCD".split("");
   document.getElementById("corrigir").onclick=function(){
-    var acertos=0;
+    var acertos=0, errs=[];
     SIM.forEach(function(q){
       if(!q.n)return;
-      var qEl=box.querySelector('.q[data-i]');
-      var qd=[].slice.call(box.querySelectorAll('.q')).filter(function(el){return el.querySelector('.qn').textContent==='Questão '+q.n;})[0];
+      var qd=document.getElementById('simq'+q.n);
       if(!qd)return;
       var opts=qd.querySelectorAll('.opt');
       var sel=qd.querySelector('input:checked');
       opts.forEach(function(o){o.classList.remove('right','wrong');});
       opts[q.c].classList.add('right');
-      if(sel){var v=+sel.value; if(v===q.c){acertos++;} else {opts[v].classList.add('wrong');}}
+      var acertou=false;
+      if(sel){var v=+sel.value; if(v===q.c){acertos++;acertou=true;} else {opts[v].classList.add('wrong');}}
       qd.querySelector('.expl').classList.add('show');
+      if(!acertou){
+        errs.push({n:q.n,anchor:'simq'+q.n,qt:q.t,you:sel?LT[+sel.value]:'',correct:LT[q.c],expl:q.e});
+      }
     });
     var pct=Math.round(acertos/total*100);
-    var msg=pct>=70?'Excelente ritmo!':pct>=50?'No caminho — foque nos erros.':'Comece pelo caderno de erros e volte.';
+    var msg=pct>=70?'Excelente ritmo!':pct>=50?'No caminho — foque nos erros abaixo.':'Comece pela revisão de erros abaixo.';
     document.getElementById("scorebox").innerHTML='Você acertou <b>'+acertos+'</b>/'+total+' ('+pct+'%). '+msg;
-    document.getElementById("simulado").scrollIntoView({behavior:"smooth"});
+    window.renderErrPanel(document.getElementById("simulado"),document.querySelector("#simulado .simbar"),errs,total);
   };
   document.getElementById("limpar").onclick=function(){
     box.querySelectorAll('input:checked').forEach(function(i){i.checked=false;});
     box.querySelectorAll('.opt').forEach(function(o){o.classList.remove('right','wrong');});
     box.querySelectorAll('.expl').forEach(function(e){e.classList.remove('show');});
     document.getElementById("scorebox").textContent='';
+    var ep=document.getElementById("simulado-errpanel"); if(ep)ep.parentNode.removeChild(ep);
   };
 })();
 
@@ -941,30 +1273,36 @@ var FC=[
   }
   function wire(host){
     var qs=[].slice.call(host.querySelectorAll(".q"));
-    qs.forEach(function(qd,i){[].forEach.call(qd.querySelectorAll("input"),function(inp){inp.name=host.id+"_"+i;});});
+    qs.forEach(function(qd,i){qd.id=host.id+"_q"+(i+1);[].forEach.call(qd.querySelectorAll("input"),function(inp){inp.name=host.id+"_"+i;});});
     var b=document.createElement("div"); b.className="simbar";
     b.innerHTML='<button class="btn cor">Corrigir</button><button class="btn ghost lim">Limpar</button><span class="score sc" aria-live="polite"></span>';
     host.appendChild(b);
     b.querySelector(".cor").onclick=function(){
-      var ac=0;
-      qs.forEach(function(qd){
+      var ac=0, errs=[];
+      qs.forEach(function(qd,i){
         var opts=qd.querySelectorAll(".opt"), ins=qd.querySelectorAll("input"), c=+qd.getAttribute("data-c");
         var sel=qd.querySelector("input:checked");
         [].forEach.call(opts,function(o){o.classList.remove("right","wrong");});
         if(opts[c])opts[c].classList.add("right");
-        if(sel){var v=[].indexOf.call(ins,sel); if(v===c)ac++; else if(opts[v])opts[v].classList.add("wrong");}
+        var acertou=false, v=-1;
+        if(sel){v=[].indexOf.call(ins,sel); if(v===c){ac++;acertou=true;} else if(opts[v])opts[v].classList.add("wrong");}
         qd.querySelector(".expl").classList.add("show");
+        if(!acertou){
+          var expl=qd.querySelector(".expl").innerHTML.replace(/^\s*<b>.*?<\/b>\s*/,"");
+          errs.push({n:i+1,anchor:qd.id,qt:qd.querySelector(".qt").innerHTML,you:v>=0?L[v]:"",correct:L[c],expl:expl});
+        }
       });
       var pct=Math.round(ac/qs.length*100);
-      var msg=pct>=70?"Ótimo!":pct>=50?"Bom — revise os erros.":"Releia a aula e refaça.";
+      var msg=pct>=70?"Ótimo!":pct>=50?"Bom — revise os erros abaixo.":"Releia a aula e veja os erros abaixo.";
       b.querySelector(".sc").innerHTML="Acertos: <b>"+ac+"</b>/"+qs.length+" ("+pct+"%). "+msg;
-      qs[0].scrollIntoView({behavior:"smooth",block:"start"});
+      window.renderErrPanel(host,b,errs,qs.length);
     };
     b.querySelector(".lim").onclick=function(){
       host.querySelectorAll("input:checked").forEach(function(i){i.checked=false;});
       host.querySelectorAll(".opt").forEach(function(o){o.classList.remove("right","wrong");});
       host.querySelectorAll(".expl").forEach(function(e){e.classList.remove("show");});
       b.querySelector(".sc").textContent="";
+      var ep=document.getElementById(host.id+"-errpanel"); if(ep)ep.parentNode.removeChild(ep);
     };
   }
   function mountList(host,items){ // items: {b},{passage},{t,o,c,e}
@@ -1032,6 +1370,57 @@ var FC=[
   ];
   mountList(document.getElementById("quiz-sim2"),SIM2);
 
+  /* ===================== SIMULADO 3 ===================== */
+  var SIM3=[
+  {b:"Português (1–10)"},
+  {passage:"<b>Texto</b> — “A água que sai da torneira percorre um caminho longo antes de chegar ao copo. Captada em mananciais, ela é tratada, distribuída por quilômetros de tubulação e, depois de usada, precisa voltar limpa aos rios. Quando a população desperdiça, todo esse esforço — e o dinheiro público investido — escorre pelo ralo. Cuidar da água, portanto, não é apenas um gesto ambiental: é também um ato de cidadania e de respeito ao patrimônio de todos.”"},
+  {t:"1. O texto defende, essencialmente, que",o:["a água tratada é cara demais para o consumidor.","o cuidado com a água é uma questão ambiental e também de cidadania.","o desperdício de água é inevitável nas grandes cidades.","o tratamento de esgoto deve ser privatizado."],c:1,e:"O trecho final é explícito: cuidar da água “é também um ato de cidadania e de respeito ao patrimônio de todos”. As demais extrapolam o texto."},
+  {t:"2. A expressão “escorre pelo ralo” foi empregada em sentido",o:["literal, indicando vazamento na tubulação.","figurado, indicando desperdício de esforço e dinheiro.","técnico, referente ao esgotamento sanitário.","irônico, criticando o tratamento da água."],c:1,e:"É linguagem figurada (metáfora): o esforço e o dinheiro são “perdidos”, não literalmente escoados."},
+  {t:"3. Em “depois de usada, precisa voltar limpa aos rios”, o termo “limpa” refere-se a",o:["rios.","tubulação.","água.","população."],c:2,e:"“Limpa” é predicativo que concorda com “ela/água” (a água precisa voltar limpa). Concordância pelo referente feminino singular."},
+  {t:"4. A palavra “portanto” estabelece relação de",o:["oposição.","conclusão.","condição.","tempo."],c:1,e:"“Portanto” é conjunção conclusiva: introduz a consequência/conclusão do que foi dito."},
+  {t:"5. “Captada em mananciais, ela é tratada…” — a oração destacada exprime ideia de",o:["causa da distribuição.","circunstância/estado anterior da água.","finalidade do tratamento.","dúvida."],c:1,e:"É oração reduzida de particípio que caracteriza a água (foi captada) antes de ser tratada — valor de circunstância/estado."},
+  {t:"6. Assinale a frase com concordância verbal correta.",o:["Fazem dez anos que moro aqui.","Houve muitos desperdícios na rede.","Existe problemas na tubulação.","Choveram no fim de semana."],c:1,e:"“Houver” (haver = existir) é impessoal: fica no singular (houve muitos desperdícios). “Fazem/existe/choveram” estão errados nesses contextos."},
+  {t:"7. Em qual opção a crase está correta?",o:["A água chega à população tratada.","Refiro-me à tudo isso.","Cheguei à distribuir água.","Fui à Uberlândia."],c:0,e:"“Chega a a população” = à (fem., com artigo). Erros: antes de “tudo” (pronome), antes de verbo e cidade sem artigo."},
+  {t:"8. A alternativa em que a vírgula está corretamente empregada é:",o:["A água, tratada é distribuída.","Cuidar da água, é dever de todos.","Quando a população desperdiça, o esforço se perde.","O rio recebe, água limpa."],c:2,e:"Vírgula separa a oração adverbial deslocada (“Quando…”) da principal. Nas outras, a vírgula quebra sujeito/verbo/objeto indevidamente."},
+  {t:"9. “Patrimônio” é acentuada pela mesma regra de",o:["água.","série.","você.","até."],c:1,e:"“Patrimônio” e “série” são paroxítonas terminadas em ditongo → acentuam-se. (“água” é do mesmo grupo, mas “série” é o par mais direto entre as opções; “você/até” são oxítonas.)"},
+  {t:"10. O antônimo adequado de “desperdiça”, no texto, é",o:["gasta.","economiza.","suja.","distribui."],c:1,e:"Desperdiçar × economizar (poupar). “Gastar” é sinônimo parcial, não antônimo."},
+  {b:"Matemática e Raciocínio Lógico (11–20)"},
+  {t:"11. Um reservatório de 12.000 litros está com 25% da capacidade. Quantos litros faltam para enchê-lo?",o:["3.000 L","6.000 L","9.000 L","10.000 L"],c:2,e:"25% de 12.000 = 3.000 (tem). Faltam 12.000 − 3.000 = 9.000 L."},
+  {t:"12. A tarifa de água subiu de R$ 40 para R$ 46. O aumento percentual foi de",o:["6%","12%","15%","16%"],c:2,e:"Aumento = 6/40 = 0,15 = 15%."},
+  {t:"13. Três funcionários leem 600 hidrômetros em 4 dias. Mantido o ritmo, quantos dias 2 funcionários levam para ler os mesmos 600?",o:["6 dias","5 dias","3 dias","8 dias"],c:0,e:"Menos gente, mais tempo (inversamente proporcional): 3·4 = 12; 12/2 = 6 dias."},
+  {t:"14. Uma conta de R$ 200 foi paga com 10% de desconto por antecipação. O valor pago foi",o:["R$ 190","R$ 180","R$ 210","R$ 170"],c:1,e:"200 × 0,90 = 180."},
+  {t:"15. Qual é o próximo número da sequência 2, 6, 12, 20, 30, ...?",o:["36","40","42","44"],c:2,e:"Diferenças 4, 6, 8, 10, 12 → 30 + 12 = 42."},
+  {t:"16. Numa caixa há 5 canetas azuis e 3 pretas. Retirando uma ao acaso, a probabilidade de ser preta é",o:["3/8","5/8","3/5","1/3"],c:0,e:"Favoráveis 3, total 8 → 3/8."},
+  {t:"17. Se todo servidor do DMAE é concursado, e João é servidor do DMAE, conclui-se que",o:["João pode não ser concursado.","João é concursado.","João é terceirizado.","nada se pode concluir."],c:1,e:"Silogismo válido: se TODO servidor é concursado e João é servidor, então João é concursado."},
+  {t:"18. A negação de “Todos os hidrômetros funcionam” é",o:["Nenhum hidrômetro funciona.","Todos os hidrômetros não funcionam.","Existe pelo menos um hidrômetro que não funciona.","Alguns hidrômetros funcionam."],c:2,e:"Negar “todo A é B” = “existe pelo menos um A que não é B”. Não é “nenhum”."},
+  {t:"19. A média de 4 provas foi 7,0. Se três notas foram 6, 8 e 7, a quarta nota foi",o:["6","7","8","9"],c:1,e:"Soma = 7×4 = 28; 28 − (6+8+7) = 28 − 21 = 7."},
+  {t:"20. Um cano enche um tanque em 6 h e outro em 3 h. Juntos, enchem em",o:["1 h","2 h","4 h","9 h"],c:1,e:"1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2 tanque por hora → 2 horas."},
+  {b:"Conhecimentos Gerais (21–25)"},
+  {t:"21. Os componentes do saneamento básico, segundo a Lei 11.445/2007, são água, esgoto, drenagem pluvial e",o:["energia elétrica.","limpeza urbana e manejo de resíduos sólidos.","transporte público.","pavimentação."],c:1,e:"Os quatro: água, esgoto, drenagem e limpeza urbana/resíduos sólidos."},
+  {t:"22. Uberlândia está localizada em qual região de Minas Gerais?",o:["Zona da Mata.","Triângulo Mineiro.","Vale do Jequitinhonha.","Sul de Minas."],c:1,e:"Triângulo Mineiro, oeste do estado."},
+  {t:"23. O Novo Marco Legal do Saneamento (Lei 14.026/2020) fixou metas de universalização para",o:["2025.","2030.","2033.","2040."],c:2,e:"Até 31/12/2033: 99% com água e 90% com coleta e tratamento de esgoto."},
+  {t:"24. A capital de Minas Gerais é",o:["Uberlândia.","Uberaba.","Belo Horizonte.","Contagem."],c:2,e:"Belo Horizonte é a capital; Uberlândia é a 2ª cidade mais populosa do estado."},
+  {t:"25. A unidade de gestão dos recursos hídricos, pela Lei 9.433/1997, é",o:["o município.","a bacia hidrográfica.","o estado.","a região metropolitana."],c:1,e:"A bacia hidrográfica é a unidade de planejamento e gestão da água."},
+  {b:"Legislação (26–30)"},
+  {t:"26. São princípios expressos da Administração Pública no art. 37 da CF (LIMPE):",o:["legalidade, isonomia, moralidade, publicidade, economicidade.","legalidade, impessoalidade, moralidade, publicidade, eficiência.","liberdade, igualdade, moralidade, prudência, eficácia.","legalidade, impessoalidade, motivação, prudência, eficiência."],c:1,e:"LIMPE: Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência."},
+  {t:"27. A investidura em cargo público efetivo depende de",o:["indicação política.","aprovação prévia em concurso público.","tempo de serviço.","seleção interna."],c:1,e:"Art. 37, II, CF: cargo efetivo exige concurso público de provas ou provas e títulos."},
+  {t:"28. O prazo do estágio probatório do servidor público é de",o:["1 ano.","2 anos.","3 anos.","5 anos."],c:2,e:"Estágio probatório: 3 anos de efetivo exercício (para aquisição da estabilidade)."},
+  {t:"29. A Lei 13.460/2017 dispõe sobre",o:["licitações e contratos.","participação, proteção e defesa dos direitos do usuário dos serviços públicos.","o regime jurídico dos servidores.","improbidade administrativa."],c:1,e:"É o Código de Defesa do Usuário do Serviço Público (Carta de Serviços, ouvidoria etc.)."},
+  {t:"30. É forma de provimento de cargo público:",o:["a demissão.","a nomeação.","a exoneração.","a aposentadoria."],c:1,e:"Nomeação é provimento (dá o cargo). Demissão/exoneração/aposentadoria são formas de vacância (deixam o cargo)."},
+  {b:"Conhecimentos Específicos (31–40)"},
+  {t:"31. A modalidade de licitação criada pela Lei 14.133/2021 para escolher trabalho técnico/artístico mediante prêmio é o",o:["pregão.","concurso.","leilão.","diálogo competitivo."],c:1,e:"Concurso: escolhe trabalho técnico, científico ou artístico com prêmio ou remuneração."},
+  {t:"32. Documento oficial usado para tratar de assunto de serviço entre órgãos e também com particulares, hoje unificado pelo Manual de Redação da Presidência, é o",o:["memorando.","ofício.","requerimento.","edital."],c:1,e:"O padrão ofício unificou ofício/aviso/memorando; serve para comunicação oficial interna e externa."},
+  {t:"33. No arquivo, a fase em que o documento é consultado com frequência e fica próximo ao setor é a",o:["corrente.","intermediária.","permanente.","de descarte."],c:0,e:"Idade corrente: uso frequente, junto ao produtor. Depois vem intermediária e, por fim, permanente."},
+  {t:"34. Segundo a teoria das relações humanas, a produtividade é influenciada principalmente por",o:["somente o salário.","fatores sociais e psicológicos do grupo.","o layout físico apenas.","a punição."],c:1,e:"Experiência de Hawthorne: fatores sociais, motivacionais e de grupo afetam a produtividade — não só o dinheiro."},
+  {t:"35. A ordem correta dos estágios da despesa pública é",o:["liquidação, empenho, pagamento.","empenho, liquidação, pagamento.","pagamento, empenho, liquidação.","empenho, pagamento, liquidação."],c:1,e:"Empenho → liquidação → pagamento (Empenha, Liquida, Paga)."},
+  {t:"36. O instrumento de planejamento orçamentário com vigência de quatro anos é o",o:["LOA.","LDO.","PPA.","LRF."],c:2,e:"PPA (Plano Plurianual) — 4 anos; LDO orienta o ano; LOA é o orçamento anual."},
+  {t:"37. Na gestão de estoques, a classe A da curva ABC reúne",o:["muitos itens de baixo valor.","poucos itens de alto valor.","itens perecíveis apenas.","itens sem giro."],c:1,e:"Classe A: poucos itens (~20%) que representam a maior parte do valor (~80%) → controle rigoroso."},
+  {t:"38. No atendimento ao público, o princípio que impede tratamento privilegiado a conhecidos é o da",o:["eficiência.","impessoalidade.","publicidade.","legalidade."],c:1,e:"Impessoalidade: todos são tratados igualmente, sem favorecimento."},
+  {t:"39. A avaliação de desempenho em que uma única qualidade positiva contamina todo o julgamento é o erro de",o:["tendência central.","efeito halo.","recência.","contraste."],c:1,e:"Efeito halo: um traço marcante distorce a avaliação dos demais fatores."},
+  {t:"40. Planilha eletrônica (Excel/Calc): a fórmula que soma as células de A1 até A10 é",o:["=SOMA(A1;A10)","=SOMA(A1:A10)","=SOMAR(A1-A10)","=TOTAL(A1:A10)"],c:1,e:"O intervalo usa dois-pontos: =SOMA(A1:A10). O ponto e vírgula soma apenas A1 e A10."}
+  ];
+  mountList(document.getElementById("quiz-sim3"),SIM3);
+
   /* ===================== TREINOS (aula + questões) ===================== */
   var TREINOS=[
   {mat:"Português",titulo:"Aula + treino: Crase",aula:"Crase é a fusão da preposição <b>a</b> com o artigo <b>a(s)</b> (ou com o “a” de <i>aquele/aquela/aquilo</i>). Só existe diante de palavra <b>feminina</b>. <b>Teste infalível:</b> troque a palavra feminina por uma masculina — se surgir <b>“ao”</b>, tem crase; se surgir só <b>“a”</b>, não tem.<br>Ex.: “Vou <b>à</b> escola” → “Vou <b>ao</b> colégio” (crase). “Vou <b>a</b> pé” → “Vou <b>a</b> nado” (sem crase).<br><b>Sempre tem:</b> às vezes, à noite, à vista, à moda de, à medida que, e horas definidas (às 8h). <b>Nunca tem:</b> antes de verbo, de palavra masculina, de pronome (a ela, a você, a Vossa Excelência) e de cidade que não pede artigo (“vou a Uberlândia”).",qs:[
@@ -1070,6 +1459,30 @@ var FC=[
     {t:"Em “Ele respondeu rapidamente”, a palavra “rapidamente” é",o:["adjetivo","advérbio","substantivo","conjunção"],c:1,e:"Modifica o verbo indicando modo → advérbio (invariável)."},
     {t:"Em “Comprei livros e cadernos”, a palavra “e” é",o:["preposição","conjunção (aditiva)","advérbio","pronome"],c:1,e:"Liga dois termos de mesma função somando ideias → conjunção coordenativa aditiva."}
   ]},
+  {mat:"Português",titulo:"Aula + treino: Interpretação de texto",aula:"Ler bem é separar três coisas: <b>compreensão</b> (o que o texto diz de forma literal), <b>inferência</b> (o que dá para concluir a partir do texto) e <b>extrapolação</b> (o que vai ALÉM do texto — geralmente é a alternativa errada). Desconfie de alternativas que <b>generalizam</b> (“sempre”, “todos”, “nunca”) o que o texto disse de modo limitado, e das que são “verdadeiras no mundo real” mas o texto não afirma.<br><b>Texto de apoio:</b> “A cobrança pelo uso da água não pretende encarecer o serviço, e sim lembrar que o recurso é limitado. Ao dar valor econômico à água, o poder público estimula o consumo consciente. Não se trata, portanto, de punir quem usa, mas de evitar o desperdício de um bem de todos.”",qs:[
+    {t:"Segundo o texto, o objetivo da cobrança pelo uso da água é",o:["aumentar a arrecadação encarecendo o serviço.","punir quem consome muito.","estimular o consumo consciente, lembrando que o recurso é limitado.","privatizar a água."],c:2,e:"O texto diz que a cobrança “não pretende encarecer” e serve para “estimular o consumo consciente”. As outras contrariam ou extrapolam."},
+    {t:"Em “Não se trata de punir quem usa, mas de evitar o desperdício”, a relação é de",o:["causa.","oposição/retificação.","conclusão.","condição."],c:1,e:"A estrutura “não… mas…” corrige e opõe: nega uma ideia e afirma outra."},
+    {t:"Assinale a afirmação que é uma EXTRAPOLAÇÃO (não está no texto).",o:["A água é um recurso limitado.","A cobrança visa ao consumo consciente.","Toda cobrança de serviço público é injusta.","A água é um bem de todos."],c:2,e:"É opinião externa, que o texto não afirma. As demais estão escritas no texto."},
+    {t:"A expressão “Ao dar valor econômico à água” exprime ideia de",o:["circunstância (ao fazer isso / quando se faz isso).","causa exclusiva e única.","oposição.","dúvida."],c:0,e:"“Ao + infinitivo” indica circunstância (tempo/condição): no momento em que se dá valor econômico."}
+  ]},
+  {mat:"Português",titulo:"Aula + treino: Coesão e coerência",aula:"<b>Coesão</b> é a amarração do texto pelas palavras que ligam as ideias. <b>Referencial:</b> pronomes e sinônimos que <b>retomam</b> (anáfora) ou <b>antecipam</b> (catáfora) um termo. <b>Sequencial:</b> conectivos que dão a relação lógica — adição (e, além disso), oposição (mas, porém, contudo), causa (porque, pois, já que), conclusão (portanto, logo), condição (se, caso), concessão (embora, ainda que). <b>Coerência</b> é o sentido: o texto não pode se contradizer. Dica: sempre localize o <b>antecedente exato</b> do pronome.",qs:[
+    {t:"Em “O DMAE ampliou a rede; ISSO reduziu as faltas d’água”, o termo “isso” retoma",o:["o DMAE.","a rede.","o fato de o DMAE ter ampliado a rede.","as faltas d’água."],c:2,e:"O demonstrativo “isso” retoma a oração inteira anterior (anáfora), não uma palavra só."},
+    {t:"Para ligar duas ideias com sentido de OPOSIÇÃO, usa-se",o:["portanto.","porque.","contudo.","além disso."],c:2,e:"“Contudo” é adversativa (oposição). “Portanto” = conclusão; “porque” = causa; “além disso” = adição."},
+    {t:"“___ tenha chovido pouco, os reservatórios se mantiveram.” Complete com ideia de concessão.",o:["Porque","Embora","Portanto","Se"],c:1,e:"“Embora” = concessão: o fato contrário (chover pouco) não impediu o resultado."},
+    {t:"A relação de conclusão é expressa por",o:["mas.","porque.","portanto.","embora."],c:2,e:"“Portanto” (e “logo”) indicam conclusão."}
+  ]},
+  {mat:"Português",titulo:"Aula + treino: Sintaxe do período",aula:"Um <b>período composto</b> tem mais de uma oração. As <b>coordenadas</b> são independentes: aditiva (e, nem), adversativa (mas, porém, contudo, todavia), alternativa (ou… ou), conclusiva (logo, portanto), explicativa (porque, pois <i>antes</i> do verbo). As <b>subordinadas</b> dependem de outra: substantivas (funcionam como sujeito/objeto), adjetivas (restritiva/explicativa) e adverbiais (causal, condicional, concessiva, temporal, final, consecutiva…). Dica: <b>“embora/ainda que”</b> = concessão; <b>“se/caso”</b> = condição; <b>“para que/a fim de que”</b> = finalidade.",qs:[
+    {t:"“Estudou muito, portanto foi aprovado.” A oração iniciada por “portanto” é coordenada",o:["aditiva.","adversativa.","conclusiva.","explicativa."],c:2,e:"“Portanto” conclui a partir da ideia anterior → coordenada conclusiva."},
+    {t:"“Se chover, a prova será adiada.” A oração “Se chover” é adverbial",o:["causal.","condicional.","concessiva.","temporal."],c:1,e:"“Se” introduz condição."},
+    {t:"“Ainda que estivesse cansado, terminou o serviço.” A ideia é de",o:["causa.","condição.","concessão.","finalidade."],c:2,e:"“Ainda que” = concessão: apesar do obstáculo, o fato ocorreu."},
+    {t:"“Ele fez tudo para que o prazo fosse cumprido.” A subordinada exprime",o:["causa.","finalidade.","tempo.","comparação."],c:1,e:"“Para que” = finalidade (o objetivo da ação)."}
+  ]},
+  {mat:"Português",titulo:"Aula + treino: Sentido figurado (figuras)",aula:"<b>Denotação</b> = sentido literal; <b>conotação</b> = figurado. Principais figuras: <b>metáfora</b> (comparação implícita: “ela é uma flor”), <b>comparação</b> (com conectivo: “forte como um touro”), <b>metonímia</b> (parte pelo todo, autor pela obra: “li Machado”), <b>hipérbole</b> (exagero: “chorei rios”), <b>eufemismo</b> (suaviza: “partiu” por morreu), <b>ironia</b> (diz o contrário), <b>personificação/prosopopeia</b> (traço humano ao não humano: “o vento sussurrou”), <b>antítese</b> (ideias opostas), <b>pleonasmo</b> (redundância).",qs:[
+    {t:"“Uberlândia é uma ilha de progresso no cerrado.” A figura é",o:["metáfora.","metonímia.","eufemismo.","hipérbole."],c:0,e:"Comparação implícita (chamar a cidade de “ilha”), sem conectivo → metáfora."},
+    {t:"Em “Ele leu Drummond a noite toda”, há",o:["metáfora.","metonímia (autor pela obra).","hipérbole.","ironia."],c:1,e:"“Drummond” = as obras do autor. Trocar o autor pela obra é metonímia."},
+    {t:"“Chorei um oceano de lágrimas.” A figura é",o:["eufemismo.","hipérbole (exagero).","metonímia.","antítese."],c:1,e:"Exagero proposital → hipérbole."},
+    {t:"“O sol sorriu para a cidade.” A figura é",o:["personificação.","comparação.","metonímia.","pleonasmo."],c:0,e:"Atribui ação humana (sorrir) a algo não humano → personificação."}
+  ]},
   {mat:"Matemática",titulo:"Aula + treino: Porcentagem e juros",aula:"<b>Porcentagem:</b> x% = x/100. Aumentar p% = ×(1 + p/100); descontar p% = ×(1 − p/100). <b>Aumentos/descontos sucessivos multiplicam</b> (não somam): +10% e +20% = 1,10 × 1,20 = 1,32 → +32%.<br><b>Juros simples:</b> J = C·i·t e M = C + J.<br><b>Juros compostos:</b> M = C·(1+i)ᵗ (juro sobre juro). Taxa e tempo na <b>mesma unidade</b>. Pegadinha: pedem o <b>montante</b> e você marca só o <b>juro</b>.",qs:[
     {t:"R$ 1.000 a juros compostos de 10% ao mês por 2 meses. O montante é",o:["R$ 1.200","R$ 1.210","R$ 1.100","R$ 1.021"],c:1,e:"M = 1.000 × (1,1)² = 1.000 × 1,21 = 1.210."},
     {t:"Um produto de R$ 200 sofre +10% e depois −10%. O preço final é",o:["R$ 200","R$ 198","R$ 202","R$ 180"],c:1,e:"200 × 1,10 × 0,90 = 198. Não volta ao original, porque os percentuais incidem sobre valores diferentes."},
@@ -1093,6 +1506,30 @@ var FC=[
     {t:"Nas notas 3, 5, 7, 7 e 8, a moda é",o:["6","7","5","8"],c:1,e:"Moda é o valor mais frequente: o 7 aparece duas vezes."},
     {t:"Prova (peso 3) com nota 8 e trabalho (peso 1) com nota 4. A média ponderada é",o:["6","7","5","6,5"],c:1,e:"(8×3 + 4×1) ÷ (3+1) = 28 ÷ 4 = 7."},
     {t:"No conjunto 10, 20, 30, 40, a mediana é",o:["25","20","30","15"],c:0,e:"n é par → média dos dois centrais (20 e 30) = 25."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Funções (afim e quadrática)",aula:"<b>Função afim</b> f(x)=ax+b: o gráfico é uma reta; a&gt;0 crescente, a&lt;0 decrescente; a raiz (onde f=0) é x=−b/a; b é onde a reta corta o eixo y.<br><b>Função quadrática</b> f(x)=ax²+bx+c: o gráfico é uma parábola; a&gt;0 concavidade para cima (tem ponto de <b>mínimo</b>), a&lt;0 para baixo (<b>máximo</b>). Raízes por Bhaskara (Δ=b²−4ac). Vértice: x_v=−b/(2a) e y_v=−Δ/(4a). <b>Pegadinha:</b> se pedem o valor mínimo/máximo, a resposta é o <b>y_v</b> (não o x_v).",qs:[
+    {t:"Na função f(x)=2x−6, a raiz (onde f(x)=0) é",o:["x=3","x=−3","x=6","x=2"],c:0,e:"2x−6=0 → 2x=6 → x=3."},
+    {t:"A parábola de f(x)=x²−4x+3 tem",o:["concavidade para baixo, vértice em x=2.","concavidade para cima, vértice em x=2.","concavidade para cima, vértice em x=4.","concavidade para baixo, vértice em x=−2."],c:1,e:"a=1&gt;0 → para cima; x_v = −(−4)/(2·1) = 2."},
+    {t:"Uma função quadrática com a&lt;0 tem ponto de",o:["mínimo.","máximo.","inflexão.","nenhum extremo."],c:1,e:"a&lt;0 → concavidade para baixo → ponto de máximo no vértice."},
+    {t:"A função afim f(x)=3x+1 é",o:["decrescente.","crescente.","constante.","quadrática."],c:1,e:"a=3&gt;0 → função crescente."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Conjuntos",aula:"<b>União (A∪B):</b> tudo que está em A ou em B. <b>Interseção (A∩B):</b> o que está nos dois ao mesmo tempo. Fórmula-chave: <b>n(A∪B) = n(A) + n(B) − n(A∩B)</b> (desconta a interseção contada duas vezes). Em problemas de “quantos gostam dos dois / de só um / de nenhum”, monte o <b>diagrama de Venn começando pela interseção</b>. Conjuntos numéricos: N ⊂ Z ⊂ Q ⊂ R; irracionais (√2, π) não são racionais.",qs:[
+    {t:"Se n(A)=20, n(B)=15 e n(A∩B)=5, então n(A∪B) é",o:["40","35","30","25"],c:2,e:"20 + 15 − 5 = 30."},
+    {t:"Numa turma, 18 gostam de água de coco, 12 de suco e 5 dos dois. Quantos gostam de pelo menos um?",o:["30","25","35","20"],c:1,e:"18 + 12 − 5 = 25 (a interseção não pode ser contada duas vezes)."},
+    {t:"A interseção A∩B contém",o:["tudo que está em A e em B (somados).","só o que está em A e em B ao mesmo tempo.","o que está em A ou em B.","o que não está em nenhum."],c:1,e:"Interseção = elementos comuns aos dois conjuntos."},
+    {t:"O número √2 pertence ao conjunto dos",o:["naturais.","inteiros.","racionais.","irracionais."],c:3,e:"√2 é irracional (não pode ser escrito como fração exata)."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Geometria (áreas e volumes)",aula:"<b>Áreas:</b> quadrado l²; retângulo base×altura; triângulo (base×altura)/2; círculo πr². <b>Volumes:</b> bloco/prisma = área da base × altura; <b>cilindro = πr²·h</b>; cone e pirâmide = (1/3)×base×altura; esfera = (4/3)πr³. <b>Conversão essencial:</b> 1 m³ = 1.000 litros. <b>Pegadinhas:</b> confundir raio com diâmetro (raio = metade) e esquecer de converter m³ em litros.",qs:[
+    {t:"Um reservatório em forma de bloco mede 2 m × 3 m × 4 m. O volume é",o:["9 m³","24 m³","12 m³","20 m³"],c:1,e:"Volume do bloco = 2 × 3 × 4 = 24 m³."},
+    {t:"Quantos litros cabem em 2,5 m³?",o:["25 L","250 L","2.500 L","25.000 L"],c:2,e:"1 m³ = 1.000 L → 2,5 × 1.000 = 2.500 L."},
+    {t:"A área de um terreno retangular de 10 m por 8 m é",o:["18 m²","36 m²","80 m²","800 m²"],c:2,e:"Área = base × altura = 10 × 8 = 80 m²."},
+    {t:"Um cilindro tem raio 3 m e altura 10 m (use π=3). O volume é",o:["90 m³","270 m³","900 m³","30 m³"],c:1,e:"V = πr²h = 3 × 3² × 10 = 3 × 9 × 10 = 270 m³."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Sequências (PA e PG)",aula:"<b>PA</b> (progressão aritmética): soma-se sempre a mesma <b>razão r</b>. Termo geral: <b>aₙ = a₁ + (n−1)·r</b>. Soma: Sₙ = (a₁+aₙ)·n/2. <b>PG</b> (geométrica): multiplica-se pela razão q; aₙ = a₁·q^(n−1). <b>Pegadinha clássica:</b> usar n em vez de (n−1) no termo geral da PA.",qs:[
+    {t:"Na PA 5, 8, 11, 14, …, a razão é",o:["2","3","5","4"],c:1,e:"r = 8 − 5 = 3 (a diferença constante)."},
+    {t:"Numa PA com a₁=10 e r=5, o 8º termo é",o:["45","50","40","55"],c:0,e:"a₈ = 10 + (8−1)×5 = 10 + 35 = 45. (Usar n em vez de n−1 daria 50 — pegadinha.)"},
+    {t:"Na PG 2, 6, 18, 54, …, a razão é",o:["2","3","4","6"],c:1,e:"q = 6 ÷ 2 = 3 (multiplica-se por 3)."},
+    {t:"A soma dos números de 1 a 10 (PA 1,2,…,10) é",o:["45","50","55","100"],c:2,e:"Sₙ = (1+10)×10/2 = 55."}
   ]},
   {mat:"Específicos",titulo:"Aula + treino: Licitações (Lei 14.133/2021)",aula:"Desde 30/12/2023, a <b>Lei 14.133/2021</b> é a <b>única</b> lei geral de licitações (revogou a 8.666, o pregão e o RDC). Aplica-se ao DMAE (autarquia).<br><b>5 modalidades (art. 28):</b> pregão, concorrência, concurso, leilão e diálogo competitivo. <b>Convite e tomada de preços não existem mais.</b><br><b>Fases (art. 17):</b> preparatória → edital → propostas → <b>julgamento → habilitação</b> (invertida) → recursal → homologação.<br><b>Dispensa (art. 75):</b> dá pra competir, mas a lei permite não licitar. <b>Inexigibilidade (art. 74):</b> competição inviável (fornecedor exclusivo, artista consagrado, notória especialização).",qs:[
     {t:"NÃO é modalidade da Lei 14.133/2021:",o:["concorrência","tomada de preços","leilão","diálogo competitivo"],c:1,e:"Tomada de preços (e convite) foram extintas. As 5 modalidades são pregão, concorrência, concurso, leilão e diálogo competitivo."},
@@ -1135,6 +1572,30 @@ var FC=[
     {t:"Pelo regime de competência, a despesa é reconhecida",o:["quando é paga","quando ocorre, independentemente do pagamento","apenas no fim do ano","somente se for à vista"],c:1,e:"Competência = registrar no momento do fato gerador, não do caixa."},
     {t:"Representam obrigações da entidade:",o:["o ativo","o passivo","o patrimônio líquido","as receitas"],c:1,e:"Passivo = obrigações (o que a entidade deve). Ativo = bens e direitos."},
     {t:"A demonstração que apura o lucro ou prejuízo do período é a",o:["Balanço Patrimonial","DRE","DFC","DMPL"],c:1,e:"DRE (Demonstração do Resultado do Exercício): receitas − despesas = resultado."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: RH e Departamento de Pessoal",aula:"<b>Gestão de pessoas</b> (Chiavenato) tem 6 processos: <b>agregar</b> (recrutar/selecionar), <b>aplicar</b> (cargos, avaliação), <b>recompensar</b> (salário, benefícios), <b>desenvolver</b> (treinar), <b>manter</b> (higiene, segurança, clima) e <b>monitorar</b> (dados). <b>Recrutamento interno</b> (mais rápido/barato, motiva, mas limita a renovação) × <b>externo</b> (traz gente nova, mais caro/lento). <b>Erros de avaliação:</b> efeito halo (uma qualidade contamina o resto), tendência central, recência. <b>Cultura</b> (valores enraizados) × <b>clima</b> (percepção do momento). No serviço público o vínculo é <b>estatutário</b> (cargo); na iniciativa privada, CLT (emprego).",qs:[
+    {t:"Preencher uma vaga promovendo alguém que já é do quadro é recrutamento",o:["externo.","interno.","obrigatoriamente misto.","terceirizado."],c:1,e:"Recrutamento interno: aproveita quem já trabalha na organização."},
+    {t:"Quando a boa impressão em UMA característica influencia toda a avaliação, ocorre o erro de",o:["tendência central.","efeito halo.","recência.","leniência."],c:1,e:"Efeito halo: um traço marcante “contamina” o julgamento dos demais."},
+    {t:"Treinar e capacitar pessoas faz parte do processo de",o:["agregar.","recompensar.","desenvolver.","monitorar."],c:2,e:"Desenvolver = treinamento e capacitação."},
+    {t:"A diferença entre cultura e clima organizacional é:",o:["são a mesma coisa.","cultura é passageira; clima é permanente.","cultura são os valores enraizados; clima é a percepção do momento.","clima é a estrutura formal do organograma."],c:2,e:"Cultura = valores compartilhados e duradouros; clima = como as pessoas percebem o ambiente agora."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Atendimento ao público (Lei 13.460)",aula:"Bom atendimento no serviço público = <b>presteza, cortesia, clareza, empatia e tratamento igualitário</b> (sem privilégios — princípio da impessoalidade). No telefone: identifique-se, anote o recado completo e não deixe o usuário sem retorno. A <b>Lei 13.460/2017</b> (Código de Defesa do Usuário do Serviço Público) garante direitos como urbanidade, acesso à informação, a <b>Carta de Serviços ao Usuário</b>, a <b>ouvidoria</b> e a avaliação continuada dos serviços. Qualidade no serviço público = eficiência + satisfação do usuário.",qs:[
+    {t:"A Lei 13.460/2017 trata",o:["das licitações.","dos direitos do usuário do serviço público.","do orçamento público.","do estatuto do servidor."],c:1,e:"É o Código de Defesa do Usuário do Serviço Público."},
+    {t:"NÃO é um bom princípio de atendimento ao público",o:["cortesia.","tratamento igualitário.","dar preferência a conhecidos.","clareza."],c:2,e:"Privilegiar conhecidos fere a impessoalidade e a igualdade."},
+    {t:"O documento que informa ao cidadão os serviços, prazos e como acessá-los é a",o:["ata.","Carta de Serviços ao Usuário.","portaria.","certidão."],c:1,e:"A Carta de Serviços ao Usuário é prevista na Lei 13.460."},
+    {t:"O canal para o usuário reclamar, sugerir e receber resposta do órgão é a",o:["ouvidoria.","tesouraria.","procuradoria.","almoxarifado."],c:0,e:"A ouvidoria recebe e encaminha manifestações dos usuários."}
+  ]},
+  {mat:"Conhecimentos Gerais",titulo:"Aula + treino: Saneamento e água (leis)",aula:"<b>Lei 11.445/2007</b> (diretrizes do saneamento) define os <b>4 componentes</b>: abastecimento de água, esgotamento sanitário, limpeza urbana/resíduos sólidos e drenagem de águas pluviais. <b>Lei 14.026/2020 (Novo Marco):</b> metas até 31/12/2033 — <b>99% da população com água e 90% com coleta e tratamento de esgoto</b>; a <b>ANA</b> tornou-se reguladora de referência. <b>Lei 9.433/1997</b> (Política Nacional de Recursos Hídricos): água é bem público de valor econômico; a <b>bacia hidrográfica</b> é a unidade de gestão; há outorga, cobrança pelo uso e comitês de bacia. <b>ODS 6</b> (Agenda 2030): água potável e saneamento.",qs:[
+    {t:"Os componentes do saneamento básico (Lei 11.445) são",o:["água, esgoto, energia e transporte.","água, esgoto, limpeza urbana/resíduos e drenagem.","apenas água e esgoto.","água, saúde e educação."],c:1,e:"São quatro: água, esgoto, resíduos sólidos/limpeza urbana e drenagem pluvial. Energia não entra."},
+    {t:"A meta do Novo Marco do Saneamento até 2033 é",o:["100% de água e de esgoto.","99% de água e 90% de esgoto.","90% de água e 99% de esgoto.","80% de tudo."],c:1,e:"Lei 14.026/2020: 99% com água potável e 90% com coleta e tratamento de esgoto."},
+    {t:"A unidade de gestão dos recursos hídricos (Lei 9.433) é",o:["o município.","o estado.","a bacia hidrográfica.","o bairro."],c:2,e:"A bacia hidrográfica é a unidade de planejamento e gestão da água."},
+    {t:"O Objetivo de Desenvolvimento Sustentável da água e do saneamento é o",o:["ODS 6.","ODS 3.","ODS 13.","ODS 1."],c:0,e:"ODS 6: água potável e saneamento (ODS 3 = saúde; 13 = clima)."}
+  ]},
+  {mat:"Conhecimentos Gerais",titulo:"Aula + treino: Uberlândia e Minas Gerais",aula:"<b>Uberlândia</b> fica no <b>Triângulo Mineiro</b> (oeste de MG), bioma <b>Cerrado</b>, e é cortada pelo <b>Rio Uberabinha</b> (afluente do Araguari, bacia do Paranaíba). Foi emancipada em <b>31/08/1888</b> como <b>São Pedro de Uberabinha</b> e passou a se chamar <b>Uberlândia em 1929</b>. É a <b>2ª cidade mais populosa de MG</b> (~713 mil hab., Censo 2022), polo logístico e atacadista. O <b>DMAE</b>, autarquia de água e esgoto, foi criado em <b>1966</b>. <b>Minas Gerais:</b> capital <b>Belo Horizonte</b>; é o estado com o <b>maior número de municípios do país (853)</b>.",qs:[
+    {t:"Uberlândia localiza-se",o:["na Zona da Mata.","no Triângulo Mineiro.","no Norte de Minas.","no Sul de Minas."],c:1,e:"Está no Triângulo Mineiro, oeste do estado."},
+    {t:"O rio que corta Uberlândia é o",o:["São Francisco.","das Velhas.","Uberabinha.","Doce."],c:2,e:"Rio Uberabinha, afluente do Araguari (bacia do Paranaíba)."},
+    {t:"Ao ser emancipada em 1888, a cidade se chamava",o:["Uberlândia.","São Pedro de Uberabinha.","Araguari.","Uberaba."],c:1,e:"Só passou a se chamar Uberlândia em 1929."},
+    {t:"Minas Gerais é o estado brasileiro com o maior número de",o:["habitantes.","municípios.","praias.","estados vizinhos."],c:1,e:"MG tem 853 municípios — o maior número do país (em população é o 2º)."}
   ]},
   {mat:"Legislação",titulo:"Aula + treino: Servidor e Constituição",aula:"<b>Princípios do art. 37 (LIMPE):</b> Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência (razoabilidade e proporcionalidade são <b>implícitos</b>).<br><b>Provimento × vacância:</b> provimento é OCUPAR o cargo (nomeação, promoção, readaptação, reintegração, recondução, aproveitamento); vacância é DESOCUPAR (exoneração, demissão, aposentadoria, posse em outro cargo, falecimento).<br><b>Estabilidade:</b> após <b>3 anos</b> de efetivo exercício. <b>Concurso:</b> validade de até <b>2 anos, prorrogável 1 vez</b>. O DMAE é <b>autarquia</b> (administração indireta).",qs:[
     {t:"NÃO é forma de provimento de cargo público:",o:["nomeação","promoção","exoneração","reintegração"],c:2,e:"Exoneração é forma de VACÂNCIA (desocupa o cargo). As demais são provimento."},
