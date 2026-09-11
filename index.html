@@ -1316,12 +1316,14 @@ window.attachTimer=function(simbar,minutes){
 };
 
 /* Histórico de desempenho (salvo no navegador) */
-window.recordScore=function(key,label,pct,ac,total){
+window.recordScore=function(key,label,pct,ac,total,pts,mp){
   var K="dmae:scores",arr=[];
   try{arr=JSON.parse(localStorage.getItem(K)||"[]");}catch(e){}
   function two2(n){return(n<10?"0":"")+n;}
   var d=new Date();
-  arr.push({k:key,l:label,p:pct,a:ac,n:total,d:two2(d.getDate())+"/"+two2(d.getMonth()+1)});
+  var rec={k:key,l:label,p:pct,a:ac,n:total,d:two2(d.getDate())+"/"+two2(d.getMonth()+1)};
+  if(pts!=null){rec.pt=pts;rec.mp=mp;}
+  arr.push(rec);
   if(arr.length>40)arr=arr.slice(-40);
   try{localStorage.setItem(K,JSON.stringify(arr));}catch(e){}
   if(window.renderDesempenho)window.renderDesempenho();
@@ -1330,10 +1332,13 @@ window.renderDesempenho=function(){
   var host=document.getElementById("desempenho");if(!host)return;
   var arr=[];try{arr=JSON.parse(localStorage.getItem("dmae:scores")||"[]");}catch(e){}
   if(!arr.length){host.innerHTML='<p class="dhint">Faça um simulado e clique em <b>Corrigir</b>: suas notas ficam salvas aqui para você acompanhar a evolução.</p>';return;}
-  var best={};arr.forEach(function(s){if(best[s.l]==null||s.p>best[s.l])best[s.l]=s.p;});
-  var bestHTML=Object.keys(best).map(function(l){return '<span class="dchip">'+l+': <b>'+best[l]+'%</b></span>';}).join("");
-  var last=arr.slice(-6).reverse().map(function(s){return '<li>'+s.d+' · '+s.l+' — <b>'+s.a+'/'+s.n+' ('+s.p+'%)</b></li>';}).join("");
-  host.innerHTML='<div class="dbest"><span class="dlbl">Melhor nota:</span> '+bestHTML+'</div><ol class="dlast">'+last+'</ol><button class="btn ghost dclear" type="button">Limpar histórico</button>';
+  var best={},bpt={},bmp={};arr.forEach(function(s){if(best[s.l]==null||s.p>best[s.l])best[s.l]=s.p;if(s.pt!=null&&(bpt[s.l]==null||s.pt>bpt[s.l])){bpt[s.l]=s.pt;bmp[s.l]=s.mp;}});
+  var bestHTML=Object.keys(best).map(function(l){
+    if(bpt[l]!=null){var ok=bpt[l]>=25;return '<span class="dchip">'+l+': <b>'+bpt[l]+'/'+bmp[l]+' pts</b> '+(ok?'✅':'⚠️')+'</span>';}
+    return '<span class="dchip">'+l+': <b>'+best[l]+'%</b></span>';
+  }).join("");
+  var last=arr.slice(-6).reverse().map(function(s){var nota=s.pt!=null?(s.pt+'/'+s.mp+' pts · '+s.p+'%'):(s.a+'/'+s.n+' ('+s.p+'%)');return '<li>'+s.d+' · '+s.l+' — <b>'+nota+'</b></li>';}).join("");
+  host.innerHTML='<div class="dbest"><span class="dlbl">Melhor nota:</span> '+bestHTML+'</div><p class="dhint" style="margin:0 0 8px">✅ = atingiu o mínimo de 25 pontos do edital.</p><ol class="dlast">'+last+'</ol><button class="btn ghost dclear" type="button">Limpar histórico</button>';
   host.querySelector(".dclear").onclick=function(){try{localStorage.removeItem("dmae:scores");}catch(e){}window.renderDesempenho();};
 };
 
@@ -1381,7 +1386,7 @@ window.renderDesempenho=function(){
     var st=zeros.length?('<b style="color:var(--red)">⚠️ Você zerou: '+zeros.join(", ")+'</b> — no critério do edital, zerar qualquer conteúdo reprova.'):(pts>=25?'<b style="color:var(--green)">✅ No critério do edital (mín. 25 pts e sem zerar), você passaria.</b> Agora suba a nota!':'<b>Abaixo do mínimo de 25 pontos.</b> Volte aos erros abaixo.');
     document.getElementById("scorebox").innerHTML='Nota: <b>'+pts+'</b>/'+maxpts+' pontos · '+acertos+'/'+total+' acertos ('+pct+'%).<br>'+st;
     window.renderErrPanel(document.getElementById("simulado"),document.querySelector("#simulado .simbar"),errs,total);
-    window.recordScore("sim1","Simulado 1",pct,acertos,total);
+    window.recordScore("sim1","Simulado 1",pct,acertos,total,pts,maxpts);
     if(window.saveErrors)window.saveErrors(cadErrs);
   };
   document.getElementById("limpar").onclick=function(){
@@ -1546,7 +1551,7 @@ var FC=[
         b.querySelector(".sc").innerHTML="Acertos: <b>"+ac+"</b>/"+qs.length+" ("+pct+"%). "+msg;
       }
       window.renderErrPanel(host,b,errs,qs.length);
-      if(isSim)window.recordScore(host.id,simLabel,pct,ac,qs.length);
+      if(isSim)window.recordScore(host.id,simLabel,pct,ac,qs.length,structured?pts:null,structured?maxpts:null);
       if(host.id!=="caderno-list"&&window.saveErrors)window.saveErrors(cadErrs);
     };
     b.querySelector(".lim").onclick=function(){
