@@ -198,6 +198,24 @@
   .errpanel .tip{font-size:.86rem;color:var(--muted);margin:10px 0 0}
   .errpanel a{font-weight:700;color:var(--blue)}
   .errpanel.zero{border-left-color:var(--green)} .errpanel.zero h4{color:var(--green)}
+  /* cronômetro */
+  .timer{display:inline-flex;align-items:center;gap:8px;margin-left:auto}
+  .timer .tdisp{font-variant-numeric:tabular-nums;font-size:15px;color:var(--ink-2);white-space:nowrap;font-family:"Lora",serif}
+  .timer .tdisp.low{color:var(--red)}
+  .timer .tbtn2{padding:8px 12px;font-size:13px}
+  /* meu desempenho */
+  .desempenho .dhint{font-size:14px;color:var(--ink-2);margin:0}
+  .desempenho .dbest{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:2px 0 10px}
+  .desempenho .dlbl{font-weight:700;color:var(--ink)}
+  .desempenho .dchip{background:var(--green-soft);color:var(--ink);border:1px solid color-mix(in srgb,var(--green) 30%,var(--line));border-radius:999px;padding:4px 11px;font-size:13px}
+  .desempenho .dlast{margin:0 0 10px;padding-left:20px;font-size:14px}
+  .desempenho .dlast li{margin:3px 0}
+  .desempenho .dclear{padding:7px 12px;font-size:13px}
+  @media(max-width:560px){
+    .timer{margin-left:0;width:100%;justify-content:space-between;order:3}
+    .q .qt{font-size:15.5px} .opt{padding:11px 13px}
+    .card{padding:18px 15px}
+  }
 
   .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
   @media(max-width:720px){.grid2{grid-template-columns:1fr}}
@@ -251,6 +269,7 @@
     <a href="#simulado">Simulado 1</a>
     <a href="#simulado2">Simulado 2</a>
     <a href="#simulado3">Simulado 3</a>
+    <a href="#simulado4">Simulado 4</a>
     <a href="#flashcards">Flashcards</a>
     <div class="grp">3 · Consultar</div>
     <a href="#ficha">Ficha do edital</a>
@@ -291,12 +310,14 @@
         <h2 class="sec">Por onde começar</h2>
         <p>Siga a trilha na ordem — do aprender ao revisar. Está tudo aqui dentro: você não precisa pesquisar fora.</p>
         <div class="hubgrid">
-          <a class="hubc" href="#treinos-sec"><span class="hn">1</span><b>Aprender + treinar</b><span class="d">Aulas por tema com exemplo e, em seguida, questões que explicam o porquê. Comece pelos temas P1.</span></a>
-          <a class="hubc" href="#simulado"><span class="hn">2</span><b>Praticar</b><span class="d">Dois simulados de 40 questões que corrigem sozinho, no formato Fundep, com comentário em cada questão.</span></a>
-          <a class="hubc" href="#flashcards"><span class="hn">3</span><b>Revisar</b><span class="d">80 flashcards para revisão diária + cronograma de 7 semanas com progresso salvo no navegador.</span></a>
+          <a class="hubc" href="#dominio"><span class="hn">1</span><b>Aprender + treinar</b><span class="d">Domínio por prioridade (P1/P2/P3) e 33 aulas por tema com questões que explicam o porquê. Comece pelos P1.</span></a>
+          <a class="hubc" href="#simulado"><span class="hn">2</span><b>Praticar</b><span class="d">Quatro simulados de 40 questões que corrigem sozinho (com cronômetro de 3 h) e o painel “Revise seus erros”.</span></a>
+          <a class="hubc" href="#flashcards"><span class="hn">3</span><b>Revisar</b><span class="d">80 flashcards + plano dia a dia com horários (progresso salvo no navegador) até a prova.</span></a>
           <a class="hubc" href="#ficha"><span class="hn">4</span><b>Consultar</b><span class="d">Ficha do edital, o que estudar (verticalizado), fontes oficiais e o tutor infinito no Claude Code.</span></a>
         </div>
-        <div class="alert blue" style="margin-bottom:0"><span class="tag">Prioridade</span> — as três matérias que mais pesam (25% cada) e decidem o desempate são <b>Conhecimentos Específicos, Matemática e Português</b>. Nos treinos, ataque primeiro os temas marcados <b>P1</b>.</div>
+        <div class="alert blue"><span class="tag">Prioridade</span> — as três matérias que mais pesam (25% cada) e decidem o desempate são <b>Conhecimentos Específicos, Matemática e Português</b>. Nos treinos, ataque primeiro os temas marcados <b>P1</b>.</div>
+        <h3 style="margin:18px 0 8px">Meu desempenho</h3>
+        <div id="desempenho" class="desempenho"></div>
       </div>
     </section>
 
@@ -701,6 +722,8 @@
         <div class="chk"><input type="checkbox" id="d52"><label for="d52"><b>Sáb 31/10:</b> <b>DESCANSO.</b> Sem estudar matéria. Checklist: documento oficial com foto, comprovante impresso, caneta preta transparente, água, roupa separada, despertador. Dormir cedo (7–8 h).</label></div>
       </div>
 
+      <div style="margin-top:14px"><button class="btn ghost" id="plano-reset" type="button">Zerar meu progresso do cronograma</button></div>
+
       <div class="callout" style="margin-top:22px">
         <h3 style="margin-top:0">🗓️ Dia da prova — domingo 01/11 (só revisão pela manhã)</h3>
         <p><b>Nada de matéria nova.</b> A prova é no <b>Turno B</b> (confira o horário exato no seu cartão de confirmação) — organize a manhã para chegar <b>1 hora antes</b> com folga.</p>
@@ -948,6 +971,14 @@
       <div id="quiz-sim3"></div>
     </div></section>
 
+    <!-- ============ SIMULADO 4 ============ -->
+    <section id="simulado4"><div class="card">
+      <p class="eyebrow">Prova online 4 · 40 questões · 3 horas</p>
+      <h2 class="sec">Simulado 4 (inédito)</h2>
+      <p>Quarta prova completa no formato Fundep. Use o <strong>cronômetro</strong> da barra de correção para treinar o ritmo (≈ 4,5 min por questão). Marque tudo e clique em <strong>Corrigir</strong> — o painel <em>Revise seus erros</em> aparece no fim.</p>
+      <div id="quiz-sim4"></div>
+    </div></section>
+
     <!-- ============ 9. FLASHCARDS ============ -->
     <section id="flashcards"><div class="card">
       <p class="eyebrow">Seção 9 · 80 cartões</p>
@@ -1040,6 +1071,12 @@
     if(st[c.id]){c.checked=true;c.closest(".chk").classList.add("done");}
     c.onchange=function(){st[c.id]=c.checked;c.closest(".chk").classList.toggle("done",c.checked);try{localStorage.setItem(key,JSON.stringify(st));}catch(e){}};
   });
+  var pr=document.getElementById("plano-reset");
+  if(pr)pr.onclick=function(){
+    if(!confirm("Desmarcar todos os dias e semanas do cronograma?"))return;
+    st={};try{localStorage.removeItem(key);}catch(e){}
+    document.querySelectorAll("#plano-list input, #diario-list input").forEach(function(c){c.checked=false;c.closest(".chk").classList.remove("done");});
+  };
 })();
 
 /* ---------- SIMULADO ---------- */
@@ -1117,6 +1154,49 @@ window.renderErrPanel=function(host,anchorEl,errors,total){
   d.scrollIntoView({behavior:"smooth",block:"nearest"});
   return d;
 };
+
+/* Cronômetro de prova (treina o ritmo das 3 h) */
+window.attachTimer=function(simbar,minutes){
+  if(!simbar||simbar.querySelector(".timer"))return;
+  var total=minutes*60,left=total,iv=null;
+  function two(n){return(n<10?"0":"")+n;}
+  function fmt(s){var h=Math.floor(s/3600),m=Math.floor((s%3600)/60),x=s%60;return h>0?h+":"+two(m)+":"+two(x):m+":"+two(x);}
+  var wrap=document.createElement("span");wrap.className="timer";
+  var disp=document.createElement("b");disp.className="tdisp";
+  var start=document.createElement("button");start.type="button";start.className="btn ghost tbtn2";start.textContent="▶ Cronômetro";
+  var reset=document.createElement("button");reset.type="button";reset.className="btn ghost tbtn2";reset.textContent="Zerar";reset.style.display="none";
+  function paint(){disp.textContent="⏱ "+fmt(left);disp.classList.toggle("low",left<=300);}
+  function stop(){if(iv){clearInterval(iv);iv=null;}start.textContent="▶ Retomar";}
+  function tick(){left--;if(left<=0){left=0;stop();disp.textContent="⏱ Tempo esgotado";disp.classList.add("low");return;}paint();}
+  paint();
+  start.onclick=function(){if(iv){stop();return;}if(left<=0)left=total;iv=setInterval(tick,1000);start.textContent="⏸ Pausar";reset.style.display="";};
+  reset.onclick=function(){stop();left=total;paint();start.textContent="▶ Cronômetro";};
+  wrap.appendChild(disp);wrap.appendChild(start);wrap.appendChild(reset);
+  simbar.appendChild(wrap);
+};
+
+/* Histórico de desempenho (salvo no navegador) */
+window.recordScore=function(key,label,pct,ac,total){
+  var K="dmae:scores",arr=[];
+  try{arr=JSON.parse(localStorage.getItem(K)||"[]");}catch(e){}
+  function two2(n){return(n<10?"0":"")+n;}
+  var d=new Date();
+  arr.push({k:key,l:label,p:pct,a:ac,n:total,d:two2(d.getDate())+"/"+two2(d.getMonth()+1)});
+  if(arr.length>40)arr=arr.slice(-40);
+  try{localStorage.setItem(K,JSON.stringify(arr));}catch(e){}
+  if(window.renderDesempenho)window.renderDesempenho();
+};
+window.renderDesempenho=function(){
+  var host=document.getElementById("desempenho");if(!host)return;
+  var arr=[];try{arr=JSON.parse(localStorage.getItem("dmae:scores")||"[]");}catch(e){}
+  if(!arr.length){host.innerHTML='<p class="dhint">Faça um simulado e clique em <b>Corrigir</b>: suas notas ficam salvas aqui para você acompanhar a evolução.</p>';return;}
+  var best={};arr.forEach(function(s){if(best[s.l]==null||s.p>best[s.l])best[s.l]=s.p;});
+  var bestHTML=Object.keys(best).map(function(l){return '<span class="dchip">'+l+': <b>'+best[l]+'%</b></span>';}).join("");
+  var last=arr.slice(-6).reverse().map(function(s){return '<li>'+s.d+' · '+s.l+' — <b>'+s.a+'/'+s.n+' ('+s.p+'%)</b></li>';}).join("");
+  host.innerHTML='<div class="dbest"><span class="dlbl">Melhor nota:</span> '+bestHTML+'</div><ol class="dlast">'+last+'</ol><button class="btn ghost dclear" type="button">Limpar histórico</button>';
+  host.querySelector(".dclear").onclick=function(){try{localStorage.removeItem("dmae:scores");}catch(e){}window.renderDesempenho();};
+};
+
 (function(){
   var box=document.getElementById("sim"),html="";
   SIM.forEach(function(q,i){
@@ -1155,6 +1235,7 @@ window.renderErrPanel=function(host,anchorEl,errors,total){
     var msg=pct>=70?'Excelente ritmo!':pct>=50?'No caminho — foque nos erros abaixo.':'Comece pela revisão de erros abaixo.';
     document.getElementById("scorebox").innerHTML='Você acertou <b>'+acertos+'</b>/'+total+' ('+pct+'%). '+msg;
     window.renderErrPanel(document.getElementById("simulado"),document.querySelector("#simulado .simbar"),errs,total);
+    window.recordScore("sim1","Simulado 1",pct,acertos,total);
   };
   document.getElementById("limpar").onclick=function(){
     box.querySelectorAll('input:checked').forEach(function(i){i.checked=false;});
@@ -1163,7 +1244,9 @@ window.renderErrPanel=function(host,anchorEl,errors,total){
     document.getElementById("scorebox").textContent='';
     var ep=document.getElementById("simulado-errpanel"); if(ep)ep.parentNode.removeChild(ep);
   };
+  window.attachTimer(document.querySelector("#simulado .simbar"),180);
 })();
+if(window.renderDesempenho)window.renderDesempenho();
 
 /* ---------- FLASHCARDS ---------- */
 var FC=[
@@ -1277,6 +1360,8 @@ var FC=[
     var b=document.createElement("div"); b.className="simbar";
     b.innerHTML='<button class="btn cor">Corrigir</button><button class="btn ghost lim">Limpar</button><span class="score sc" aria-live="polite"></span>';
     host.appendChild(b);
+    var isSim=host.id.indexOf("quiz-sim")===0;
+    if(isSim)window.attachTimer(b,180);
     b.querySelector(".cor").onclick=function(){
       var ac=0, errs=[];
       qs.forEach(function(qd,i){
@@ -1296,6 +1381,7 @@ var FC=[
       var msg=pct>=70?"Ótimo!":pct>=50?"Bom — revise os erros abaixo.":"Releia a aula e veja os erros abaixo.";
       b.querySelector(".sc").innerHTML="Acertos: <b>"+ac+"</b>/"+qs.length+" ("+pct+"%). "+msg;
       window.renderErrPanel(host,b,errs,qs.length);
+      if(isSim)window.recordScore(host.id,"Simulado "+host.id.replace("quiz-sim",""),pct,ac,qs.length);
     };
     b.querySelector(".lim").onclick=function(){
       host.querySelectorAll("input:checked").forEach(function(i){i.checked=false;});
@@ -1421,6 +1507,57 @@ var FC=[
   ];
   mountList(document.getElementById("quiz-sim3"),SIM3);
 
+  /* ===================== SIMULADO 4 ===================== */
+  var SIM4=[
+  {b:"Português (1–10)"},
+  {passage:"<b>Texto</b> — “Economizar água não é abrir mão do conforto; é usar com inteligência o que temos. Fechar a torneira ao escovar os dentes, consertar um vazamento no mesmo dia, reaproveitar a água da chuva no jardim: são atitudes pequenas que, somadas, aliviam os mananciais e a conta no fim do mês. O cidadão que economiza não faz um favor à companhia de água — faz um favor a si mesmo e às próximas gerações.”"},
+  {t:"1. A ideia central do texto é que economizar água",o:["exige abrir mão do conforto.","é um favor prestado à companhia de água.","combina atitudes simples que beneficiam a todos.","só depende de grandes investimentos."],c:2,e:"O texto lista atitudes pequenas que “somadas” trazem benefício coletivo; nega expressamente o sacrifício do conforto e o “favor à companhia”."},
+  {t:"2. Em “aliviam os mananciais e a conta no fim do mês”, a palavra “aliviam” está em sentido",o:["exclusivamente literal.","figurado nos dois casos.","literal para mananciais e figurado para a conta.","figurado para mananciais e literal para a conta."],c:1,e:"“Aliviar” mananciais e conta são usos figurados (não se “alivia” peso físico) — o verbo é aplicado de forma conotativa aos dois."},
+  {t:"3. O trecho “O cidadão que economiza não faz um favor à companhia” tem oração adjetiva",o:["explicativa.","restritiva.","substantiva.","adverbial."],c:1,e:"“que economiza” restringe qual cidadão (sem vírgulas) → adjetiva restritiva."},
+  {t:"4. Os dois-pontos após “no jardim” introduzem",o:["uma citação.","uma enumeração/explicação do que foi dito.","um vocativo.","uma oposição."],c:1,e:"Os dois-pontos aqui anunciam o fechamento explicativo (“são atitudes pequenas...”)."},
+  {t:"5. “às próximas gerações” recebe crase porque",o:["é objeto direto.","há preposição “a” + artigo “as” diante de palavra feminina no plural.","toda palavra feminina exige crase.","é um pronome de tratamento."],c:1,e:"“Favor a” + “as gerações” = às (preposição + artigo, feminino plural). Troca por masculino: “aos filhos” → confirma a crase."},
+  {t:"6. Assinale a reescrita que mantém o sentido de “atitudes pequenas que, somadas, aliviam os mananciais”.",o:["atitudes pequenas que, quando reunidas, aliviam os mananciais.","atitudes pequenas, embora aliviem os mananciais.","atitudes pequenas, porque somam os mananciais.","atitudes pequenas que raramente aliviam os mananciais."],c:0,e:"“Quando reunidas” equivale a “somadas”. As demais mudam a lógica (concessão, causa, frequência)."},
+  {t:"7. Em “usar com inteligência o que temos”, o termo “o que” exerce função de",o:["sujeito.","objeto direto.","adjunto adverbial.","vocativo."],c:1,e:"“o que temos” é o objeto direto de “usar” (usar algo)."},
+  {t:"8. Assinale a alternativa com concordância correta.",o:["Bastam dois gestos para economizar.","Basta dois gestos para economizar.","Fazem dois anos que economizo.","Houveram muitos vazamentos."],c:0,e:"“Bastam” concorda com “dois gestos” (sujeito plural). “Basta” singular estaria errado; “fazem/houveram” são impessoais → singular."},
+  {t:"9. A palavra “inteligência” é acentuada por ser",o:["oxítona terminada em -a.","paroxítona terminada em ditongo.","proparoxítona.","monossílabo tônico."],c:1,e:"“in-te-li-gên-cia”: paroxítona terminada em ditongo crescente (ia) → acentua-se."},
+  {t:"10. O “se” em “faz um favor a si mesmo” é",o:["conjunção condicional.","pronome reflexivo.","índice de indeterminação do sujeito.","partícula apassivadora."],c:1,e:"“a si mesmo” retoma o próprio sujeito (o cidadão) → pronome reflexivo."},
+  {b:"Matemática e Raciocínio Lógico (11–20)"},
+  {t:"11. Uma torneira pinga 3 litros por hora. Quantos litros desperdiça em um dia inteiro?",o:["36 L","48 L","72 L","24 L"],c:2,e:"3 × 24 = 72 litros por dia."},
+  {t:"12. Um produto de R$ 250 teve dois aumentos sucessivos de 10% e 10%. O preço final é",o:["R$ 300,00","R$ 302,50","R$ 305,00","R$ 275,00"],c:1,e:"250 × 1,10 × 1,10 = 250 × 1,21 = 302,50 (não 300, pois os aumentos multiplicam)."},
+  {t:"13. Em um grupo de 40 servidores, 25 tomam café e 15 tomam chá; 5 tomam os dois. Quantos não tomam nenhum?",o:["5","10","0","15"],c:0,e:"União = 25 + 15 − 5 = 35. Nenhum = 40 − 35 = 5."},
+  {t:"14. Qual é 3/4 de 2.000 litros?",o:["1.200 L","1.500 L","750 L","1.750 L"],c:1,e:"2.000 × 3/4 = 1.500 L."},
+  {t:"15. Numa PA de razão 4, se o primeiro termo é 7, o quinto termo é",o:["23","27","19","31"],c:0,e:"a₅ = 7 + (5−1)×4 = 7 + 16 = 23."},
+  {t:"16. Lançando um dado comum, a probabilidade de sair número par é",o:["1/6","1/2","1/3","2/3"],c:1,e:"Pares {2,4,6} = 3 casos em 6 → 3/6 = 1/2."},
+  {t:"17. A negação de “Todos os servidores foram à reunião” é",o:["Nenhum servidor foi à reunião.","Todos os servidores faltaram.","Pelo menos um servidor não foi à reunião.","Alguns servidores foram."],c:2,e:"Negar “todos” = “existe pelo menos um que não”. Não é “nenhum”."},
+  {t:"18. Se “Quando chove, a rua alaga” é verdadeira e a rua NÃO alagou, conclui-se que",o:["choveu.","não choveu.","vai chover.","nada se conclui."],c:1,e:"Contrapositiva: se não alagou, então não choveu (~q → ~p)."},
+  {t:"19. Um funcionário gasta 40% do salário com moradia. Se sobra R$ 1.800, o salário é",o:["R$ 2.520","R$ 3.000","R$ 4.500","R$ 2.880"],c:1,e:"Sobram 60% = 1.800 → 1% = 30 → salário = 3.000."},
+  {t:"20. A média de 5 notas é 6. Se quatro notas somam 26, a quinta nota é",o:["3","4","5","6"],c:1,e:"Soma total = 6×5 = 30; 30 − 26 = 4."},
+  {b:"Conhecimentos Gerais (21–25)"},
+  {t:"21. O bioma predominante na região de Uberlândia é o",o:["Pantanal.","Cerrado.","Mata Atlântica.","Caatinga."],c:1,e:"Uberlândia fica no Cerrado, no Triângulo Mineiro."},
+  {t:"22. A autarquia responsável pela água e pelo esgoto em Uberlândia é o",o:["IPREMU.","DMAE.","DER.","IBGE."],c:1,e:"DMAE — Departamento Municipal de Água e Esgoto (autarquia, criada em 1966)."},
+  {t:"23. Pela Política Nacional de Recursos Hídricos (Lei 9.433/97), a água é um bem",o:["particular, sem valor econômico.","público e dotado de valor econômico.","gratuito e ilimitado.","de propriedade do município."],c:1,e:"A lei define a água como bem público de domínio público e recurso natural com valor econômico."},
+  {t:"24. O ODS 6 da Agenda 2030 da ONU trata de",o:["educação de qualidade.","água potável e saneamento.","energia limpa.","erradicação da pobreza."],c:1,e:"ODS 6 = água potável e saneamento."},
+  {t:"25. Uberlândia é, em população, a ___ maior cidade de Minas Gerais.",o:["1ª","2ª","3ª","5ª"],c:1,e:"É a 2ª mais populosa de MG, atrás apenas de Belo Horizonte."},
+  {b:"Legislação (26–30)"},
+  {t:"26. O ato pelo qual o servidor é investido no cargo, assinando o termo, é a",o:["nomeação.","posse.","exercício.","promoção."],c:1,e:"Posse = investidura (assinatura do termo). Nomeação a antecede; exercício é o efetivo início das funções."},
+  {t:"27. É penalidade disciplinar aplicável ao servidor:",o:["advertência.","promoção.","progressão.","gratificação."],c:0,e:"Advertência é penalidade (junto com suspensão, demissão etc.). As demais são vantagens/formas de evolução na carreira."},
+  {t:"28. Pela CF, o prazo de validade do concurso público é de até",o:["1 ano, improrrogável.","2 anos, prorrogável uma vez por igual período.","4 anos.","5 anos."],c:1,e:"Art. 37, III, CF: até 2 anos, prorrogável uma vez por igual período."},
+  {t:"29. A estabilidade do servidor efetivo é adquirida após",o:["1 ano.","2 anos.","3 anos de efetivo exercício.","a posse."],c:2,e:"CF art. 41: 3 anos de efetivo exercício (após aprovação no estágio probatório)."},
+  {t:"30. O princípio que exige que o ato administrativo tenha finalidade pública e não favoreça pessoas é o da",o:["publicidade.","impessoalidade.","eficiência.","legalidade."],c:1,e:"Impessoalidade: o ato visa ao interesse público, sem favorecer ou prejudicar pessoas."},
+  {b:"Conhecimentos Específicos (31–40)"},
+  {t:"31. Na Lei 14.133/2021, a fase em que só o vencedor tem seus documentos conferidos é a",o:["habilitação, após o julgamento.","habilitação, antes das propostas.","homologação.","dispensa."],c:0,e:"Regra da nova lei: julga-se primeiro e habilita-se depois — apenas o licitante mais bem classificado."},
+  {t:"32. O documento interno, hoje absorvido pelo “padrão ofício”, usado antes entre setores do mesmo órgão, era o",o:["edital.","memorando.","requerimento.","atestado."],c:1,e:"O memorando (comunicação interna) foi unificado no padrão ofício pelo Manual de Redação."},
+  {t:"33. Transferir documentos do arquivo corrente para o intermediário chama-se",o:["recolhimento.","transferência.","eliminação.","classificação."],c:1,e:"Transferência = corrente → intermediário; recolhimento = para o permanente."},
+  {t:"34. No controle de estoque, o método que avalia a saída pelo preço mais recente é o",o:["PEPS/FIFO.","UEPS/LIFO.","custo médio.","curva ABC."],c:1,e:"UEPS (último a entrar, primeiro a sair) → saída pelo preço mais recente."},
+  {t:"35. Segundo a Teoria X e Y de McGregor, a Teoria Y pressupõe que o trabalhador",o:["evita o trabalho e precisa de controle.","é naturalmente motivado e busca responsabilidade.","só reage a punições.","não gosta de autonomia."],c:1,e:"Teoria Y: pessoas são automotivadas e buscam responsabilidade. A Teoria X é a visão de controle."},
+  {t:"36. O regime contábil em que as receitas e despesas são registradas quando ocorrem (não quando são pagas) é o de",o:["caixa.","competência.","adiantamento.","empenho."],c:1,e:"Regime de competência: registra o fato gerador, independentemente do pagamento."},
+  {t:"37. O empenho da despesa pública tem como função",o:["quitar o fornecedor.","reservar a dotação orçamentária para a despesa.","conferir a entrega do bem.","publicar o edital."],c:1,e:"Empenho reserva a verba; liquidação confere a entrega; pagamento quita."},
+  {t:"38. A ferramenta que classifica os itens de estoque por importância (A, B, C) baseia-se no princípio de",o:["Pareto (poucos itens, muito valor).","Maslow.","Herzberg.","Taylor."],c:0,e:"Curva ABC aplica o princípio de Pareto (80/20): poucos itens (A) concentram a maior parte do valor."},
+  {t:"39. No atendimento telefônico ao público, a conduta adequada é",o:["deixar o usuário esperando sem retorno.","identificar-se, ouvir e anotar o recado completo.","transferir sem avisar.","encerrar a ligação rapidamente."],c:1,e:"Boa prática: identificar-se, ouvir com atenção e registrar o recado — cortesia e presteza."},
+  {t:"40. Em uma planilha, para contar quantas células do intervalo A1:A20 têm valor, usa-se",o:["=SOMA(A1:A20)","=CONT.NÚM(A1:A20)","=MÉDIA(A1:A20)","=SE(A1:A20)"],c:1,e:"CONT.NÚM conta células com números no intervalo. SOMA totaliza; MÉDIA calcula a média."}
+  ];
+  mountList(document.getElementById("quiz-sim4"),SIM4);
+
   /* ===================== TREINOS (aula + questões) ===================== */
   var TREINOS=[
   {mat:"Português",titulo:"Aula + treino: Crase",aula:"Crase é a fusão da preposição <b>a</b> com o artigo <b>a(s)</b> (ou com o “a” de <i>aquele/aquela/aquilo</i>). Só existe diante de palavra <b>feminina</b>. <b>Teste infalível:</b> troque a palavra feminina por uma masculina — se surgir <b>“ao”</b>, tem crase; se surgir só <b>“a”</b>, não tem.<br>Ex.: “Vou <b>à</b> escola” → “Vou <b>ao</b> colégio” (crase). “Vou <b>a</b> pé” → “Vou <b>a</b> nado” (sem crase).<br><b>Sempre tem:</b> às vezes, à noite, à vista, à moda de, à medida que, e horas definidas (às 8h). <b>Nunca tem:</b> antes de verbo, de palavra masculina, de pronome (a ela, a você, a Vossa Excelência) e de cidade que não pede artigo (“vou a Uberlândia”).",qs:[
@@ -1483,6 +1620,12 @@ var FC=[
     {t:"“Chorei um oceano de lágrimas.” A figura é",o:["eufemismo.","hipérbole (exagero).","metonímia.","antítese."],c:1,e:"Exagero proposital → hipérbole."},
     {t:"“O sol sorriu para a cidade.” A figura é",o:["personificação.","comparação.","metonímia.","pleonasmo."],c:0,e:"Atribui ação humana (sorrir) a algo não humano → personificação."}
   ]},
+  {mat:"Português",titulo:"Aula + treino: Verbos (tempos e modos)",aula:"<b>Modos:</b> indicativo (certeza: “ele estuda”), subjuntivo (hipótese/dúvida: “que ele estude”, “se ele estudasse”), imperativo (ordem: “estude!”).<br><b>Correlações que a banca adora:</b> “Se eu <b>tivesse</b> tempo, <b>estudaria</b>” (pretérito imperfeito do subjuntivo + futuro do pretérito). Futuro do subjuntivo: “Quando eu <b>vier</b>, aviso”; “Se ele <b>vir</b> o edital, inscreve-se”.<br><b>Verbos que mais caem:</b> <i>ver</i> (se ele vir / quando ele vir) × <i>vir</i> (se ele vier / quando ele vier); <i>pôr</i>, <i>ter</i>, <i>haver</i>, <i>intervir</i> (intervier).",qs:[
+    {t:"Assinale a forma correta: “Se ele ___ o comunicado, entenderá o prazo.”",o:["ver","vir","vier","veja"],c:1,e:"Verbo VER no futuro do subjuntivo = “se ele vir”. “Vier” é do verbo VIR (chegar)."},
+    {t:"Complete: “Quando você ___ à prova, leve documento.”",o:["vir","vier","ver","vem"],c:1,e:"Verbo VIR no futuro do subjuntivo = “quando você vier”."},
+    {t:"“Se eu ___ tempo, ___ mais questões.” A correlação correta é",o:["tiver / faria","tivesse / fazia","tivesse / faria","teria / fizesse"],c:2,e:"Imperfeito do subjuntivo (tivesse) + futuro do pretérito (faria) — a correlação hipotética padrão."},
+    {t:"Assinale a frase no modo imperativo.",o:["Você economiza água.","Economize água!","Espero que economize.","Se economizasse água..."],c:1,e:"Imperativo expressa ordem/pedido: “Economize!”. As outras são indicativo e subjuntivo."}
+  ]},
   {mat:"Matemática",titulo:"Aula + treino: Porcentagem e juros",aula:"<b>Porcentagem:</b> x% = x/100. Aumentar p% = ×(1 + p/100); descontar p% = ×(1 − p/100). <b>Aumentos/descontos sucessivos multiplicam</b> (não somam): +10% e +20% = 1,10 × 1,20 = 1,32 → +32%.<br><b>Juros simples:</b> J = C·i·t e M = C + J.<br><b>Juros compostos:</b> M = C·(1+i)ᵗ (juro sobre juro). Taxa e tempo na <b>mesma unidade</b>. Pegadinha: pedem o <b>montante</b> e você marca só o <b>juro</b>.",qs:[
     {t:"R$ 1.000 a juros compostos de 10% ao mês por 2 meses. O montante é",o:["R$ 1.200","R$ 1.210","R$ 1.100","R$ 1.021"],c:1,e:"M = 1.000 × (1,1)² = 1.000 × 1,21 = 1.210."},
     {t:"Um produto de R$ 200 sofre +10% e depois −10%. O preço final é",o:["R$ 200","R$ 198","R$ 202","R$ 180"],c:1,e:"200 × 1,10 × 0,90 = 198. Não volta ao original, porque os percentuais incidem sobre valores diferentes."},
@@ -1530,6 +1673,18 @@ var FC=[
     {t:"Numa PA com a₁=10 e r=5, o 8º termo é",o:["45","50","40","55"],c:0,e:"a₈ = 10 + (8−1)×5 = 10 + 35 = 45. (Usar n em vez de n−1 daria 50 — pegadinha.)"},
     {t:"Na PG 2, 6, 18, 54, …, a razão é",o:["2","3","4","6"],c:1,e:"q = 6 ÷ 2 = 3 (multiplica-se por 3)."},
     {t:"A soma dos números de 1 a 10 (PA 1,2,…,10) é",o:["45","50","55","100"],c:2,e:"Sₙ = (1+10)×10/2 = 55."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Exponencial e logaritmo",aula:"<b>Equação exponencial:</b> iguale as bases e compare os expoentes. Ex.: 2ˣ = 8 → 2ˣ = 2³ → x = 3.<br><b>Logaritmo:</b> log_b(a) = x significa bˣ = a. Ex.: log₂(8) = 3, porque 2³ = 8.<br><b>Propriedades:</b> log(a·b) = log a + log b; log(a/b) = log a − log b; log(aⁿ) = n·log a.<br><b>Condição de existência:</b> o logaritmando &gt; 0, a base &gt; 0 e a base ≠ 1.",qs:[
+    {t:"Se 3ˣ = 81, então x vale",o:["3","4","2","9"],c:1,e:"81 = 3⁴, logo 3ˣ = 3⁴ → x = 4."},
+    {t:"log₂(16) é igual a",o:["2","3","4","8"],c:2,e:"2⁴ = 16, então log₂(16) = 4."},
+    {t:"Usando log(a·b) = log a + log b, log(1000) = log(10·100) é",o:["2","3","4","1"],c:1,e:"log 10 + log 100 = 1 + 2 = 3 (base 10)."},
+    {t:"Para log₅(x) existir, é necessário que",o:["x seja qualquer número.","x > 0.","x < 0.","x = 5."],c:1,e:"O logaritmando deve ser positivo: x > 0."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Trigonometria (noções)",aula:"No <b>triângulo retângulo</b>: <b>seno</b> = cateto oposto ÷ hipotenusa; <b>cosseno</b> = cateto adjacente ÷ hipotenusa; <b>tangente</b> = oposto ÷ adjacente (SOH-CAH-TOA).<br><b>Ângulos notáveis:</b> sen 30° = ½; cos 30° = √3/2; sen 45° = cos 45° = √2/2; sen 60° = √3/2; tg 45° = 1.<br><b>Relação fundamental:</b> sen²x + cos²x = 1. <b>Pegadinha:</b> confundir qual cateto é o oposto ao ângulo.",qs:[
+    {t:"O seno de um ângulo, no triângulo retângulo, é",o:["adjacente ÷ hipotenusa","oposto ÷ hipotenusa","oposto ÷ adjacente","hipotenusa ÷ oposto"],c:1,e:"Seno = cateto oposto ÷ hipotenusa (o “S” de SOH)."},
+    {t:"O valor de sen 30° é",o:["½","√3/2","√2/2","1"],c:0,e:"sen 30° = 1/2 (ângulo notável)."},
+    {t:"Se sen x = √2/2, um valor possível de x é",o:["30°","45°","60°","90°"],c:1,e:"sen 45° = √2/2."},
+    {t:"Pela relação fundamental, se cos x = 0, então sen²x vale",o:["0","½","1","2"],c:2,e:"sen²x + cos²x = 1 → sen²x = 1 − 0 = 1."}
   ]},
   {mat:"Específicos",titulo:"Aula + treino: Licitações (Lei 14.133/2021)",aula:"Desde 30/12/2023, a <b>Lei 14.133/2021</b> é a <b>única</b> lei geral de licitações (revogou a 8.666, o pregão e o RDC). Aplica-se ao DMAE (autarquia).<br><b>5 modalidades (art. 28):</b> pregão, concorrência, concurso, leilão e diálogo competitivo. <b>Convite e tomada de preços não existem mais.</b><br><b>Fases (art. 17):</b> preparatória → edital → propostas → <b>julgamento → habilitação</b> (invertida) → recursal → homologação.<br><b>Dispensa (art. 75):</b> dá pra competir, mas a lei permite não licitar. <b>Inexigibilidade (art. 74):</b> competição inviável (fornecedor exclusivo, artista consagrado, notória especialização).",qs:[
     {t:"NÃO é modalidade da Lei 14.133/2021:",o:["concorrência","tomada de preços","leilão","diálogo competitivo"],c:1,e:"Tomada de preços (e convite) foram extintas. As 5 modalidades são pregão, concorrência, concurso, leilão e diálogo competitivo."},
