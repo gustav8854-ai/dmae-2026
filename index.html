@@ -156,6 +156,15 @@
   .matfilter{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 4px}
   .matfilter button{border:1px solid var(--line);background:var(--paper);color:var(--ink-2);border-radius:999px;padding:6px 13px;cursor:pointer;font:inherit;font-size:13.5px}
   .matfilter button.on{background:var(--blue);color:#fff;border-color:var(--blue)}
+  .matdiv{font-family:"Lora",serif;color:var(--teal);font-size:20px;margin:28px 2px 2px;padding-top:14px;border-top:2px solid var(--line)}
+  /* central de estudos (hub) */
+  .hubgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}
+  @media(max-width:640px){.hubgrid{grid-template-columns:1fr}}
+  .hubc{display:block;border:1px solid var(--line);border-radius:12px;padding:14px 16px;text-decoration:none;color:var(--ink);background:var(--paper-2);transition:border-color .12s,transform .12s}
+  .hubc:hover{border-color:var(--blue);transform:translateY(-1px)}
+  .hubc .hn{display:inline-flex;width:24px;height:24px;align-items:center;justify-content:center;background:var(--blue);color:#fff;border-radius:50%;font-weight:800;font-size:13px;margin-bottom:6px;font-family:"Public Sans",sans-serif}
+  .hubc b{display:block;color:var(--blue);margin:2px 0 4px}
+  .hubc .d{font-size:13.5px;color:var(--ink-2)}
   /* plano checklist */
   .chk{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line-2)}
   .chk input{margin-top:5px;width:16px;height:16px;accent-color:var(--green);flex:0 0 auto}
@@ -202,28 +211,25 @@
 
 <div class="wrap">
   <nav class="toc" id="toc" aria-label="Índice">
-    <div class="grp">Concurso</div>
+    <div class="grp">Comece aqui</div>
     <a href="#inicio">Início</a>
-    <a href="#ficha">1. Ficha técnica</a>
-    <a href="#mudou">2. O que mudou (2019→2026)</a>
-    <a href="#correcoes">3. Correções ao material antigo</a>
-    <a href="#perfil">4. Perfil da banca (Fundep)</a>
-    <div class="grp">O que estudar</div>
-    <a href="#portugues">5.1 Português</a>
-    <a href="#matematica">5.2 Matemática e RLM</a>
-    <a href="#gerais">5.3 Conhec. Gerais</a>
-    <a href="#legislacao">5.4 Legislação</a>
-    <a href="#especificos">5.5 Específicos</a>
-    <div class="grp">Como passar</div>
-    <a href="#plano">6. Plano de estudos</a>
-    <a href="#memoria">Fixar na memória</a>
-    <div class="grp">Aula + prática</div>
+    <a href="#hub">Central de estudos</a>
+    <a href="#plano">Plano de 7 semanas</a>
+    <a href="#memoria">Como fixar na memória</a>
+    <div class="grp">1 · Aprender + treinar</div>
     <a href="#treinos-sec">Aulas + treinos por tema</a>
+    <div class="grp">2 · Praticar</div>
     <a href="#simulado">Simulado 1</a>
     <a href="#simulado2">Simulado 2</a>
     <a href="#flashcards">Flashcards</a>
-    <a href="#fontes">10. Fontes oficiais</a>
-    <a href="#claude">11. Tutor no Claude Code</a>
+    <div class="grp">3 · Consultar</div>
+    <a href="#ficha">Ficha do edital</a>
+    <a href="#portugues">O que estudar (verticalizado)</a>
+    <a href="#mudou">Mudanças 2019→2026</a>
+    <a href="#correcoes">Correções</a>
+    <a href="#perfil">Perfil da banca</a>
+    <a href="#fontes">Fontes oficiais</a>
+    <a href="#claude">Tutor no Claude Code</a>
   </nav>
 
   <main>
@@ -247,6 +253,22 @@
     <div class="alert amber">
       <span class="tag">Prazos</span> — Inscrições de <b>11/08 a 11/09/2026 (17h)</b> no site <code>gestaodeconcursos.com.br</code>. Taxa <b>R$ 70,00</b>, só por <b>boleto</b> (nada de PIX/cartão), pagável até <b>14/09/2026</b>. Cartão de Convocação a partir de <b>26/10</b>.
     </div>
+
+    <!-- ============ CENTRAL DE ESTUDOS (HUB) ============ -->
+    <section id="hub">
+      <div class="card">
+        <p class="eyebrow">Central de estudos</p>
+        <h2 class="sec">Por onde começar</h2>
+        <p>Siga a trilha na ordem — do aprender ao revisar. Está tudo aqui dentro: você não precisa pesquisar fora.</p>
+        <div class="hubgrid">
+          <a class="hubc" href="#treinos-sec"><span class="hn">1</span><b>Aprender + treinar</b><span class="d">Aulas por tema com exemplo e, em seguida, questões que explicam o porquê. Comece pelos temas P1.</span></a>
+          <a class="hubc" href="#simulado"><span class="hn">2</span><b>Praticar</b><span class="d">Dois simulados de 40 questões que corrigem sozinho, no formato Fundep, com comentário em cada questão.</span></a>
+          <a class="hubc" href="#flashcards"><span class="hn">3</span><b>Revisar</b><span class="d">80 flashcards para revisão diária + cronograma de 7 semanas com progresso salvo no navegador.</span></a>
+          <a class="hubc" href="#ficha"><span class="hn">4</span><b>Consultar</b><span class="d">Ficha do edital, o que estudar (verticalizado), fontes oficiais e o tutor infinito no Claude Code.</span></a>
+        </div>
+        <div class="alert blue" style="margin-bottom:0"><span class="tag">Prioridade</span> — as três matérias que mais pesam (25% cada) e decidem o desempate são <b>Conhecimentos Específicos, Matemática e Português</b>. Nos treinos, ataque primeiro os temas marcados <b>P1</b>.</div>
+      </div>
+    </section>
 
     <!-- ============ 1. FICHA ============ -->
     <section id="ficha">
@@ -1030,6 +1052,24 @@ var FC=[
     {t:"Assinale a alternativa em que a vírgula está ERRADA.",o:["Uberlândia, cidade do Triângulo, cresceu muito.","A tarifa, subiu em janeiro.","Senhor prefeito, aprove o projeto.","Depois da chuva, a barragem encheu."],c:1,e:"“A tarifa” é sujeito e não pode ser separado do verbo “subiu” por vírgula."},
     {t:"Para isolar o aposto explicativo, a forma correta é",o:["O DMAE autarquia municipal cuida da água.","O DMAE, autarquia municipal, cuida da água.","O DMAE; autarquia municipal; cuida da água.","O DMAE: autarquia municipal: cuida da água."],c:1,e:"O aposto explicativo fica entre vírgulas."}
   ]},
+  {mat:"Português",titulo:"Aula + treino: Acentuação (Novo Acordo)",aula:"Regras do Novo Acordo: acabou o <b>trema</b> (linguica → linguiça sem trema); paroxítonas com ditongo aberto <b>ei/oi</b> perderam o acento (<b>ideia, heroico, jiboia, assembleia</b>); hiatos <b>oo</b> e <b>ee</b> sem acento (<b>voo, enjoo, creem, leem, veem</b>); <b>i/u</b> tônicos depois de ditongo em paroxítona não são acentuados (feiura, baiuca); acabou o acento diferencial de <b>para, pelo, polo, pera</b>, mas <b>continua</b> “pôde” (passado) ≠ “pode” e “pôr” (verbo) ≠ “por”. <b>Oxítonas e monossílabos</b> com ditongo aberto MANTÊM o acento (herói, papéis, dói, chapéu). Todas as <b>proparoxítonas</b> são acentuadas.",qs:[
+    {t:"Assinale a alternativa com todas as palavras corretas pelo Novo Acordo.",o:["ideia, heroico, voo","idéia, herói, vôo","ideia, heróico, vôo","idéia, heroico, voo"],c:0,e:"Paroxítonas com ditongo ei/oi perdem o acento (ideia, heroico) e “voo” (hiato oo) também. As demais usam grafia antiga."},
+    {t:"Qual palavra MANTÉM o acento (diferencial) pela regra atual?",o:["para (preposição)","pelo (substantivo)","pôde (pretérito)","polo"],c:2,e:"“Pôde” (passado) mantém acento para se distinguir de “pode” (presente). Os outros perderam o acento diferencial."},
+    {t:"Assinale a palavra corretamente acentuada.",o:["heroi","papeis","herói","chapeu"],c:2,e:"Oxítonas/monossílabos com ditongo aberto mantêm o acento: herói, papéis, chapéu. Só “herói” está grafada corretamente."},
+    {t:"Assinale a palavra que NÃO leva acento.",o:["você","café","voo","até"],c:2,e:"“Voo” (hiato oo) perdeu o acento. As demais são oxítonas terminadas em e/ê acentuadas."}
+  ]},
+  {mat:"Português",titulo:"Aula + treino: Formação de palavras",aula:"<b>Derivação:</b> prefixal (in+feliz), sufixal (feliz+mente), prefixal e sufixal (des+leal+dade — os dois, mas cada um poderia faltar), <b>parassintética</b> (prefixo E sufixo ao mesmo tempo, sem existir a forma só com um deles: en+tard+ecer, a+noit+ecer), regressiva (o “ataque”, de atacar) e imprópria (mudança de classe: “o jantar”). <b>Composição:</b> justaposição (sem perda: guarda-chuva, passatempo) e aglutinação (com perda de elementos: plan(o)+alto = planalto; água+ardente = aguardente). <b>Teste da parassíntese:</b> tire o prefixo e depois o sufixo — se nenhuma das duas formas existir sozinha, é parassintética.",qs:[
+    {t:"Assinale a palavra formada por derivação parassintética.",o:["infelizmente","anoitecer","guarda-roupa","pontapé"],c:1,e:"“Anoitecer” = a- + noite + -ecer, simultâneos (não existem “anoite” nem “noitecer”). “Infelizmente” é prefixal e sufixal; os outros são composição."},
+    {t:"Assinale a composição por aglutinação.",o:["passatempo","aguardente","guarda-chuva","beija-flor"],c:1,e:"“Aguardente” = água + ardente, com perda de elementos → aglutinação. Os demais são justaposição (sem perda)."},
+    {t:"Assinale o caso de derivação imprópria (mudança de classe).",o:["o jantar (verbo usado como substantivo)","infeliz","livraria","entardecer"],c:0,e:"Derivação imprópria = a palavra muda de classe sem mudar a forma: o verbo “jantar” vira substantivo “o jantar”."},
+    {t:"Assinale a derivação regressiva.",o:["florescer","o combate (de combater)","pedreiro","refazer"],c:1,e:"Regressiva: o substantivo se forma “encurtando” o verbo (combater → o combate). “Florescer” é derivação; “pedreiro” é sufixal; “refazer” é prefixal."}
+  ]},
+  {mat:"Português",titulo:"Aula + treino: Morfossintaxe (classes e funções)",aula:"As <b>10 classes</b>: substantivo, artigo, adjetivo, numeral, pronome, verbo, advérbio, preposição, conjunção, interjeição. <b>Funções sintáticas</b>: sujeito, objeto direto/indireto, complemento nominal, adjunto adnominal, adjunto adverbial, aposto, vocativo, predicativo. <b>“Que”</b>: pronome relativo (retoma um termo e inicia oração adjetiva — “o livro <b>que</b> li”) ou conjunção integrante (inicia oração substantiva — “Disse <b>que</b> viria”). <b>Adjunto adnominal</b> (posse/qualidade: “a casa <b>do rei</b>”) × <b>complemento nominal</b> (alvo de um nome abstrato: “o amor <b>à pátria</b>”).",qs:[
+    {t:"Em “Disse que voltaria”, a palavra “que” é",o:["pronome relativo","conjunção integrante","advérbio","preposição"],c:1,e:"Inicia oração subordinada substantiva (objeto direto de “disse”) → conjunção integrante. Não retoma nenhum termo anterior."},
+    {t:"Em “O relatório do diretor foi aprovado”, a expressão “do diretor” é",o:["objeto direto","adjunto adnominal","complemento nominal","vocativo"],c:1,e:"Indica posse/autoria ligada a um substantivo concreto (relatório) → adjunto adnominal."},
+    {t:"Em “Ele respondeu rapidamente”, a palavra “rapidamente” é",o:["adjetivo","advérbio","substantivo","conjunção"],c:1,e:"Modifica o verbo indicando modo → advérbio (invariável)."},
+    {t:"Em “Comprei livros e cadernos”, a palavra “e” é",o:["preposição","conjunção (aditiva)","advérbio","pronome"],c:1,e:"Liga dois termos de mesma função somando ideias → conjunção coordenativa aditiva."}
+  ]},
   {mat:"Matemática",titulo:"Aula + treino: Porcentagem e juros",aula:"<b>Porcentagem:</b> x% = x/100. Aumentar p% = ×(1 + p/100); descontar p% = ×(1 − p/100). <b>Aumentos/descontos sucessivos multiplicam</b> (não somam): +10% e +20% = 1,10 × 1,20 = 1,32 → +32%.<br><b>Juros simples:</b> J = C·i·t e M = C + J.<br><b>Juros compostos:</b> M = C·(1+i)ᵗ (juro sobre juro). Taxa e tempo na <b>mesma unidade</b>. Pegadinha: pedem o <b>montante</b> e você marca só o <b>juro</b>.",qs:[
     {t:"R$ 1.000 a juros compostos de 10% ao mês por 2 meses. O montante é",o:["R$ 1.200","R$ 1.210","R$ 1.100","R$ 1.021"],c:1,e:"M = 1.000 × (1,1)² = 1.000 × 1,21 = 1.210."},
     {t:"Um produto de R$ 200 sofre +10% e depois −10%. O preço final é",o:["R$ 200","R$ 198","R$ 202","R$ 180"],c:1,e:"200 × 1,10 × 0,90 = 198. Não volta ao original, porque os percentuais incidem sobre valores diferentes."},
@@ -1041,6 +1081,18 @@ var FC=[
     {t:"A negação de “Se estudo, então passo” é",o:["Se não estudo, não passo.","Estudo e não passo.","Passo e estudo.","Se passo, estudo."],c:1,e:"~(p → q) = p e ~q: “Estudo e não passo”."},
     {t:"A negação de “Todos os poços estão secos” é",o:["Nenhum poço está seco.","Algum poço não está seco.","Todos os poços têm água.","Alguns poços estão secos."],c:1,e:"Negar “todo A é B” = “algum A não é B”. Basta um poço com água."},
     {t:"É equivalente a “Se é servidor, então prestou concurso”:",o:["Se prestou concurso, é servidor.","Se não prestou concurso, não é servidor.","É servidor e não prestou concurso.","Não prestou concurso e é servidor."],c:1,e:"Equivalência = contrapositiva (~q → ~p): “Se não prestou concurso, então não é servidor”. A é a recíproca."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Probabilidade e combinatória",aula:"<b>Probabilidade</b> = casos favoráveis ÷ casos possíveis (resultado entre 0 e 1). <b>“Pelo menos um”</b> = 1 − P(nenhum). Eventos independentes: P(A e B) = P(A)·P(B).<br><b>Arranjo × combinação</b> (a pegadinha clássica): se a <b>ordem importa</b> (senha, pódio, cargos diferentes) → <b>arranjo</b> A(n,p) = n!/(n−p)!; se a <b>ordem NÃO importa</b> (comissão, equipe, escolher um grupo) → <b>combinação</b> C(n,p) = n!/[p!(n−p)!].",qs:[
+    {t:"Numa urna com 10 bolas, 3 são vermelhas. A probabilidade de tirar uma vermelha é",o:["3/10","1/3","7/10","3/7"],c:0,e:"Favoráveis 3, possíveis 10 → 3/10 (= 30%)."},
+    {t:"Quantas comissões de 2 pessoas podem ser formadas com 6 candidatos?",o:["15","30","12","720"],c:0,e:"A ordem não importa (é uma comissão) → combinação C(6,2) = 15. (30 seria arranjo.)"},
+    {t:"Quantos números de 3 algarismos DISTINTOS dá para formar com 1, 2, 3, 4 e 5?",o:["10","60","125","15"],c:1,e:"A ordem importa (número) e sem repetição → arranjo 5×4×3 = 60."},
+    {t:"Ao jogar duas moedas, a probabilidade de sair pelo menos uma cara é",o:["1/4","1/2","3/4","1"],c:2,e:"“Pelo menos uma” = 1 − P(nenhuma cara) = 1 − 1/4 = 3/4."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Estatística",aula:"<b>Média</b> aritmética = soma ÷ quantidade. <b>Moda</b> = o valor que mais se repete (pode haver duas — bimodal — ou nenhuma — amodal). <b>Mediana</b> = o valor central com os dados <b>ORDENADOS</b> (n ímpar: o do meio; n par: média dos dois centrais). <b>Média ponderada</b> = Σ(valor × peso) ÷ Σ(pesos). Desvio padrão = √variância. <b>Pegadinha:</b> sempre ordene antes de achar a mediana.",qs:[
+    {t:"No conjunto 4, 8, 6, 10, 2, a mediana é",o:["6","8","5","10"],c:0,e:"Ordenando: 2, 4, 6, 8, 10 → o valor central é 6."},
+    {t:"Nas notas 3, 5, 7, 7 e 8, a moda é",o:["6","7","5","8"],c:1,e:"Moda é o valor mais frequente: o 7 aparece duas vezes."},
+    {t:"Prova (peso 3) com nota 8 e trabalho (peso 1) com nota 4. A média ponderada é",o:["6","7","5","6,5"],c:1,e:"(8×3 + 4×1) ÷ (3+1) = 28 ÷ 4 = 7."},
+    {t:"No conjunto 10, 20, 30, 40, a mediana é",o:["25","20","30","15"],c:0,e:"n é par → média dos dois centrais (20 e 30) = 25."}
   ]},
   {mat:"Específicos",titulo:"Aula + treino: Licitações (Lei 14.133/2021)",aula:"Desde 30/12/2023, a <b>Lei 14.133/2021</b> é a <b>única</b> lei geral de licitações (revogou a 8.666, o pregão e o RDC). Aplica-se ao DMAE (autarquia).<br><b>5 modalidades (art. 28):</b> pregão, concorrência, concurso, leilão e diálogo competitivo. <b>Convite e tomada de preços não existem mais.</b><br><b>Fases (art. 17):</b> preparatória → edital → propostas → <b>julgamento → habilitação</b> (invertida) → recursal → homologação.<br><b>Dispensa (art. 75):</b> dá pra competir, mas a lei permite não licitar. <b>Inexigibilidade (art. 74):</b> competição inviável (fornecedor exclusivo, artista consagrado, notória especialização).",qs:[
     {t:"NÃO é modalidade da Lei 14.133/2021:",o:["concorrência","tomada de preços","leilão","diálogo competitivo"],c:1,e:"Tomada de preços (e convite) foram extintas. As 5 modalidades são pregão, concorrência, concurso, leilão e diálogo competitivo."},
@@ -1066,6 +1118,24 @@ var FC=[
     {t:"A ordem correta dos estágios da despesa é",o:["liquidação, empenho, pagamento","empenho, liquidação, pagamento","pagamento, liquidação, empenho","empenho, pagamento, liquidação"],c:1,e:"Empenho (reserva) → liquidação (confere a entrega) → pagamento (quita)."},
     {t:"Verificar que o material/serviço foi efetivamente entregue corresponde à",o:["empenho","liquidação","pagamento","previsão"],c:1,e:"Liquidação: apura o direito do credor pela entrega do bem/serviço."}
   ]},
+  {mat:"Específicos",titulo:"Aula + treino: Administração (teorias)",aula:"<b>Funções administrativas (PODC):</b> Planejar, Organizar, Dirigir, Controlar. Principais teorias e seu foco:<br>• <b>Taylor</b> (Administração Científica): tarefas, tempos e movimentos, padronização.<br>• <b>Fayol</b> (Clássica): estrutura, 14 princípios, funções POC³.<br>• <b>Weber</b> (Burocracia): impessoalidade, hierarquia, normas; disfunções (papelório, apego à regra).<br>• <b>Mayo</b> (Relações Humanas, experiência de Hawthorne): fatores sociais e grupos informais.<br>• <b>Maslow</b>: pirâmide (fisiológicas → segurança → sociais → estima → autorrealização).<br>• <b>Herzberg</b>: fatores higiênicos (salário, condições — evitam insatisfação) × motivacionais (reconhecimento — geram satisfação).<br>• <b>McGregor</b>: Teoria X (precisa de controle) × Teoria Y (tem autonomia).",qs:[
+    {t:"O estudo de tempos e movimentos é característico da",o:["Teoria Clássica (Fayol)","Administração Científica (Taylor)","Burocracia (Weber)","Relações Humanas (Mayo)"],c:1,e:"Taylor focou na eficiência das tarefas (tempos e movimentos). Fayol focou na estrutura."},
+    {t:"Impessoalidade, hierarquia e normas escritas caracterizam a",o:["Teoria X","Burocracia (Weber)","Relações Humanas","Teoria da Contingência"],c:1,e:"São traços da burocracia de Weber; o excesso delas gera as “disfunções”."},
+    {t:"Para Herzberg, o reconhecimento profissional é um fator",o:["higiênico","motivacional","fisiológico","de segurança"],c:1,e:"Motivacionais (reconhecimento, responsabilidade) geram satisfação; higiênicos (salário, condições) só evitam a insatisfação."},
+    {t:"As funções administrativas (PODC) são",o:["prever, vender, comprar, pagar","planejar, organizar, dirigir, controlar","contratar, treinar, demitir, avaliar","receber, guardar, distribuir, conferir"],c:1,e:"PODC = Planejar, Organizar, Dirigir e Controlar."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Estoques e almoxarifado",aula:"<b>Métodos de avaliação:</b> <b>PEPS/FIFO</b> (primeiro que entra, primeiro que sai) → a saída usa o preço mais antigo e o <b>estoque final fica pelos preços mais recentes</b>. <b>UEPS/LIFO</b> é <b>vedado</b> no Brasil para fins fiscais. <b>Custo médio</b>: recalcula a média a cada entrada.<br><b>Curva ABC:</b> classe A ≈ 20% dos itens e 80% do valor (controle rigoroso); B ≈ 30%/15%; C ≈ 50%/5%.<br><b>Ponto de pedido</b> = consumo médio × tempo de reposição + estoque de segurança. <b>Inventário:</b> periódico (contagem geral) × rotativo (parcial e contínuo).",qs:[
+    {t:"No método PEPS, o estoque final é avaliado pelos preços",o:["mais antigos","mais recentes","médios","mais baixos"],c:1,e:"Como saem primeiro os itens mais antigos, sobram no estoque os mais recentes."},
+    {t:"O método de avaliação de estoque vedado no Brasil para fins fiscais é o",o:["PEPS","UEPS","custo médio","inventário rotativo"],c:1,e:"UEPS/LIFO não é aceito fiscalmente no Brasil."},
+    {t:"Na curva ABC, os itens de MENOR valor e MAIOR quantidade formam a classe",o:["A","B","C","D"],c:2,e:"Classe C ≈ 50% dos itens e só 5% do valor → controle mais simples."},
+    {t:"O ponto de pedido é calculado por",o:["estoque máximo − estoque mínimo","consumo médio × tempo de reposição + estoque de segurança","consumo do período ÷ estoque médio","entradas − saídas"],c:1,e:"É o nível que dispara uma nova compra a tempo de não faltar material."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Finanças e contabilidade",aula:"<b>Equação patrimonial:</b> Ativo = Passivo + Patrimônio Líquido → logo <b>PL = Ativo − Passivo</b>. <b>Ativo</b> = bens e direitos; <b>Passivo</b> = obrigações (dívidas). <b>Regime de competência:</b> a receita/despesa é reconhecida quando <b>ocorre</b>, não quando é paga/recebida. <b>Partidas dobradas:</b> todo débito corresponde a um crédito de igual valor (débito aumenta ativo e despesa; crédito aumenta passivo, PL e receita). Demonstrações (Lei 6.404): Balanço Patrimonial, <b>DRE</b> (apura lucro/prejuízo), DFC, DMPL, DVA.",qs:[
+    {t:"Uma entidade tem ativo de R$ 900 mil e passivo de R$ 500 mil. O patrimônio líquido é",o:["R$ 1.400 mil","R$ 400 mil","R$ 500 mil","R$ 900 mil"],c:1,e:"PL = Ativo − Passivo = 900 − 500 = 400 mil."},
+    {t:"Pelo regime de competência, a despesa é reconhecida",o:["quando é paga","quando ocorre, independentemente do pagamento","apenas no fim do ano","somente se for à vista"],c:1,e:"Competência = registrar no momento do fato gerador, não do caixa."},
+    {t:"Representam obrigações da entidade:",o:["o ativo","o passivo","o patrimônio líquido","as receitas"],c:1,e:"Passivo = obrigações (o que a entidade deve). Ativo = bens e direitos."},
+    {t:"A demonstração que apura o lucro ou prejuízo do período é a",o:["Balanço Patrimonial","DRE","DFC","DMPL"],c:1,e:"DRE (Demonstração do Resultado do Exercício): receitas − despesas = resultado."}
+  ]},
   {mat:"Legislação",titulo:"Aula + treino: Servidor e Constituição",aula:"<b>Princípios do art. 37 (LIMPE):</b> Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência (razoabilidade e proporcionalidade são <b>implícitos</b>).<br><b>Provimento × vacância:</b> provimento é OCUPAR o cargo (nomeação, promoção, readaptação, reintegração, recondução, aproveitamento); vacância é DESOCUPAR (exoneração, demissão, aposentadoria, posse em outro cargo, falecimento).<br><b>Estabilidade:</b> após <b>3 anos</b> de efetivo exercício. <b>Concurso:</b> validade de até <b>2 anos, prorrogável 1 vez</b>. O DMAE é <b>autarquia</b> (administração indireta).",qs:[
     {t:"NÃO é forma de provimento de cargo público:",o:["nomeação","promoção","exoneração","reintegração"],c:2,e:"Exoneração é forma de VACÂNCIA (desocupa o cargo). As demais são provimento."},
     {t:"A estabilidade do servidor é adquirida após",o:["a posse","2 anos","3 anos de efetivo exercício","5 anos"],c:2,e:"CF art. 41: 3 anos de efetivo exercício + avaliação especial de desempenho."},
@@ -1074,8 +1144,9 @@ var FC=[
   ]}
   ];
 
-  var tv=document.getElementById("treinos");
+  var tv=document.getElementById("treinos"), lastMat="";
   TREINOS.forEach(function(tr,ti){
+    if(tr.mat!==lastMat){lastMat=tr.mat; var dv=document.createElement("h3"); dv.className="matdiv"; dv.setAttribute("data-mat",tr.mat); dv.textContent=tr.mat; tv.appendChild(dv);}
     var card=document.createElement("div"); card.className="card"; card.style.marginTop="16px"; card.setAttribute("data-mat",tr.mat);
     card.innerHTML='<p class="eyebrow">'+tr.mat+'</p><h3 style="margin-top:0">'+tr.titulo+'</h3><div class="aula">'+tr.aula+'</div><div class="tq" id="treino-'+ti+'"></div>';
     tv.appendChild(card);
