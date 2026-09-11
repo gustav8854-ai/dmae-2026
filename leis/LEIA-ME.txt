@@ -1,8 +1,15 @@
-Coloque aqui os PDFs/textos das leis e o Edital Consolidado:
-- Lei Organica de Uberlandia
-- LC 040-1992 (Estatuto)
-- Lei 12.048-2014 (Plano de Carreira DMAE)
+Textos de lei para o tutor citar artigo e prazo sem inventar.
+
+JA INCLUIDOS (extraidos das fontes oficiais):
+- Lei-Organica-Uberlandia.txt        (fonte: Camara Municipal de Uberlandia)
+- LC-040-1992-Estatuto-Servidores.txt (fonte: Camara/leismunicipais - versao com alteracoes)
+
+AINDA FALTAM (coloque aqui quando tiver):
+- Lei 12.048-2014 (Plano de Carreira do DMAE)
 - Estrutura do Executivo / Estrutura do DMAE / Codigo de Etica
 - Lei 14.133-2021 e Manual de Redacao da Presidencia
 - Edital Consolidado 01-2026
-Assim o tutor cita artigo e prazo sem inventar.
+- Prova + gabarito DMAE 2020 (Oficial Administrativo) para virar simulado
+
+Obs.: os textos .txt foram extraidos de PDF (pdftotext); confira sempre a
+redacao vigente ate 10/06/2026 (item 1.5 do edital) antes de decorar prazos.
