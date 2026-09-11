@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprovação DMAE 2026</title>
+<meta name="description" content="Cursinho completo para Oficial Administrativo do DMAE Uberlândia 2026 (Fundep): edital verticalizado, plano de estudos, simulado que corrige sozinho e flashcards.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Public+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+  /* ===== Tema: água/saneamento (DMAE). Azul institucional + verde "tratada".
+     Claro por padrão; escuro via prefers-color-scheme e [data-theme]. ===== */
+  :root{
+    --bg:#eef3f6; --paper:#ffffff; --paper-2:#f4f8fa;
+    --ink:#122430; --ink-2:#3a5361; --muted:#647d8b; --line:#d7e2e8; --line-2:#e6eef2;
+    --blue:#0d5c86; --blue-2:#1785bf; --blue-soft:#e2f0f8;
+    --teal:#0e8f9c; --green:#1a8f4c; --green-soft:#e3f5ea;
+    --amber:#b45309; --amber-soft:#fbeede; --red:#c0392b; --red-soft:#fbe7e4;
+    --shadow:0 1px 2px rgba(18,36,48,.06),0 8px 24px rgba(18,36,48,.06);
+    --wrongbg:#fbe7e4; --rightbg:#e3f5ea;
+  }
+  @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+    --bg:#0b1418; --paper:#0f1b21; --paper-2:#132430;
+    --ink:#e7eef2; --ink-2:#b3c4cd; --muted:#8399a4; --line:#22343d; --line-2:#1a2a32;
+    --blue:#3ea6dd; --blue-2:#57b6e8; --blue-soft:#12303f;
+    --teal:#2bb6c2; --green:#43c07e; --green-soft:#123026;
+    --amber:#e0a45c; --amber-soft:#2e2410; --red:#e8796c; --red-soft:#2e1613;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    --wrongbg:#2e1613; --rightbg:#123026;
+  }}
+  :root[data-theme="dark"]{
+    --bg:#0b1418; --paper:#0f1b21; --paper-2:#132430;
+    --ink:#e7eef2; --ink-2:#b3c4cd; --muted:#8399a4; --line:#22343d; --line-2:#1a2a32;
+    --blue:#3ea6dd; --blue-2:#57b6e8; --blue-soft:#12303f;
+    --teal:#2bb6c2; --green:#43c07e; --green-soft:#123026;
+    --amber:#e0a45c; --amber-soft:#2e2410; --red:#e8796c; --red-soft:#2e1613;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 10px 30px rgba(0,0,0,.35);
+    --wrongbg:#2e1613; --rightbg:#123026;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth;scroll-padding-top:70px}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:"Public Sans",system-ui,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  h1,h2,h3,h4{font-family:"Lora",Georgia,serif;line-height:1.2;text-wrap:balance}
+  a{color:var(--blue)}
+  .serif{font-family:"Lora",Georgia,serif}
+
+  /* topbar */
+  .top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 88%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .top .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 18px}
+  .brand{display:flex;align-items:center;gap:9px;font-weight:800;letter-spacing:.01em}
+  .brand .drop{width:26px;height:26px;border-radius:50% 50% 50% 8px;transform:rotate(45deg);background:linear-gradient(135deg,var(--blue-2),var(--teal));box-shadow:inset 0 0 0 2px rgba(255,255,255,.25)}
+  .brand b{color:var(--blue)}
+  .top .sp{flex:1}
+  .cd{font-size:12.5px;color:var(--ink-2);font-weight:600;border:1px solid var(--line);border-radius:999px;padding:5px 11px;white-space:nowrap}
+  .cd b{color:var(--red);font-variant-numeric:tabular-nums}
+  .tbtn{border:1px solid var(--line);background:var(--paper);color:var(--ink-2);border-radius:9px;padding:6px 9px;cursor:pointer;font-size:14px}
+  .menub{display:none}
+
+  .wrap{max-width:1180px;margin:0 auto;padding:0 18px;display:grid;grid-template-columns:236px 1fr;gap:30px;align-items:start}
+  /* TOC */
+  nav.toc{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 80px);overflow:auto;padding:18px 0 40px;font-size:14px}
+  nav.toc a{display:block;color:var(--ink-2);text-decoration:none;padding:6px 10px;border-radius:7px;border-left:2px solid transparent}
+  nav.toc a:hover{background:var(--paper-2);color:var(--ink)}
+  nav.toc a.on{color:var(--blue);border-left-color:var(--blue);background:var(--blue-soft);font-weight:600}
+  nav.toc .grp{font-size:11px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);margin:16px 10px 4px;font-weight:700}
+  main{min-width:0;padding-bottom:80px}
+
+  section{scroll-margin-top:70px;margin:34px 0}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 24px;box-shadow:var(--shadow)}
+  .eyebrow{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin:0 0 6px}
+  h2.sec{font-size:clamp(22px,3.2vw,30px);margin:0 0 14px;color:var(--ink);border-bottom:2px solid var(--blue);padding-bottom:8px;display:inline-block}
+  h3{font-size:19px;margin:22px 0 8px;color:var(--blue)}
+  h4{font-size:15.5px;margin:16px 0 6px}
+  p{margin:0 0 12px;max-width:72ch}
+  ul,ol{margin:0 0 12px;padding-left:22px}
+  li{margin:5px 0;max-width:72ch}
+  strong{color:var(--ink)}
+  .lead{font-size:17px;color:var(--ink-2)}
+  code{background:var(--paper-2);border:1px solid var(--line-2);border-radius:5px;padding:1px 5px;font-size:.9em}
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;border-radius:20px;border:1px solid var(--line);background:
+     radial-gradient(120% 90% at 88% -10%, color-mix(in srgb,var(--blue-2) 24%, transparent), transparent 60%),
+     linear-gradient(180deg,var(--paper),var(--paper-2));padding:34px 28px;margin-top:22px}
+  .hero h1{font-size:clamp(28px,5vw,46px);margin:8px 0 6px;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--blue)}
+  .hero .sub{font-size:17px;color:var(--ink-2);max-width:60ch}
+  .facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+  .fact{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:9px 13px;font-size:13.5px}
+  .fact b{display:block;font-size:16px;color:var(--blue);font-family:"Lora",serif}
+
+  /* alert */
+  .alert{border-radius:14px;padding:14px 16px;margin:14px 0;border:1px solid;font-size:14.5px}
+  .alert b{font-weight:800}
+  .alert.red{background:var(--red-soft);border-color:color-mix(in srgb,var(--red) 40%,var(--line))}
+  .alert.amber{background:var(--amber-soft);border-color:color-mix(in srgb,var(--amber) 40%,var(--line))}
+  .alert.blue{background:var(--blue-soft);border-color:color-mix(in srgb,var(--blue) 30%,var(--line))}
+  .alert .tag{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+  .alert.red .tag{color:var(--red)} .alert.amber .tag{color:var(--amber)} .alert.blue .tag{color:var(--blue)}
+
+  /* tables */
+  .tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px;margin:12px 0}
+  table{width:100%;border-collapse:collapse;font-size:14px;min-width:520px}
+  th,td{text-align:left;vertical-align:top;padding:9px 12px;border-bottom:1px solid var(--line-2)}
+  th{background:var(--paper-2);color:var(--blue);font-weight:700;position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:0}
+  td.k{font-weight:600;color:var(--ink);white-space:nowrap}
+  .pri{font-weight:800;font-size:11px;padding:2px 7px;border-radius:6px}
+  .p1{background:var(--red-soft);color:var(--red)} .p2{background:var(--amber-soft);color:var(--amber)} .p3{background:var(--paper-2);color:var(--muted)}
+  .peg{color:var(--amber)}
+
+  /* weight bars */
+  .weights{display:grid;gap:9px;margin:10px 0}
+  .wrow{display:grid;grid-template-columns:200px 1fr 54px;gap:12px;align-items:center;font-size:14px}
+  .bar{height:14px;background:var(--paper-2);border-radius:999px;overflow:hidden;border:1px solid var(--line-2)}
+  .bar>i{display:block;height:100%;background:linear-gradient(90deg,var(--blue-2),var(--teal));border-radius:999px}
+  @media(max-width:560px){.wrow{grid-template-columns:1fr;gap:3px}.wrow .bar{grid-row:2}}
+
+  /* simulado */
+  .q{border:1px solid var(--line);border-radius:13px;padding:16px 18px;margin:14px 0;background:var(--paper)}
+  .q .qn{font-weight:700;color:var(--blue);font-size:13px;letter-spacing:.02em}
+  .q .qt{margin:4px 0 12px;font-weight:500}
+  .opt{display:flex;gap:10px;align-items:flex-start;padding:9px 12px;border:1px solid var(--line);border-radius:10px;margin:6px 0;cursor:pointer;transition:background .12s,border-color .12s}
+  .opt:hover{background:var(--paper-2)}
+  .opt input{margin-top:3px}
+  .opt .lt{font-weight:700;color:var(--ink-2)}
+  .opt.right{background:var(--rightbg);border-color:var(--green)}
+  .opt.wrong{background:var(--wrongbg);border-color:var(--red)}
+  .expl{display:none;margin-top:10px;border-left:3px solid var(--blue);background:var(--paper-2);padding:9px 13px;border-radius:0 8px 8px 0;font-size:14px}
+  .expl.show{display:block}
+  .expl b.ok{color:var(--green)} .expl b.no{color:var(--red)}
+  .passage{background:var(--paper-2);border:1px solid var(--line-2);border-left:3px solid var(--teal);border-radius:0 10px 10px 0;padding:12px 16px;margin:10px 0;font-style:italic}
+  .simbar{position:sticky;bottom:0;background:color-mix(in srgb,var(--paper) 92%,transparent);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin-top:16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap;box-shadow:var(--shadow)}
+  .btn{background:var(--blue);color:#fff;border:0;border-radius:10px;padding:11px 20px;font-weight:700;font-size:15px;cursor:pointer;font-family:inherit}
+  .btn:hover{background:var(--blue-2)}
+  .btn.ghost{background:transparent;color:var(--blue);border:1px solid var(--line)}
+  .score{font-weight:800;font-size:16px}
+  .score b{font-family:"Lora",serif;font-size:20px}
+  .blocklabel{font-family:"Lora",serif;font-size:17px;color:var(--teal);margin:22px 0 4px;font-weight:700}
+
+  /* flashcards */
+  .fctools{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:8px 0 14px}
+  .fc{border:1px solid var(--line);border-radius:13px;padding:16px 18px;background:var(--paper);cursor:pointer;min-height:96px;display:flex;flex-direction:column;justify-content:center;box-shadow:var(--shadow)}
+  .fc .fq{font-weight:600}
+  .fc .fn{font-size:12px;color:var(--muted);font-weight:700}
+  .fc .fa{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);color:var(--ink-2)}
+  .fc.open .fa{display:block}
+  .fc .hint{font-size:12px;color:var(--muted);margin-top:6px}
+  .fc.open .hint{display:none}
+
+  /* plano checklist */
+  .chk{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--line-2)}
+  .chk input{margin-top:5px;width:16px;height:16px;accent-color:var(--green);flex:0 0 auto}
+  .chk label{cursor:pointer}
+  .chk.done label{color:var(--muted);text-decoration:line-through}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){.grid2{grid-template-columns:1fr}}
+  .mini{background:var(--paper-2);border:1px solid var(--line-2);border-radius:11px;padding:14px 16px}
+  .mini h4{margin-top:0;color:var(--blue)}
+  footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;padding:24px 0;text-align:center}
+  .back{position:fixed;right:16px;bottom:16px;z-index:40;background:var(--blue);color:#fff;border:0;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;box-shadow:var(--shadow);display:none}
+  .back.show{display:block}
+
+  @media(max-width:900px){
+    .wrap{grid-template-columns:1fr;gap:0}
+    nav.toc{position:fixed;inset:56px 0 0 0;top:56px;z-index:45;background:var(--paper);max-height:none;padding:14px 18px;display:none;border-right:1px solid var(--line)}
+    nav.toc.open{display:block}
+    .menub{display:inline-block}
+    .cd{display:none}
+  }
+  @media print{
+    .top,nav.toc,.simbar,.back,.fctools,.menub{display:none!important}
+    .wrap{display:block;max-width:none;padding:0}
+    body{background:#fff}
+    .card,.q,.fc,.hero{box-shadow:none;break-inside:avoid}
+    .expl{display:block!important}
+    .fc .fa{display:block!important} .fc .hint{display:none}
+    a{color:inherit;text-decoration:none}
+    section{margin:16px 0}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="in">
+    <button class="tbtn menub" id="menub" aria-label="Menu">☰</button>
+    <span class="brand"><span class="drop" aria-hidden="true"></span> Aprovação <b>DMAE&nbsp;2026</b></span>
+    <span class="sp"></span>
+    <span class="cd" id="cd">Prova 01/11/2026 · faltam <b id="cddays">—</b> dias</span>
+    <button class="tbtn" id="theme" aria-label="Alternar tema">◐</button>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="toc" id="toc" aria-label="Índice">
+    <div class="grp">Concurso</div>
+    <a href="#inicio">Início</a>
+    <a href="#ficha">1. Ficha técnica</a>
+    <a href="#mudou">2. O que mudou (2019→2026)</a>
+    <a href="#correcoes">3. Correções ao material antigo</a>
+    <a href="#perfil">4. Perfil da banca (Fundep)</a>
+    <div class="grp">O que estudar</div>
+    <a href="#portugues">5.1 Português</a>
+    <a href="#matematica">5.2 Matemática e RLM</a>
+    <a href="#gerais">5.3 Conhec. Gerais</a>
+    <a href="#legislacao">5.4 Legislação</a>
+    <a href="#especificos">5.5 Específicos</a>
+    <div class="grp">Como passar</div>
+    <a href="#plano">6. Plano de estudos</a>
+    <a href="#memoria">Fixar na memória</a>
+    <a href="#simulado">7. Simulado (corrige!)</a>
+    <a href="#flashcards">9. Flashcards</a>
+    <a href="#fontes">10. Fontes oficiais</a>
+    <a href="#claude">11. Tutor no Claude Code</a>
+  </nav>
+
+  <main>
+    <!-- ============ HERO ============ -->
+    <section id="inicio" class="hero">
+      <p class="eyebrow">Concurso DMAE Uberlândia · Edital 01/2026 · Banca Fundep</p>
+      <h1>Seu cursinho completo para <em>Oficial Administrativo</em> do DMAE 2026</h1>
+      <p class="sub">Edital verticalizado, plano de 7 semanas, simulado que corrige sozinho e 80 flashcards — tudo com as pegadinhas da Fundep. Feito para você entrar nas 10 vagas.</p>
+      <div class="facts">
+        <div class="fact"><b>40</b> questões · 3 h</div>
+        <div class="fact"><b>01/11/2026</b> domingo · Turno B</div>
+        <div class="fact"><b>10</b> vagas + CR</div>
+        <div class="fact"><b>R$ 3.968,08</b> inicial · 40h</div>
+        <div class="fact"><b>Ens. Médio</b> completo</div>
+      </div>
+    </section>
+
+    <div class="alert red" style="margin-top:16px">
+      <span class="tag">Corrija já</span> — <b>O cargo é OFICIAL ADMINISTRATIVO</b>, não "Auxiliar Administrativo". No edital 2026 não existe cargo "Auxiliar Administrativo"; esse nome só aparece como <em>tema</em> dentro de Conhecimentos Específicos. Confira o <b>código do cargo</b> ao se inscrever — depois de confirmada, a inscrição não pode ser alterada.
+    </div>
+    <div class="alert amber">
+      <span class="tag">Prazos</span> — Inscrições de <b>11/08 a 11/09/2026 (17h)</b> no site <code>gestaodeconcursos.com.br</code>. Taxa <b>R$ 70,00</b>, só por <b>boleto</b> (nada de PIX/cartão), pagável até <b>14/09/2026</b>. Cartão de Convocação a partir de <b>26/10</b>.
+    </div>
+
+    <!-- ============ 1. FICHA ============ -->
+    <section id="ficha">
+      <div class="card">
+        <p class="eyebrow">Seção 1</p>
+        <h2 class="sec">Ficha técnica do concurso</h2>
+        <div class="tw"><table>
+          <tbody>
+          <tr><td class="k">Órgão</td><td>Departamento Municipal de Água e Esgoto de Uberlândia (DMAE) — autarquia municipal. Sede: Av. Rondon Pacheco, 6.400, Tibery.</td></tr>
+          <tr><td class="k">Edital</td><td>Nº 01/2026, de 10/06/2026 (+ Retificação I e Edital Consolidado de 10/07/2026).</td></tr>
+          <tr><td class="k">Banca</td><td>Fundep (ligada à UFMG). Portais: gestaodeconcursos.com.br e fundep.selecao.net.br/informacoes/63/</td></tr>
+          <tr><td class="k">Cargo</td><td><strong>Oficial Administrativo</strong> — Nível Médio (Ensino Médio completo).</td></tr>
+          <tr><td class="k">Vagas</td><td>10 + cadastro de reserva (7 ampla concorrência, 1 PcD, 2 pessoas negras).</td></tr>
+          <tr><td class="k">Remuneração</td><td>R$ 3.968,08 · Jornada 40h semanais (pode haver viagens; deslocamento por conta do servidor).</td></tr>
+          <tr><td class="k">Regime</td><td>Estatutário (LC Municipal 040/1992), previdência pelo IPREMU.</td></tr>
+          <tr><td class="k">Prova</td><td>01/11/2026 (domingo), Uberlândia, <strong>Turno B</strong>, duração 3h · 40 questões objetivas, 4 alternativas (A–D), uma correta.</td></tr>
+          <tr><td class="k">Aprovação</td><td>Atingir a pontuação mínima do Anexo III <span class="peg">[confirmar o número no Edital Consolidado]</span> e <strong>não zerar</strong> nenhuma disciplina.</td></tr>
+          <tr><td class="k">Nota final</td><td>Soma dos pontos da objetiva (sem redação, prova prática ou TAF).</td></tr>
+          <tr><td class="k">Gabarito</td><td>2º dia após a prova (previsão 03/11). Recursos: 3 dias úteis, um por questão, fundamentado.</td></tr>
+          <tr><td class="k">Validade</td><td>2 anos, prorrogável por mais 2. Resultado final estimado: abril/2027.</td></tr>
+          <tr><td class="k">Legislação cobrada</td><td>Somente a vigente até <strong>10/06/2026</strong> (item 1.5). Alterações posteriores não caem.</td></tr>
+          </tbody>
+        </table></div>
+
+        <h3 id="dist">1.1 As 40 questões e o peso de cada matéria</h3>
+        <div class="weights">
+          <div class="wrow"><span>Língua Portuguesa</span><span class="bar"><i style="width:100%"></i></span><span>10 · 25%</span></div>
+          <div class="wrow"><span>Matemática e RLM</span><span class="bar"><i style="width:100%"></i></span><span>10 · 25%</span></div>
+          <div class="wrow"><span>Conhec. Específicos</span><span class="bar"><i style="width:100%"></i></span><span>10 · 25%</span></div>
+          <div class="wrow"><span>Conhec. Gerais</span><span class="bar"><i style="width:50%"></i></span><span>5 · 12,5%</span></div>
+          <div class="wrow"><span>Legislação</span><span class="bar"><i style="width:50%"></i></span><span>5 · 12,5%</span></div>
+        </div>
+        <p class="peg">O peso em pontos está no Anexo III do Edital Consolidado. Se Específicos tiver peso maior (comum na Fundep), a prioridade dessa matéria sobe ainda mais. [confirmar no Anexo III]</p>
+
+        <h3 id="desempate">1.2 Critérios de desempate (nesta ordem)</h3>
+        <ol>
+          <li>Idade ≥ 60 anos (Estatuto do Idoso);</li>
+          <li><strong>Mais pontos em Conhecimentos Específicos</strong>;</li>
+          <li>Mais pontos em Língua Portuguesa;</li>
+          <li>Mais pontos em Matemática e RLM;</li>
+          <li>Mais pontos em Legislação;</li>
+          <li>Maior idade;</li>
+          <li>Sorteio.</li>
+        </ol>
+        <div class="alert blue"><span class="tag">Consequência</span> — com 10 vagas e nota de corte alta, quem empata ganha por <b>Específicos</b>. É a matéria que decide a vaga: estude-a com prioridade máxima.</div>
+
+        <h3 id="regras">1.3 Regras do dia da prova</h3>
+        <ul>
+          <li>Chegar <strong>60 min antes</strong>; após o fechamento dos portões = eliminado.</li>
+          <li>Levar <strong>documento oficial com foto</strong> (RG, CNH física/digital, CTPS com foto, passaporte, e-Título, carteira de conselho) e <strong>caneta esferográfica azul ou preta, corpo transparente</strong>. CPF sozinho, cópia ou foto do documento <em>não</em> valem.</li>
+          <li>Proibido, mesmo desligado: celular, <strong>relógio de qualquer tipo</strong>, fone, calculadora, boné, óculos escuros, lápis, borracha, corretivo. Há detector de metais.</li>
+          <li>Só pode sair em definitivo após <strong>2 horas</strong>. Questão em branco, rasurada ou com 2 marcações = erro. <strong>Não há desconto por erro → nunca deixe em branco.</strong></li>
+          <li>Preencha a Folha de Respostas com caneta, sem rasura; leve só o rascunho do gabarito. Os 3 últimos saem juntos e assinam a ata.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 2. MUDOU ============ -->
+    <section id="mudou">
+      <div class="card">
+        <p class="eyebrow">Seção 2</p>
+        <h2 class="sec">O que mudou do último edital para 2026</h2>
+        <div class="tw"><table>
+          <thead><tr><th>Item</th><th>2019/2020</th><th>2026</th></tr></thead>
+          <tbody>
+          <tr><td class="k">Banca</td><td>Fundep</td><td>Fundep (mesma banca — as provas de 2020 são o melhor simulado)</td></tr>
+          <tr><td class="k">Vagas totais</td><td>153 (32 cargos)</td><td>59</td></tr>
+          <tr><td class="k">Vagas do cargo</td><td>20</td><td>10</td></tr>
+          <tr><td class="k">Remuneração</td><td>R$ 2.731,52</td><td>R$ 3.968,08 (+45%)</td></tr>
+          <tr><td class="k">Prova</td><td>09/02/2020, 4 h</td><td>01/11/2026, 3 h</td></tr>
+          <tr><td class="k">Questões</td><td>40</td><td>40</td></tr>
+          <tr><td class="k">Legislação</td><td>Estatuto + Lei Orgânica</td><td>Estatuto + Lei Orgânica + Plano de Carreira do DMAE + Estrutura do Executivo + Estrutura do DMAE + Código de Ética</td></tr>
+          </tbody>
+        </table></div>
+        <p><strong>Leitura estratégica:</strong> menos vagas, salário maior e mesma banca → concorrência tende a ser maior que em 2020. <strong>Baixe e resolva cronometrado</strong> a prova de Oficial Administrativo DMAE 2020 e a de Oficial Administrativo da Prefeitura de Uberlândia 2019 (ambas Fundep) — em gestaodeconcursos.com.br (concursos encerrados) ou Qconcursos (filtro "Fundep").</p>
+      </div>
+    </section>
+
+    <!-- ============ 3. CORREÇÕES ============ -->
+    <section id="correcoes">
+      <div class="card">
+        <p class="eyebrow">Seção 3</p>
+        <h2 class="sec">Correções a materiais desatualizados</h2>
+        <p>Se você usou um resumo antigo (ou de IA), corrija a base — estes erros deixam matéria inteira de fora:</p>
+        <div class="tw"><table>
+          <thead><tr><th>O material antigo diz</th><th>O que o edital 2026 diz</th></tr></thead>
+          <tbody>
+          <tr><td>Prova de 35 questões</td><td><strong>40 questões</strong> (10+10+5+5+10)</td></tr>
+          <tr><td>Matemática = só porcentagem, juros, combinatória, probabilidade, estatística e tabela-verdade</td><td>Inclui também <strong>funções (1º/2º grau, exponencial, log), trigonometria, PA/PG, geometria plana/espacial/analítica, matrizes, determinantes, sistemas, variância e desvio padrão, verdades e mentiras, casa dos pombos, orientação espacial/temporal</strong></td></tr>
+          <tr><td>Português = sintaxe, regência, crase, pontuação, texto</td><td>Inclui <strong>formação de palavras, colocação pronominal, fono-ortografia e acentuação (Novo Acordo), tipos/gêneros, sentido figurado, sinonímia/antonímia/polissemia, variação linguística, tempos e modos verbais</strong>. Regência não está listada explicitamente em 2026 (é complemento, não prioridade)</td></tr>
+          <tr><td>Legislação = Lei Orgânica + Estatuto</td><td><strong>6 itens</strong>: Lei Orgânica, Estatuto (LC 040/92), Plano de Carreira do DMAE (Lei 12.048/14), Estrutura do Executivo, Estrutura do DMAE, Código de Ética</td></tr>
+          <tr><td>Específicos = Lei 14.133, arquivologia, almoxarifado, redação oficial, administração</td><td>Faltaram <strong>Teorias da Administração, gestão de pessoas e rotinas de DP, atendimento, compras/inventário, finanças/contabilidade, orçamento (tradicional × programa), técnica legislativa, redação de documentos e Constituição (serviço público, servidor, serviços essenciais)</strong></td></tr>
+          <tr><td>"A Fundep sempre põe o resultado parcial na letra A"</td><td>Não existe regra assim. Os distratores de Matemática usam os erros mais comuns (resultado parcial, unidade errada, juros simples no lugar de compostos). Defesa: <strong>reler o comando antes de marcar</strong></td></tr>
+          <tr><td>Prazos de PAD iguais aos federais</td><td>Estude os prazos na letra da <strong>LC 040/1992</strong> — não presuma que são iguais à Lei 8.112/90</td></tr>
+          </tbody>
+        </table></div>
+        <p class="peg">Permanece correto: "Respeitosamente" (superior) e "Atenciosamente" (mesma hierarquia/inferior); vocativo "Senhor Prefeito" (não "Excelentíssimo"); Convite e Tomada de Preços não existem mais; arquivo permanente nunca é eliminado.</p>
+      </div>
+    </section>
+
+    <!-- ============ 4. PERFIL ============ -->
+    <section id="perfil">
+      <div class="card">
+        <p class="eyebrow">Seção 4</p>
+        <h2 class="sec">Como a Fundep cobra (perfil da banca)</h2>
+        <ul>
+          <li><strong>4 alternativas</strong> → eliminando 2, o chute vira 50%. Nunca deixe em branco.</li>
+          <li>Comandos frequentes: "assinale a <strong>INCORRETA</strong>", "todas estão corretas, <strong>EXCETO</strong>", "marque V ou F e assinale a sequência", "reescreva preservando o sentido".</li>
+          <li><strong>Português:</strong> texto longo (crônica, artigo, charge) + 4–5 questões de compreensão e o resto de gramática aplicada (conectivo, reescrita, crase, concordância, pontuação, colocação).</li>
+          <li><strong>Matemática:</strong> problemas contextualizados (consumo de água, tarifa, folha, estoque) em 2–3 etapas; RLM com proposições, negações, equivalências e sequências.</li>
+          <li><strong>Legislação:</strong> cobrança <strong>literal</strong> (prazos, "compete a", "é vedado"). Quem lê a lei seca e faz tabela acerta.</li>
+          <li><strong>Específicos:</strong> definições e classificações, muitas vezes "assinale a INCORRETA".</li>
+          <li><strong>Gerais:</strong> fatos recentes (nacional e local), dados de Uberlândia/MG, água e meio ambiente.</li>
+          <li>Recursos são deferidos só com <strong>fundamentação bibliográfica</strong> — guarde referência (letra da lei, Manual de Redação, gramática).</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 5. VERTICALIZADO ============ -->
+    <section>
+      <p class="eyebrow" style="margin-left:2px">Seção 5 · Edital verticalizado (Anexo IV)</p>
+      <h2 class="sec" style="margin-left:2px">O que estudar em cada item — com a pegadinha</h2>
+      <p style="margin-left:2px">Prioridade: <span class="pri p1">P1</span> cai com certeza e pesa · <span class="pri p2">P2</span> cai com frequência · <span class="pri p3">P3</span> cai pouco.</p>
+    </section>
+
+    <section id="portugues"><div class="card">
+      <h3 style="margin-top:0">5.1 Língua Portuguesa <span style="color:var(--muted);font-family:Public Sans;font-size:14px">(10 questões · 25%)</span></h3>
+      <div class="tw"><table>
+        <thead><tr><th>Item</th><th>Pri.</th><th>O que dominar</th><th>Pegadinha</th></tr></thead>
+        <tbody>
+        <tr><td class="k">Interpretação</td><td><span class="pri p1">P1</span></td><td>Compreensão (o que diz) × inferência (o que se conclui) × extrapolação. Ideia central × secundária.</td><td class="peg">Alternativa "verdadeira no mundo real" mas ausente do texto; generalizar ("sempre", "todos") o que o texto restringe.</td></tr>
+        <tr><td class="k">Tipos e gêneros</td><td><span class="pri p2">P2</span></td><td>Tipos: narrativo, descritivo, dissertativo-argumentativo, expositivo, injuntivo. Gêneros: crônica, notícia, editorial, charge, ofício…</td><td class="peg">Confundir tipo (estrutura) com gênero (função social).</td></tr>
+        <tr><td class="k">Sentido figurado</td><td><span class="pri p2">P2</span></td><td>Denotação × conotação; metáfora, metonímia, hipérbole, eufemismo, ironia, antítese, paradoxo.</td><td class="peg">Metonímia (parte pelo todo) confundida com metáfora.</td></tr>
+        <tr><td class="k">Coesão/coerência</td><td><span class="pri p1">P1</span></td><td>Anáfora (retoma) × catáfora (antecipa), elipse, conectivos; coerência = sem contradição.</td><td class="peg">"A que se refere o pronome?" — localize o antecedente exato.</td></tr>
+        <tr><td class="k">Concordância</td><td><span class="pri p1">P1</span></td><td>"Haver"(existir) e "fazer"(tempo) impessoais → singular ("Houve/Faz dois anos"). "Existir" concorda. "Vendem-se casas" × "Precisa-se de".</td><td class="peg">"Houveram" e "fazem dois anos" (errados).</td></tr>
+        <tr><td class="k">Crase</td><td><span class="pri p1">P1</span></td><td>a+artigo; a+aquele; locuções femininas (às vezes, à noite, à medida que). Teste: troca por masculino → "ao" = crase.</td><td class="peg">Cidade sem artigo ("vou a Belo Horizonte"); antes de verbo/masculino/plural com "a".</td></tr>
+        <tr><td class="k">Formação de palavras</td><td><span class="pri p2">P2</span></td><td>Derivação (prefixal, sufixal, parassintética, regressiva, imprópria) × composição (justaposição, aglutinação).</td><td class="peg">Parassíntese × prefixal-e-sufixal: "infelizmente" não é parassíntese ("infeliz" existe); "entardecer" é.</td></tr>
+        <tr><td class="k">Colocação pronominal</td><td><span class="pri p2">P2</span></td><td>Próclise com atrativas (não, que, advérbios); ênclise no início e imperativo; mesóclise no futuro sem atrativo.</td><td class="peg">"Me avisaram", "nunca esqueça-se", "que inscreveu-se" (todos errados).</td></tr>
+        <tr><td class="k">Sin/ant/polissemia</td><td><span class="pri p2">P2</span></td><td>Polissemia (um vocábulo, vários sentidos) × homonímia; sinônimo no contexto.</td><td class="peg">Sinônimo correto no dicionário mas errado no contexto.</td></tr>
+        <tr><td class="k">Acentuação (Novo Acordo)</td><td><span class="pri p2">P2</span></td><td>Sem trema; sem acento em "ei/oi" de paroxítona (ideia, heroico, assembleia); "voo/creem" sem acento; mantém "pôde/pôr". Hífen.</td><td class="peg">Grafia antiga (idéia, vôo, pára) posta como "correta".</td></tr>
+        <tr><td class="k">Pontuação</td><td><span class="pri p1">P1</span></td><td>Vírgula nunca separa sujeito do verbo; obrigatória em aposto, vocativo, adverbial anteposta, adjetiva explicativa.</td><td class="peg">Explicativa × restritiva muda o sentido ("Os servidores, que…" = todos; sem vírgula = só alguns).</td></tr>
+        <tr><td class="k">Morfossintaxe</td><td><span class="pri p1">P1</span></td><td>10 classes; funções (sujeito, objeto, predicativo, adjunto, aposto). Adjunto adnominal × complemento nominal.</td><td class="peg">"Que" pronome relativo × conjunção integrante.</td></tr>
+        <tr><td class="k">Tempos/modos verbais</td><td><span class="pri p2">P2</span></td><td>Indicativo/subjuntivo/imperativo; correlação "Se tivesse… teria", "Quando chegar… avisarei".</td><td class="peg">Verbos irregulares: "se ele vir" × "se ele vier"; pôr, ter, haver.</td></tr>
+        <tr><td class="k">Sintaxe do período</td><td><span class="pri p1">P1</span></td><td>Coordenadas (aditiva, adversativa, conclusiva, explicativa) e subordinadas (substantivas, adjetivas, adverbiais).</td><td class="peg">"Embora/ainda que" = concessão; "pois" antes do verbo = explicação, depois = conclusão.</td></tr>
+        <tr><td class="k">Variação linguística</td><td><span class="pri p3">P3</span></td><td>Diatópica, diastrática, diafásica, diacrônica; norma-padrão × variedades.</td><td class="peg">Tratar variedade popular como "erro" → alternativa considerada incorreta.</td></tr>
+        </tbody>
+      </table></div>
+      <p class="peg"><strong>Estratégia:</strong> leia as perguntas antes do texto; marque conectivos e pronomes; nas reescritas, teste o sentido lógico (causa, oposição, concessão), não a "beleza".</p>
+    </div></section>
+
+    <section id="matematica"><div class="card">
+      <h3 style="margin-top:0">5.2 Matemática e Raciocínio Lógico <span style="color:var(--muted);font-family:Public Sans;font-size:14px">(10 questões · 25%)</span></h3>
+      <div class="tw"><table>
+        <thead><tr><th>Item</th><th>Pri.</th><th>Fórmulas / pontos-chave</th><th>Pegadinha</th></tr></thead>
+        <tbody>
+        <tr><td class="k">Conjuntos</td><td><span class="pri p2">P2</span></td><td>n(A∪B)=n(A)+n(B)−n(A∩B); Venn 2–3 conjuntos; N⊂Z⊂Q⊂R.</td><td class="peg">"Quantos não leem nenhum": monte o Venn pela interseção.</td></tr>
+        <tr><td class="k">Funções afim/quadrática</td><td><span class="pri p1">P1</span></td><td>Bhaskara; vértice xv=−b/2a, yv=−Δ/4a; a&gt;0 mínimo.</td><td class="peg">Pedem o valor mínimo (yv) e o candidato marca xv.</td></tr>
+        <tr><td class="k">Exponencial/log</td><td><span class="pri p2">P2</span></td><td>Igualar bases; log(a·b)=log a+log b; mudança de base.</td><td class="peg">Condição de existência: logaritmando&gt;0, base&gt;0 e ≠1.</td></tr>
+        <tr><td class="k">Trigonometria</td><td><span class="pri p3">P3</span></td><td>sen/cos/tg de 30/45/60; sen²+cos²=1; leis dos senos/cossenos.</td><td class="peg">Trocar seno por cosseno (qual cateto é o oposto?).</td></tr>
+        <tr><td class="k">PA/PG e financeira</td><td><span class="pri p1">P1</span></td><td>an=a1+(n−1)r; regra de três; aumentos sucessivos multiplicam (10%+20%=32%); J=C·i·t; M=C(1+i)ᵗ.</td><td class="peg">Pedem montante e você marca só o juro; juros simples onde é composto; n em vez de n−1.</td></tr>
+        <tr><td class="k">Combinatória/probab.</td><td><span class="pri p1">P1</span></td><td>Arranjo (ordem importa) × combinação; P=favoráveis/possíveis; "pelo menos um"=1−P(nenhum).</td><td class="peg">Senha/pódio = arranjo; comissão = combinação. Sem reposição muda o denominador.</td></tr>
+        <tr><td class="k">Geometria</td><td><span class="pri p2">P2</span></td><td>Áreas; volume cilindro=πr²h; 1 m³ = 1.000 L; distância entre pontos.</td><td class="peg">Esquecer de converter m³→litros ou cm→m; raio × diâmetro.</td></tr>
+        <tr><td class="k">Matrizes/sistemas</td><td><span class="pri p3">P3</span></td><td>Produto linha×coluna (A·B≠B·A); determinante 2×2 = ad−bc; Cramer.</td><td class="peg">Ordem do produto; sinal do determinante.</td></tr>
+        <tr><td class="k">Estatística</td><td><span class="pri p1">P1</span></td><td>Média, moda, mediana (ordenar!), variância, desvio padrão = √variância.</td><td class="peg">Mediana sem ordenar; confundir moda com média.</td></tr>
+        <tr><td class="k">Raciocínio lógico</td><td><span class="pri p1">P1</span></td><td>Conectivos (∧,∨,→,↔); ~(p∧q)=~p∨~q; ~(p→q)=p∧~q; contrapositiva p→q ≡ ~q→~p; casa dos pombos.</td><td class="peg">Negar "se p então q" com "se não p então não q" (errado); recíproca × contrapositiva.</td></tr>
+        </tbody>
+      </table></div>
+      <p class="peg"><strong>Estratégia:</strong> leia o comando final 2× (juros ou montante? litros ou m³?). Escreva a fórmula antes de calcular. Confira a unidade. Deixe as longas para o fim.</p>
+    </div></section>
+
+    <section id="gerais"><div class="card">
+      <h3 style="margin-top:0">5.3 Conhecimentos Gerais <span style="color:var(--muted);font-family:Public Sans;font-size:14px">(5 questões · 12,5%)</span></h3>
+      <div class="grid2">
+        <div class="mini">
+          <h4>Uberlândia <span class="pri p1">P1</span></h4>
+          <ul>
+            <li>Triângulo Mineiro, bioma Cerrado; <strong>Rio Uberabinha</strong> (afluente do Araguari, bacia do Paranaíba).</li>
+            <li>Estiagem abril–setembro pressiona os mananciais (gancho da crise hídrica).</li>
+            <li>Emancipação <strong>31/08/1888</strong> como <strong>São Pedro de Uberabinha</strong>; vira <strong>Uberlândia em 1929</strong>.</li>
+            <li>2ª cidade mais populosa de MG (~713 mil, Censo 2022); polo logístico/atacadista; UFU.</li>
+            <li>DMAE: autarquia de <strong>1966</strong>; ETAs Sucupira e Bom Jardim (Uberabinha) + Sistema Capim Branco (Araguari).</li>
+          </ul>
+        </div>
+        <div class="mini">
+          <h4>Minas Gerais <span class="pri p2">P2</span></h4>
+          <ul>
+            <li>Capital BH (1897, planejada); <strong>853 municípios</strong> (mais do país); ~20,5 mi.</li>
+            <li>Mineração (Quadrilátero Ferrífero, nióbio em Araxá), café e leite (maior produtor), automotiva (Betim).</li>
+            <li>Nascente do São Francisco (Serra da Canastra). Desastres: Mariana (2015), Brumadinho (2019).</li>
+            <li>Inconfidência Mineira (1789, Tiradentes, 21/04); Ouro Preto antiga capital.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="mini" style="margin-top:14px">
+        <h4>Brasil, mundo, água e meio ambiente <span class="pri p2">P2</span></h4>
+        <ul>
+          <li><strong>Saneamento:</strong> Lei 11.445/2007 (4 componentes: água, esgoto, resíduos/limpeza, drenagem). <strong>Marco Legal 14.026/2020</strong>: até 31/12/2033, <strong>99% água + 90% esgoto</strong>; ANA reguladora.</li>
+          <li><strong>Água:</strong> Lei 9.433/1997 (bem público, valor econômico, bacia como unidade, outorga, comitês). Agenda 2030: <strong>ODS 6</strong> (água/saneamento), ODS 11, ODS 13.</li>
+          <li>Crise hídrica/energética: matriz hidrelétrica, bandeiras tarifárias; COP30 em Belém (nov/2025); enchentes no RS (2024).</li>
+          <li>Economia: IPCA, Selic, reforma tributária (EC 132/2023 — IBS e CBS, transição em 2026). Direitos: CF/88 art. 6º; Maria da Penha; Estatuto do Idoso; LGPD. Eleições gerais 2026 (04/10 e 25/10).</li>
+        </ul>
+      </div>
+      <p class="peg"><strong>Método:</strong> 20 min/dia de manchetes (G1 Triângulo Mineiro, Diário de Uberlândia, portal da Prefeitura, site do DMAE), anotando 3 linhas por fato (o quê, quem, quando). A banca elabora a prova entre junho e outubro/2026.</p>
+    </div></section>
+
+    <section id="legislacao"><div class="card">
+      <h3 style="margin-top:0">5.4 Legislação <span style="color:var(--muted);font-family:Public Sans;font-size:14px">(5 questões · 12,5% · cobrança literal)</span></h3>
+      <div class="tw"><table>
+        <thead><tr><th>Norma</th><th>Pri.</th><th>O que a banca pergunta</th></tr></thead>
+        <tbody>
+        <tr><td class="k">Lei Orgânica de Uberlândia</td><td><span class="pri p1">P1</span></td><td>Competências do Município; Câmara (27 vereadores, quóruns); processo legislativo; competências do Prefeito; julgamento das contas (parecer prévio do TC, só afastado por 2/3); orçamento (PPA/LDO/LOA).</td></tr>
+        <tr><td class="k">Estatuto — LC 040/1992</td><td><span class="pri p1">P1</span></td><td>Provimento × vacância; posse/exercício; estágio probatório (3 anos); direitos e vantagens; licenças; deveres/proibições; penalidades; sindicância e PAD (prazos!).</td></tr>
+        <tr><td class="k">Plano de Carreira do DMAE (Lei 12.048/2014)</td><td><span class="pri p2">P2</span></td><td>Cargos, classes, progressão (tempo × mérito), interstício, jornada (12×36 operacionais), avaliação de desempenho.</td></tr>
+        <tr><td class="k">Estrutura do Executivo</td><td><span class="pri p2">P2</span></td><td>Administração direta × indireta (autarquias: DMAE, IPREMU); órgãos de assessoramento; vinculação do DMAE.</td></tr>
+        <tr><td class="k">Estrutura do DMAE</td><td><span class="pri p2">P2</span></td><td>Autarquia com autonomia; finalidade (água e esgoto); Diretor-Geral, diretorias, competências.</td></tr>
+        <tr><td class="k">Código de Ética</td><td><span class="pri p2">P2</span></td><td>Princípios; deveres × vedações (presentes de interessados, informação privilegiada, retardar serviço); Comissão de Ética (censura).</td></tr>
+        </tbody>
+      </table></div>
+      <div class="alert blue"><span class="tag">Base constitucional</span> — cai junto: art. 37 (<b>LIMPE</b>; concurso válido por até 2 anos + 1 prorrogação; acumulação só do inciso XVI; teto); arts. 39–41 (estabilidade após 3 anos, avaliação especial); art. 31 (controle externo pela Câmara + TC); art. 30 (competências do Município).</div>
+      <p class="peg"><strong>Como estudar:</strong> baixe a lei seca (site da Câmara / leismunicipais.com.br), leia com marca-texto e monte tabelas "compete a" × "é vedado" × prazos. Vale a redação vigente em 10/06/2026. Não presuma prazos iguais aos federais.</p>
+    </div></section>
+
+    <section id="especificos"><div class="card">
+      <h3 style="margin-top:0">5.5 Conhecimentos Específicos <span style="color:var(--muted);font-family:Public Sans;font-size:14px">(10 questões · 25% · decide o desempate)</span></h3>
+
+      <h4>Bloco 1 — Noções de Administração <span class="pri p1">P1</span></h4>
+      <ul>
+        <li>Administrar = <strong>PODC</strong> (planejar, organizar, dirigir, controlar). Eficiência (meios) × eficácia (resultado) × efetividade (impacto).</li>
+        <li>Fayol <strong>POC³</strong> (prever, organizar, comandar, coordenar, controlar) + 14 princípios; ciclo <strong>PDCA</strong>.</li>
+        <li>Teorias: Taylor (tarefas), Fayol (estrutura), Weber (burocracia: formalidade, impessoalidade; disfunções), Mayo (Hawthorne, relações humanas), Maslow, Herzberg (higiênicos × motivacionais), McGregor (X/Y), Sistemas (aberto), Contingência.</li>
+        <li>Estruturas: linear, funcional, linha-staff, matricial (dupla subordinação). Níveis: estratégico, tático, operacional. SWOT; missão/visão/valores.</li>
+      </ul>
+
+      <h4>Bloco 2 — RH, Dep. Pessoal, Atendimento <span class="pri p1">P1</span></h4>
+      <ul>
+        <li>Gestão de pessoas (Chiavenato): agregar, aplicar, recompensar, desenvolver, manter, monitorar. Recrutamento interno × externo. Avaliação 360°; erros: <strong>efeito halo</strong>, tendência central, recência.</li>
+        <li>Rotinas CLT (base das questões): jornada 44h/8h; hora extra ≥50%; adicional noturno 20% (22h–5h); férias 30 dias após 12 meses + 1/3; 13º (1ª até 30/11, 2ª até 20/12); FGTS 8%. <em>No DMAE o regime é estatutário (LC 040/92).</em></li>
+        <li>Atendimento: presteza, cortesia, empatia, tratamento igualitário. <strong>Lei 13.460/2017</strong> (direitos do usuário, Carta de Serviços, ouvidoria).</li>
+      </ul>
+
+      <h4>Bloco 3 — Almoxarifado, Estoques, Compras <span class="pri p1">P1</span></h4>
+      <ul>
+        <li>Funções: recebimento (confere NF × pedido × material), armazenagem, distribuição, controle, inventário.</li>
+        <li>Inventário geral/periódico × rotativo/cíclico. <strong>Curva ABC</strong>: A ≈ 20% itens/80% valor; B 30/15; C 50/5.</li>
+        <li>Ponto de pedido = consumo médio × tempo de reposição + estoque de segurança. Giro = consumo/estoque médio.</li>
+        <li>Avaliação: <strong>PEPS/FIFO</strong> (estoque final pelos preços recentes), UEPS (vedado fiscalmente no Brasil), custo médio. Setor público: Lei 4.320/64 → preço médio ponderado.</li>
+        <li>Compras — os "5 certos": material, quantidade, tempo, preço e fonte certos. Manutenção preventiva/corretiva/preditiva.</li>
+      </ul>
+
+      <h4>Bloco 4 — Finanças, Contabilidade, Orçamento <span class="pri p2">P2</span></h4>
+      <ul>
+        <li>Juros simples × compostos; desconto comercial ("por fora") × racional; Price × SAC.</li>
+        <li>Contabilidade: <strong>Ativo = Passivo + PL</strong>; regime de competência; partidas dobradas (débito aumenta ativo/despesa; crédito, passivo/PL/receita). Demonstrativos (Lei 6.404): BP, DRE, DFC, DMPL, DVA.</li>
+        <li>Pública (Lei 4.320/64): despesa = <strong>empenho → liquidação → pagamento</strong>; receita = previsão, lançamento, arrecadação, recolhimento; restos a pagar.</li>
+        <li>Orçamento: <strong>PPA</strong> (4 anos) / <strong>LDO</strong> (metas, orienta a LOA) / <strong>LOA</strong> (orçamento do ano); princípios; LRF: pessoal ≤ 60% da RCL. Tradicional (objeto do gasto) × programa (objetivos/metas).</li>
+      </ul>
+
+      <h4>Bloco 5 — Arquivos, Redação Oficial, Documentos <span class="pri p1">P1</span></h4>
+      <ul>
+        <li><strong>Teoria das 3 idades:</strong> corrente (valor primário) → intermediário (aguarda destinação) → permanente (valor secundário, <strong>jamais eliminado</strong>). Transferência (corrente→interm.) × recolhimento (→permanente). Tabela de temporalidade. Sigilo (LAI): ultrassecreto 25, secreto 15, reservado 5 anos.</li>
+        <li>Alfabetação: último sobrenome primeiro; grau de parentesco acompanha ("Silva Filho, João da"). Métodos diretos (alfabético, geográfico) × indiretos.</li>
+        <li>Redação oficial (Manual da PR, 3ª ed.): padrão ofício unifica aviso/ofício/memorando. Fechos: <strong>Respeitosamente</strong> (superior) / <strong>Atenciosamente</strong> (igual ou inferior). Pronomes: Vossa Excelência × Vossa Senhoria; "Vossa" (com a pessoa) × "Sua" (da pessoa). Abolidos DD./Ilmo.</li>
+        <li>Técnica legislativa (LC 95/98): artigo (ordinal até o 9º), parágrafo, inciso (romano), alínea (letra), item (número). Documentos: ata, portaria, ofício, requerimento, parecer, certidão, declaração, atestado, memorando…</li>
+      </ul>
+
+      <h4>Bloco 6 — Licitações (Lei 14.133/2021), Constituição e Servidor <span class="pri p1">P1</span></h4>
+      <ul>
+        <li>Desde 30/12/2023 é a <strong>única</strong> lei geral (8.666, pregão e RDC revogados). Aplica-se ao DMAE (autarquia).</li>
+        <li><strong>Modalidades (art. 28):</strong> pregão, concorrência, concurso, leilão, diálogo competitivo. <em>Convite e tomada de preços não existem mais.</em></li>
+        <li><strong>Critérios:</strong> menor preço, maior desconto, melhor técnica/conteúdo artístico, técnica e preço, maior lance, maior retorno econômico.</li>
+        <li><strong>Fases (art. 17):</strong> preparatória → edital → propostas → <strong>julgamento → habilitação</strong> (invertida!) → recursal → homologação.</li>
+        <li>Dispensa (art. 75, competição possível) × <strong>inexigibilidade</strong> (art. 74, inviável: fornecedor exclusivo, artista consagrado, notória especialização). Ata de registro de preços: 1 ano + 1. Sanções: advertência, multa, impedimento (até 3 anos), inidoneidade (3–6).</li>
+        <li>Constituição/servidor: art. 37 (LIMPE, concurso, acumulação); estabilidade 3 anos; art. 175 (serviço público por licitação). <strong>Serviços essenciais (Lei 7.783/89):</strong> água, esgoto, energia, saúde, transporte — em greve, manter necessidades inadiáveis.</li>
+      </ul>
+    </div></section>
+
+    <!-- ============ 6. PLANO ============ -->
+    <section id="plano"><div class="card">
+      <p class="eyebrow">Seção 6</p>
+      <h2 class="sec">Plano de estudos — 7 semanas + reta final</h2>
+      <p>~22 h/semana (3 h dias úteis, 5 h sábado, 2 h domingo). Tempo integral: dobre os blocos na mesma ordem. Pouco tempo: corte P3 antes, <strong>nunca P1</strong>.</p>
+      <h3>Ciclo semanal (por peso × dificuldade)</h3>
+      <div class="tw"><table>
+        <thead><tr><th>Matéria</th><th>Horas/sem.</th><th>Por quê</th></tr></thead>
+        <tbody>
+        <tr><td class="k">Específicos</td><td>5 h</td><td>25% + decide o desempate; extenso e "decorável".</td></tr>
+        <tr><td class="k">Matemática/RLM</td><td>5 h</td><td>25%; programa amplo, exige treino.</td></tr>
+        <tr><td class="k">Português</td><td>4 h</td><td>25%; evolui com questões comentadas.</td></tr>
+        <tr><td class="k">Legislação</td><td>3 h</td><td>12,5%; lei seca + tabelas.</td></tr>
+        <tr><td class="k">Conhec. Gerais</td><td>1h30</td><td>12,5%; notícias diárias.</td></tr>
+        <tr><td class="k">Simulado + correção</td><td>3h30</td><td>Todo sábado, cronometrado.</td></tr>
+        </tbody>
+      </table></div>
+
+      <h3>Cronograma (marque conforme avança — fica salvo no navegador)</h3>
+      <div id="plano-list">
+        <div class="chk"><input type="checkbox" id="s0"><label for="s0"><b>Semana 0 (10–13/09):</b> inscrição + boleto; baixar Edital Consolidado, as 6 leis, a Lei 14.133 e o Manual de Redação; baixar provas Fundep 2019/2020; fazer o <a href="#simulado">simulado diagnóstico</a>.</label></div>
+        <div class="chk"><input type="checkbox" id="s1"><label for="s1"><b>Semana 1 (14–20/09):</b> Port.: interpretação, coesão, crase · Mat.: %, regra de três, juros, PA/PG · Espec.: Lei 14.133 · Legis.: Lei Orgânica (1ª leitura) · Gerais: Uberlândia · Sáb.: 40 questões Fundep.</label></div>
+        <div class="chk"><input type="checkbox" id="s2"><label for="s2"><b>Semana 2 (21–27/09):</b> Port.: concordância, pontuação, colocação · Mat.: funções, log, estatística · Espec.: redação oficial e documentos · Legis.: Estatuto (provimento/vacância) · Gerais: MG · Sáb.: prova DMAE 2020.</label></div>
+        <div class="chk"><input type="checkbox" id="s3"><label for="s3"><b>Semana 3 (28/09–04/10):</b> Port.: sintaxe, reescrita · Mat.: combinatória, probabilidade, lógica · Espec.: arquivologia, estoques, compras · Legis.: Estatuto (PAD/prazos) · Gerais: saneamento/água · Sáb.: prova Prefeitura 2019.</label></div>
+        <div class="chk"><input type="checkbox" id="s4"><label for="s4"><b>Semana 4 (05–11/10):</b> Port.: acentuação, formação, verbos · Mat.: geometria, matrizes, trig. · Espec.: Administração, RH, atendimento · Legis.: Carreira, Estruturas, Ética · Gerais: Brasil/eleições · Sáb.: simulado misto.</label></div>
+        <div class="chk"><input type="checkbox" id="s5"><label for="s5"><b>Semana 5 (12–18/10):</b> revisão 1 (refazer erros) · Espec.: finanças, contabilidade, orçamento, Lei 4.320 · Legis.: 2ª leitura (tabelas) · Sáb.: simulado 2.</label></div>
+        <div class="chk"><input type="checkbox" id="s6"><label for="s6"><b>Semana 6 (19–25/10):</b> revisão 2 dos campeões (crase, concordância, pontuação; juros, %, probabilidade, lógica); flashcards de Espec./Legis. · Sáb.: simulado 3 completo.</label></div>
+        <div class="chk"><input type="checkbox" id="s7"><label for="s7"><b>Semana 7 (26–31/10):</b> só caderno de erros, flashcards e tabelas. <b>Nada de matéria nova.</b> 31/10: descanso + checklist + dormir cedo.</label></div>
+      </div>
+
+      <h3>Rotina diária (para quem trabalha)</h3>
+      <div class="tw"><table>
+        <thead><tr><th>Quando</th><th>O quê</th><th>Tempo</th></tr></thead>
+        <tbody>
+        <tr><td class="k">Ao acordar</td><td>Flashcards do dia anterior (revisão espaçada)</td><td>20 min</td></tr>
+        <tr><td class="k">Almoço</td><td>Manchetes + 3 fatos (Gerais)</td><td>15 min</td></tr>
+        <tr><td class="k">19h00 · bloco 1</td><td>Matéria mais difícil do dia (teoria + esquema próprio)</td><td>50 min</td></tr>
+        <tr><td class="k">20h00 · bloco 2</td><td>Questões da mesma matéria (mín. 15) + caderno de erros</td><td>50 min</td></tr>
+        <tr><td class="k">21h00 · bloco 3</td><td>Lei seca / decoreba com marca-texto e tabela</td><td>40 min</td></tr>
+        <tr><td class="k">Antes de dormir</td><td>Reler as anotações do dia (só reler)</td><td>10 min</td></tr>
+        </tbody>
+      </table></div>
+      <p class="peg">Melhor horário: a matéria difícil vai no <strong>1º bloco após um descanso</strong> (pico de atenção). A releitura antes de dormir aproveita a consolidação no sono. <strong>Dormir 7–8 h vale mais que 1 h extra à meia-noite.</strong></p>
+    </div></section>
+
+    <section id="memoria"><div class="card">
+      <p class="eyebrow">O método que fixa</p>
+      <h2 class="sec">Como fixar na memória (com base em evidências)</h2>
+      <div class="grid2">
+        <div class="mini"><h4>1. Recuperação ativa</h4><p style="margin:0">Feche o material e escreva/explique de memória; só depois confira. Reler passivamente é a técnica mais fraca.</p></div>
+        <div class="mini"><h4>2. Revisão espaçada</h4><p style="margin:0">Reveja cada tema em <strong>24 h, 7 dias e 21 dias</strong>. Flashcards com algoritmo (Anki) automatizam.</p></div>
+        <div class="mini"><h4>3. Questões como método</h4><p style="margin:0">Metade do tempo resolvendo questões Fundep. Cada erro vira uma linha no caderno de erros (o quê, por quê, regra, como não repetir).</p></div>
+        <div class="mini"><h4>4. Intercalação</h4><p style="margin:0">Alterne matérias no mesmo dia (Port. + Mat. + Lei) — aprende-se mais "trocando de marcha".</p></div>
+        <div class="mini"><h4>5. Técnica Feynman</h4><p style="margin:0">Explique como para uma criança de 12 anos. Onde travar, falta entendimento.</p></div>
+        <div class="mini"><h4>6. Tabelas próprias</h4><p style="margin:0">Transforme listas da lei em tabelas (prazo, quem, o quê). Escrever à mão fixa mais.</p></div>
+      </div>
+      <h4>Mnemônicos que salvam</h4>
+      <ul>
+        <li><strong>LIMPE</strong> — princípios do art. 37 (Legalidade, Impessoalidade, Moralidade, Publicidade, Eficiência).</li>
+        <li><strong>POC³ / PODC</strong> — funções da administração.</li>
+        <li><strong>"PPA planeja, LDO orienta, LOA executa."</strong></li>
+        <li><strong>"Empenha, Liquida, Paga"</strong> — estágios da despesa.</li>
+        <li><strong>"Respeitosamente pra cima, Atenciosamente pro lado e pra baixo."</strong></li>
+        <li>5 certos das compras: material, quantidade, tempo, preço, fonte.</li>
+      </ul>
+    </div></section>
+
+    <!-- ============ 7. SIMULADO ============ -->
+    <section id="simulado"><div class="card">
+      <p class="eyebrow">Seção 7 · 40 questões · 4 alternativas · 3 horas</p>
+      <h2 class="sec">Simulado no formato da prova</h2>
+      <p>Marque uma alternativa em cada questão e clique em <strong>Corrigir prova</strong>. O site mostra sua nota e o comentário de cada questão. Use como diagnóstico (Semana 0) e refaça na Semana 6.</p>
+      <div id="sim"></div>
+      <div class="simbar">
+        <button class="btn" id="corrigir">Corrigir prova</button>
+        <button class="btn ghost" id="limpar">Limpar</button>
+        <span class="score" id="scorebox" aria-live="polite"></span>
+      </div>
+    </div></section>
+
+    <!-- ============ 9. FLASHCARDS ============ -->
+    <section id="flashcards"><div class="card">
+      <p class="eyebrow">Seção 9 · 80 cartões</p>
+      <h2 class="sec">Flashcards — revisão diária</h2>
+      <p>Toque no cartão para ver a resposta. Responda em voz alta <em>antes</em> de virar (recuperação ativa).</p>
+      <div class="fctools">
+        <button class="btn ghost" id="fc-shuffle">Embaralhar</button>
+        <button class="btn ghost" id="fc-all">Mostrar/ocultar todas</button>
+        <span class="score" id="fc-count"></span>
+      </div>
+      <div id="fcs" class="weights" style="gap:12px"></div>
+    </div></section>
+
+    <!-- ============ 10. FONTES ============ -->
+    <section id="fontes"><div class="card">
+      <p class="eyebrow">Seção 10</p>
+      <h2 class="sec">Fontes oficiais — onde baixar</h2>
+      <div class="tw"><table>
+        <thead><tr><th>Material</th><th>Onde</th></tr></thead>
+        <tbody>
+        <tr><td class="k">Edital, Retificação, Consolidado, gabaritos, cartão</td><td>fundep.selecao.net.br/informacoes/63/ · gestaodeconcursos.com.br (Área do Candidato)</td></tr>
+        <tr><td class="k">Provas anteriores (DMAE 2020, Prefeitura 2019)</td><td>gestaodeconcursos.com.br (concursos encerrados) · Qconcursos/TEC (filtro "Fundep")</td></tr>
+        <tr><td class="k">Lei 14.133/2021 e Constituição, 4.320, 11.445, 14.026, 7.783, 13.460, LC 95/101, 12.527</td><td>planalto.gov.br</td></tr>
+        <tr><td class="k">Manual de Redação da Presidência (3ª ed., 2018)</td><td>gov.br</td></tr>
+        <tr><td class="k">Leis municipais (Lei Orgânica, LC 040/92, 12.048/14, Ética, estruturas)</td><td>Câmara de Uberlândia · leismunicipais.com.br/uberlandia (versão vigente em 10/06/2026)</td></tr>
+        <tr><td class="k">Dados de Uberlândia/MG e atualidades</td><td>IBGE Cidades · Prefeitura · DMAE · G1 Triângulo Mineiro · Diário de Uberlândia</td></tr>
+        </tbody>
+      </table></div>
+    </div></section>
+
+    <!-- ============ 11. CLAUDE ============ -->
+    <section id="claude"><div class="card">
+      <p class="eyebrow">Seção 11</p>
+      <h2 class="sec">Seu tutor infinito no Claude Code</h2>
+      <p>Este site é o material fixo. Para <strong>questões ilimitadas e correção personalizada</strong>, use o Claude Code como cursinho particular:</p>
+      <ol>
+        <li>Crie uma pasta <code>dmae-2026</code> e coloque nela: <code>CLAUDE.md</code>, <code>base_conhecimento_dmae_2026.md</code> e uma subpasta <code>leis/</code> com os PDFs das leis e o Edital Consolidado.</li>
+        <li>Abra o terminal na pasta e rode <code>claude</code> — o <code>CLAUDE.md</code> ativa o modo tutor.</li>
+        <li>Peça em português: <em>"monte a sessão de hoje"</em>, <em>"simulado de 10 questões da Lei 14.133 e depois o gabarito"</em>, <em>"corrija: 11-A, 12-B…"</em>, <em>"sorteie 20 flashcards"</em>, <em>"faltam 5 dias: revisão final por prioridade"</em>.</li>
+        <li>O tutor mantém <code>progresso.md</code> e <code>erros.md</code> — peça a atualização ao fim de cada sessão.</li>
+      </ol>
+      <div class="alert blue"><span class="tag">Dica</span> — os arquivos <code>CLAUDE.md</code> e <code>base_conhecimento_dmae_2026.md</code> vêm juntos neste projeto. Coloque também a lei seca em <code>leis/</code> para o tutor citar artigo e prazo sem inventar.</div>
+    </div></section>
+
+    <footer>
+      Material de estudo · Concurso DMAE Uberlândia 2026 (Fundep) · Oficial Administrativo · elaborado com base no Edital 01/2026.<br>
+      Confira sempre os dados marcados no edital oficial. Bons estudos e boa prova. 💧
+    </footer>
+  </main>
+</div>
+<button class="back" id="back" aria-label="Voltar ao topo">↑</button>
+
+<script>
+/* ---------- tema ---------- */
+(function(){
+  var root=document.documentElement, key="dmae:theme";
+  try{var s=localStorage.getItem(key); if(s)root.setAttribute("data-theme",s);}catch(e){}
+  document.getElementById("theme").onclick=function(){
+    var cur=root.getAttribute("data-theme");
+    var dark=cur? cur==="dark" : matchMedia("(prefers-color-scheme:dark)").matches;
+    var nx=dark?"light":"dark"; root.setAttribute("data-theme",nx);
+    try{localStorage.setItem(key,nx);}catch(e){}
+  };
+})();
+/* ---------- countdown ---------- */
+(function(){
+  var prova=new Date(2026,10,1,13,0,0); // 01/11/2026
+  function upd(){var d=Math.max(0,Math.ceil((prova-new Date())/86400000));var e=document.getElementById("cddays");if(e)e.textContent=d;}
+  upd();
+})();
+/* ---------- menu mobile + TOC ativo ---------- */
+(function(){
+  var toc=document.getElementById("toc"),mb=document.getElementById("menub");
+  mb.onclick=function(){toc.classList.toggle("open");};
+  toc.addEventListener("click",function(e){if(e.target.tagName==="A")toc.classList.remove("open");});
+  var links=[].slice.call(toc.querySelectorAll("a"));
+  var map={}; links.forEach(function(a){map[a.getAttribute("href").slice(1)]=a;});
+  var obs=new IntersectionObserver(function(en){
+    en.forEach(function(x){ if(x.isIntersecting){ links.forEach(function(a){a.classList.remove("on");}); var a=map[x.target.id]; if(a)a.classList.add("on"); }});
+  },{rootMargin:"-64px 0px -70% 0px"});
+  document.querySelectorAll("section[id]").forEach(function(s){obs.observe(s);});
+  var back=document.getElementById("back");
+  addEventListener("scroll",function(){back.classList.toggle("show",scrollY>600);});
+  back.onclick=function(){scrollTo({top:0,behavior:"smooth"});};
+})();
+/* ---------- plano checklist ---------- */
+(function(){
+  var key="dmae:plano";var st={};try{st=JSON.parse(localStorage.getItem(key)||"{}");}catch(e){}
+  document.querySelectorAll("#plano-list input").forEach(function(c){
+    if(st[c.id]){c.checked=true;c.closest(".chk").classList.add("done");}
+    c.onchange=function(){st[c.id]=c.checked;c.closest(".chk").classList.toggle("done",c.checked);try{localStorage.setItem(key,JSON.stringify(st));}catch(e){}};
+  });
+})();
+
+/* ---------- SIMULADO ---------- */
+var SIM=[
+{b:"Língua Portuguesa (1–10)",passage:"A água que chega às torneiras de Uberlândia percorre um caminho invisível para a maioria das pessoas. Captada no rio, ela passa por etapas de tratamento, é armazenada em reservatórios e distribuída por centenas de quilômetros de rede. Embora o serviço funcione com regularidade, muitos moradores só se lembram dele quando falta. Esse esquecimento cotidiano tem um custo: quem não percebe o valor do que recebe tende a desperdiçar. Por isso, campanhas de consumo consciente não são um luxo, mas uma necessidade, sobretudo nos períodos de estiagem, quando os mananciais sofrem."},
+{n:1,t:"De acordo com o texto, o desperdício de água está associado",o:["à precariedade do tratamento nas estações.","à falta de percepção do valor do serviço recebido.","ao excesso de reservatórios na cidade.","à distância entre captação e distribuição."],c:1,e:'O texto diz: "quem não percebe o valor do que recebe tende a desperdiçar". As demais são extrapolação.'},
+{n:2,t:'Reescrita de "Embora o serviço funcione com regularidade, muitos moradores só se lembram dele quando falta" que preserva o sentido:',o:["Como o serviço funciona com regularidade, muitos moradores só se lembram dele quando falta.","O serviço funciona com regularidade; portanto, muitos moradores só se lembram dele quando falta.","O serviço funciona com regularidade, mas muitos moradores só se lembram dele quando falta.","Se o serviço funcionar com regularidade, muitos moradores só se lembrarão dele quando faltar."],c:2,e:'"Embora" é concessivo; a adversativa "mas" mantém a oposição. A=causa, B=conclusão, D=condição mudam o sentido.'},
+{n:3,t:"Assinale a alternativa em que a crase foi empregada INCORRETAMENTE.",o:["O relatório foi entregue à diretora administrativa.","Ele voltou à casa dos pais depois do expediente.","Os hidrômetros foram enviados à Belo Horizonte para calibração.","O pagamento da taxa será feito à vista."],c:2,e:'Cidade que não admite artigo não recebe crase ("vou a Belo Horizonte"). Em B, "casa" está especificada (dos pais) → há crase; D é locução adverbial.'},
+{n:4,t:"Assinale a alternativa correta quanto à concordância verbal.",o:["Houveram muitas reclamações sobre a falta d'água.","Fazem dois anos que a rede foi ampliada.","Existem, na cidade, centenas de quilômetros de tubulação.","Chegou os relatórios do laboratório."],c:2,e:'"Existir" é pessoal e concorda ("Existem centenas"). "Haver"(existir) e "fazer"(tempo) são impessoais: "Houve", "Faz dois anos". D: "Chegaram".'},
+{n:5,t:"Assinale a alternativa com pontuação de acordo com a norma-padrão.",o:["Os servidores, que chegaram atrasados perderam a reunião.","O diretor solicitou, ao setor de compras, urgência.","Se houver estiagem, o consumo deverá ser reduzido.","O laboratório analisou as amostras, e aprovou o lote."],c:2,e:"Oração adverbial anteposta pede vírgula. A: falta a 2ª vírgula. B: vírgula separando verbo do complemento. D: sem vírgula antes de 'e' com mesmo sujeito."},
+{n:6,t:"Assinale a alternativa que respeita a colocação pronominal da norma-padrão.",o:["Me informaram que a prova será em novembro.","Nunca esqueça-se de conferir o cartão.","O candidato que inscreveu-se hoje pagará amanhã.","Entregar-lhe-ei o documento assim que possível."],c:3,e:"Mesóclise no futuro sem atrativo. A: não se inicia frase com oblíquo. B: 'nunca' atrai ('nunca se esqueça'). C: 'que' atrai ('que se inscreveu')."},
+{n:7,t:'Em "campanhas de consumo consciente não são um luxo", o termo "um luxo" exerce a função de',o:["objeto direto.","predicativo do sujeito.","adjunto adnominal.","complemento nominal."],c:1,e:'"São" é verbo de ligação; "um luxo" caracteriza o sujeito "campanhas" → predicativo do sujeito.'},
+{n:8,t:"Alternativa com todas as palavras conforme o Acordo Ortográfico vigente:",o:["ideia, heroico, assembleia, voo.","idéia, herói, assembléia, vôo.","ideia, heróico, assembleia, vôo.","idéia, heroico, assembléia, voo."],c:0,e:'Paroxítonas com ditongo aberto ei/oi perdem o acento (ideia, heroico, assembleia) e "voo" não tem acento.'},
+{n:9,t:"Palavra formada por derivação parassintética:",o:["infelizmente.","entardecer.","guarda-chuva.","pernalta."],c:1,e:'"Entardecer" = prefixo e sufixo simultâneos (não existem "entarde" nem "tardecer"). "Infelizmente" é prefixal e sufixal; "guarda-chuva" justaposição; "pernalta" aglutinação.'},
+{n:10,t:'Em "percorre um caminho invisível", a expressão "caminho invisível" está em sentido',o:["denotativo, pois descreve a tubulação.","conotativo, pois indica que o percurso da água é desconhecido da população.","literal, pois a água não pode ser vista.","ambíguo."],c:1,e:'"Invisível" não descreve a tubulação; indica que as pessoas não percebem o percurso → sentido figurado (conotativo).'},
+
+{b:"Matemática e RLM (11–20)"},
+{n:11,t:"Capital de R$ 2.000,00 a juros compostos de 10% a.m. por 2 meses. O montante é",o:["R$ 400,00.","R$ 420,00.","R$ 2.400,00.","R$ 2.420,00."],c:3,e:"M = 2.000×(1,1)² = 2.420. A=juro simples; B=só o juro; C=montante a juros simples. Pediu o montante."},
+{n:12,t:"Aumento de 10% e depois 20% sobre o valor já reajustado. O aumento acumulado foi de",o:["30%.","32%.","20%.","12%."],c:1,e:"1,10×1,20 = 1,32 → 32%. Aumentos sucessivos não se somam."},
+{n:13,t:"Seis operários instalam 300 m em 10 dias. Nove operários instalarão 450 m em",o:["8 dias.","10 dias.","12 dias.","15 dias."],c:1,e:"10×(6/9)×(450/300)=10. Operários: inversa; metros: direta."},
+{n:14,t:"Senha de 4 algarismos distintos entre 1,2,3,4,5,6. Nº de senhas:",o:["15.","24.","360.","1.296."],c:2,e:"Ordem importa, sem repetição: 6×5×4×3 = 360. A=combinação; D=com repetição."},
+{n:15,t:"Em 20 hidrômetros, 4 têm defeito. Probabilidade de um sorteado NÃO ser defeituoso:",o:["20%.","25%.","75%.","80%."],c:3,e:"16 de 20 = 0,8 = 80%."},
+{n:16,t:"Consumo (m³) em 5 dias: 12, 15, 15, 18, 20. Média, moda e mediana:",o:["16, 15 e 15.","15, 16 e 15.","16, 15 e 16.","16, 18 e 15."],c:0,e:"Média=80/5=16; moda=15; mediana (ordenado)=15."},
+{n:17,t:"Custo C(x)=x²−8x+20 (milhares). Custo mínimo:",o:["R$ 4 mil.","R$ 8 mil.","R$ 16 mil.","R$ 20 mil."],c:0,e:"xv=8/2=4; C(4)=16−32+20=4 (milhares). B=2·xv (distrator)."},
+{n:18,t:"Produção cresce 50 m³/mês; 1º mês = 1.200 m³. No 12º mês:",o:["1.700 m³.","1.750 m³.","1.800 m³.","1.850 m³."],c:1,e:"PA: a12 = 1.200 + 11×50 = 1.750. C usa n em vez de n−1."},
+{n:19,t:'Negação de "Se chover, então o reservatório encherá":',o:["Se não chover, então não encherá.","Chove e o reservatório não enche.","Não chove ou o reservatório enche.","Se não encher, então não choveu."],c:1,e:"~(p→q) = p ∧ ~q. A=inversa; C=equivalente à original; D=contrapositiva."},
+{n:20,t:"Reservatório cilíndrico r=2 m, h=5 m, π=3. Capacidade:",o:["6.000 L.","60.000 L.","600.000 L.","30.000 L."],c:1,e:"V=πr²h=3×4×5=60 m³ = 60.000 L."},
+
+{b:"Conhecimentos Gerais (21–25)"},
+{n:21,t:"Sobre Uberlândia, é correto afirmar que",o:["é a capital de Minas Gerais.","é a 2ª cidade mais populosa de MG, no Triângulo Mineiro.","é banhada pelo Rio São Francisco.","foi emancipada em 1929, quando adotou o nome atual."],c:1,e:"Capital é BH; rio local é o Uberabinha; emancipação em 1888 (1929 foi só a mudança de nome)."},
+{n:22,t:"O Marco Legal do Saneamento (Lei 14.026/2020) fixou, até 31/12/2033,",o:["90% com água e 99% com esgoto.","99% com água potável e 90% com coleta e tratamento de esgoto.","100% de água e esgoto até 2030.","80% de água e 70% de esgoto."],c:1,e:"Metas: 99% água + 90% esgoto até 31/12/2033."},
+{n:23,t:"Segundo a Lei 11.445/2007, NÃO integra o saneamento básico",o:["o abastecimento de água potável.","o esgotamento sanitário.","a drenagem e o manejo de águas pluviais.","a distribuição de energia elétrica."],c:3,e:"Componentes: água, esgoto, resíduos/limpeza urbana e drenagem. Energia elétrica não entra."},
+{n:24,t:"O ODS da Agenda 2030 dedicado à água potável e ao saneamento é o",o:["ODS 3.","ODS 6.","ODS 11.","ODS 13."],c:1,e:"ODS 6. (3=saúde, 11=cidades, 13=clima.)"},
+{n:25,t:"Antes de adotar o nome Uberlândia (1929), o município se chamava",o:["São Pedro de Uberabinha.","Vila Platina.","Santa Maria do Triângulo.","Araguari."],c:0,e:"Emancipado em 31/08/1888 como São Pedro de Uberabinha."},
+
+{b:"Legislação (26–30)"},
+{n:26,t:"NÃO é forma de provimento de cargo público:",o:["nomeação.","readaptação.","exoneração.","reintegração."],c:2,e:"Exoneração é forma de VACÂNCIA. As demais são provimento."},
+{n:27,t:"Pela CF, o servidor efetivo adquire estabilidade após",o:["2 anos de efetivo exercício.","3 anos de efetivo exercício.","5 anos.","a posse."],c:1,e:"CF art. 41: 3 anos de efetivo exercício, com avaliação especial."},
+{n:28,t:"Compete à Câmara Municipal de Uberlândia",o:["sancionar e promulgar as leis.","julgar as contas do Prefeito com parecer prévio do Tribunal de Contas.","nomear os secretários municipais.","elaborar a lei orçamentária."],c:1,e:"Controle externo pela Câmara + TC (CF art. 31). As demais são atos do Prefeito."},
+{n:29,t:"É dever ético do servidor público municipal:",o:["aceitar presentes de fornecedores interessados, em troca de agilidade.","tratar com urbanidade e sem distinção todos os usuários.","usar informação privilegiada em benefício próprio sem prejudicar o órgão.","retardar o serviço para o usuário procurar alternativas."],c:1,e:"Urbanidade e tratamento igualitário são deveres; as demais são vedações."},
+{n:30,t:"Quanto à natureza jurídica, o DMAE é",o:["empresa pública municipal.","sociedade de economia mista.","autarquia municipal, com autonomia administrativa e financeira, vinculada ao Executivo.","fundação de direito privado."],c:2,e:"O DMAE é autarquia (administração indireta), direito público, autonomia administrativa e financeira."},
+
+{b:"Conhecimentos Específicos (31–40)"},
+{n:31,t:"NÃO é modalidade de licitação da Lei 14.133/2021:",o:["pregão.","diálogo competitivo.","tomada de preços.","leilão."],c:2,e:"Modalidades: pregão, concorrência, concurso, leilão, diálogo competitivo. Tomada de preços e convite foram extintos."},
+{n:32,t:"Contratar artista consagrado pela crítica/opinião pública configura",o:["dispensa de licitação.","inexigibilidade de licitação.","pregão eletrônico.","concurso."],c:1,e:"Artista consagrado = inviabilidade de competição = inexigibilidade (art. 74). Dispensa é quando a competição é possível, mas a lei autoriza não licitar."},
+{n:33,t:"Na Lei 14.133/2021, em regra, a fase de habilitação ocorre",o:["antes do julgamento das propostas.","após o julgamento das propostas.","após a homologação.","na fase preparatória."],c:1,e:"Art. 17: habilitação vem DEPOIS do julgamento (inversão de fases); a ordem tradicional exige justificativa."},
+{n:34,t:"Ofício do Diretor-Geral do DMAE ao Prefeito deve usar o fecho",o:["Atenciosamente,","Cordialmente,","Respeitosamente,","Sinceramente,"],c:2,e:"'Respeitosamente' para autoridade de hierarquia superior; 'Atenciosamente' para igual ou inferior."},
+{n:35,t:"Pela teoria das três idades, documentos de valor secundário devem ser",o:["eliminados após cinco anos.","mantidos no arquivo corrente.","recolhidos ao arquivo permanente, onde não podem ser eliminados.","transferidos ao intermediário para descarte."],c:2,e:"Valor secundário = arquivo permanente = guarda definitiva, sem eliminação."},
+{n:36,t:"Entram 100 unid. a R$ 10 e depois 100 a R$ 12; saem 150. Pelo PEPS, o custo da saída foi",o:["R$ 1.600,00.","R$ 1.650,00.","R$ 1.700,00.","R$ 1.800,00."],c:0,e:"PEPS: 100×10 (1.000) + 50×12 (600) = 1.600. B=custo médio; C=UEPS."},
+{n:37,t:"Instrumento que fixa metas e prioridades para o exercício seguinte e orienta a LOA:",o:["PPA.","LDO.","LOA.","Balanço Patrimonial."],c:1,e:"LDO: metas e prioridades + orienta a LOA. PPA é plurianual; LOA é o orçamento do ano."},
+{n:38,t:"Bens e direitos de R$ 500 mil e obrigações de R$ 300 mil. O patrimônio líquido é",o:["R$ 800 mil.","R$ 300 mil.","R$ 200 mil.","R$ 500 mil."],c:2,e:"PL = Ativo − Passivo = 500 − 300 = 200 mil."},
+{n:39,t:"Em Maslow, a busca por estabilidade no emprego é necessidade",o:["fisiológica.","de segurança.","social.","de estima."],c:1,e:"Segurança: estabilidade, proteção, emprego seguro."},
+{n:40,t:"NÃO está entre os princípios expressos no caput do art. 37 da CF:",o:["eficiência.","publicidade.","razoabilidade.","moralidade."],c:2,e:"Expressos: LIMPE (legalidade, impessoalidade, moralidade, publicidade, eficiência). Razoabilidade é princípio implícito."}
+];
+(function(){
+  var box=document.getElementById("sim"),html="";
+  SIM.forEach(function(q,i){
+    if(q.b){html+='<div class="blocklabel">'+q.b+'</div>';}
+    if(q.passage){html+='<div class="passage">'+q.passage+'</div>';}
+    if(q.n){
+      html+='<div class="q" data-i="'+i+'"><div class="qn">Questão '+q.n+'</div><div class="qt">'+q.t+'</div>';
+      "ABCD".split("").forEach(function(L,j){
+        html+='<label class="opt"><input type="radio" name="q'+q.n+'" value="'+j+'"><span class="lt">'+L+')</span><span>'+q.o[j]+'</span></label>';
+      });
+      html+='<div class="expl"><b>Gabarito: '+"ABCD"[q.c]+'.</b> '+q.e+'</div></div>';
+    }
+  });
+  box.innerHTML=html;
+  var total=SIM.filter(function(q){return q.n;}).length;
+
+  document.getElementById("corrigir").onclick=function(){
+    var acertos=0;
+    SIM.forEach(function(q){
+      if(!q.n)return;
+      var qEl=box.querySelector('.q[data-i]');
+      var qd=[].slice.call(box.querySelectorAll('.q')).filter(function(el){return el.querySelector('.qn').textContent==='Questão '+q.n;})[0];
+      if(!qd)return;
+      var opts=qd.querySelectorAll('.opt');
+      var sel=qd.querySelector('input:checked');
+      opts.forEach(function(o){o.classList.remove('right','wrong');});
+      opts[q.c].classList.add('right');
+      if(sel){var v=+sel.value; if(v===q.c){acertos++;} else {opts[v].classList.add('wrong');}}
+      qd.querySelector('.expl').classList.add('show');
+    });
+    var pct=Math.round(acertos/total*100);
+    var msg=pct>=70?'Excelente ritmo!':pct>=50?'No caminho — foque nos erros.':'Comece pelo caderno de erros e volte.';
+    document.getElementById("scorebox").innerHTML='Você acertou <b>'+acertos+'</b>/'+total+' ('+pct+'%). '+msg;
+    document.getElementById("simulado").scrollIntoView({behavior:"smooth"});
+  };
+  document.getElementById("limpar").onclick=function(){
+    box.querySelectorAll('input:checked').forEach(function(i){i.checked=false;});
+    box.querySelectorAll('.opt').forEach(function(o){o.classList.remove('right','wrong');});
+    box.querySelectorAll('.expl').forEach(function(e){e.classList.remove('show');});
+    document.getElementById("scorebox").textContent='';
+  };
+})();
+
+/* ---------- FLASHCARDS ---------- */
+var FC=[
+["Quantas questões e como se distribuem?","40: Português 10, Matemática/RLM 10, Gerais 5, Legislação 5, Específicos 10."],
+["Duração e turno da prova?","3 horas, Turno B (01/11/2026)."],
+["O que elimina na objetiva?","Não atingir a pontuação mínima do Anexo III ou zerar qualquer disciplina."],
+["1º critério de desempate (abaixo de 60 anos)?","Mais pontos em Conhecimentos Específicos."],
+["Prazo de recurso contra o gabarito?","3 dias úteis, um por questão, fundamentado."],
+["Modalidades da Lei 14.133","Pregão, concorrência, concurso, leilão, diálogo competitivo."],
+["Critérios de julgamento (14.133)","Menor preço, maior desconto, melhor técnica, técnica e preço, maior lance, maior retorno econômico."],
+["Ordem das fases (art. 17)","Preparatória, edital, propostas, julgamento, habilitação, recursal, homologação."],
+["Dispensa × inexigibilidade","Dispensa: competição possível, lei autoriza não licitar. Inexigibilidade: competição inviável."],
+["Três exemplos de inexigibilidade","Fornecedor exclusivo, artista consagrado, notória especialização."],
+["Prazo do contrato emergencial","1 ano, vedadas prorrogação e recontratação."],
+["Para que serve o pregão?","Bens e serviços comuns; menor preço ou maior desconto."],
+["Modalidade para alienar bens móveis inservíveis","Leilão (maior lance)."],
+["Sanções da Lei 14.133","Advertência, multa, impedimento (até 3 anos), inidoneidade (3 a 6 anos)."],
+["Validade da ata de registro de preços","1 ano, prorrogável por igual período."],
+["Prazo de impugnação do edital","Até 3 dias úteis antes da abertura."],
+["Alteração unilateral do contrato: limite","25% (acréscimo/supressão); 50% para reforma de edifício/equipamento."],
+["Quem conduz o pregão?","Pregoeiro."],
+["Portal de publicidade obrigatória","PNCP."],
+["Lei das estatais em licitações","Lei 13.303/2016."],
+["Fecho para autoridade superior","Respeitosamente,"],
+["Fecho para mesma hierarquia ou inferior","Atenciosamente,"],
+["Vocativo para o Prefeito","Senhor Prefeito (não 'Excelentíssimo')."],
+["Quem recebe 'Excelentíssimo Senhor'?","Presidente da República, do Congresso e do STF."],
+["Vossa × Sua Excelência","Vossa: fala COM a pessoa. Sua: fala DA pessoa."],
+["Pronome de tratamento para reitor","Vossa Magnificência."],
+["Concordância com Vossa Excelência","3ª pessoa; adjetivo concorda com o sexo da pessoa."],
+["O que o padrão ofício unificou?","Aviso, ofício e memorando."],
+["Atributos da redação oficial","Clareza, precisão, objetividade, concisão, coesão, impessoalidade, formalidade, padronização."],
+["Como se corrige erro em ata?","Com 'digo' (na hora) ou 'em tempo' (no fim); sem rasura."],
+["Unidades do texto legal (LC 95/98)","Artigo, parágrafo, inciso (romano), alínea (letra), item (número)."],
+["Até que artigo se usa ordinal?","Até o 9º; do 10 em diante, cardinal."],
+["Teoria das três idades","Corrente, intermediário, permanente (valor secundário, nunca eliminado)."],
+["Transferência × recolhimento","Transferência: corrente→intermediário. Recolhimento: →permanente."],
+["O que define prazos de guarda?","Tabela de temporalidade."],
+["Fases da gestão de documentos","Produção, utilização, destinação."],
+["Métodos diretos de arquivamento","Alfabético e geográfico."],
+["Como arquivar 'João da Silva Filho'?","Silva Filho, João da (parentesco acompanha o sobrenome)."],
+["Prazos de sigilo da LAI","Ultrassecreto 25, secreto 15, reservado 5 anos."],
+["PEPS","Primeiro que entra, primeiro que sai; estoque final pelos preços recentes."],
+["Método vedado fiscalmente no Brasil","UEPS/LIFO."],
+["Curva ABC","A: 20% itens/80% valor; B: 30/15; C: 50/5."],
+["Ponto de pedido","Consumo médio × tempo de reposição + estoque de segurança."],
+["Os 5 certos das compras","Material, quantidade, tempo, preço e fonte certos."],
+["Estágios da despesa pública","Empenho, liquidação, pagamento."],
+["O que é liquidação?","Verificação do direito do credor (entrega do bem/serviço)."],
+["PPA, LDO, LOA","PPA 4 anos (diretrizes/metas); LDO anual (orienta a LOA); LOA orçamento do ano."],
+["Orçamento tradicional × programa","Tradicional: objeto do gasto. Programa: objetivos, metas, indicadores."],
+["Limite de pessoal nos Municípios (LRF)","60% da RCL (54% Executivo, 6% Legislativo)."],
+["Equação patrimonial","Ativo = Passivo + Patrimônio Líquido."],
+["Regime de competência","Receitas e despesas quando ocorrem, não quando pagas."],
+["Funções de Fayol (POC³)","Prever, organizar, comandar, coordenar, controlar."],
+["Eficiência × eficácia × efetividade","Meios / resultado / impacto."],
+["Pirâmide de Maslow","Fisiológicas, segurança, sociais, estima, autorrealização."],
+["Herzberg","Higiênicos evitam insatisfação; motivacionais geram satisfação."],
+["McGregor","Teoria X: controle; Teoria Y: automotivação."],
+["Experiência de Hawthorne","Mayo — relações humanas, grupos informais."],
+["Estrutura linha-staff","Linha executa; staff assessora."],
+["Estrutura matricial","Dupla subordinação: gerente funcional e de projeto."],
+["Efeito halo (avaliação)","Uma característica contamina a avaliação das outras."],
+["Férias na CLT","30 dias após 12 meses, +1/3, até 3 períodos (um de 14 dias)."],
+["13º salário: parcelas","1ª até 30/11, 2ª até 20/12."],
+["Lei 13.460/2017","Direitos do usuário do serviço público, Carta de Serviços, ouvidoria."],
+["Princípios do art. 37 (LIMPE)","Legalidade, impessoalidade, moralidade, publicidade, eficiência."],
+["Estabilidade do servidor","3 anos de efetivo exercício (CF art. 41)."],
+["Validade do concurso (CF)","Até 2 anos, prorrogável uma vez por igual período."],
+["Serviços essenciais (Lei 7.783) incluem","Água, esgoto, energia, saúde, transporte coletivo, telecom."],
+["Componentes do saneamento (11.445)","Água, esgoto, resíduos/limpeza urbana, drenagem."],
+["Metas do Marco do Saneamento","99% água e 90% esgoto até 2033."],
+["Uberlândia: emancipação e nome","31/08/1888 (São Pedro de Uberabinha); Uberlândia em 1929."],
+["Rio que corta Uberlândia","Uberabinha (afluente do Araguari, bacia do Paranaíba)."],
+["Natureza jurídica do DMAE","Autarquia municipal (1966), autonomia administrativa e financeira."],
+["Crase: teste rápido","Troca por masculino: 'ao' = crase; 'a' = sem crase."],
+["'Houve' ou 'houveram' reclamações?","'Houve' — haver no sentido de existir é impessoal (singular)."],
+["Negação de 'Se p então q'","p e não q (não é 'se não p então não q')."],
+["Aumentos sucessivos de 10% e 20%","32% (1,1×1,2), não 30%."],
+["Vírgula pode separar sujeito do verbo?","Nunca."],
+["Explicativa × restritiva (vírgula)","Com vírgula = todos; sem vírgula = só alguns."]
+];
+(function(){
+  var box=document.getElementById("fcs"),order=FC.map(function(_,i){return i;});
+  function render(){
+    box.innerHTML=order.map(function(idx,pos){
+      return '<div class="fc" data-i="'+idx+'"><div class="fn">Flashcard '+(pos+1)+'</div><div class="fq">'+FC[idx][0]+'</div><div class="fa">'+FC[idx][1]+'</div><div class="hint">toque para ver a resposta</div></div>';
+    }).join("");
+    document.getElementById("fc-count").textContent=FC.length+" cartões";
+  }
+  render();
+  box.addEventListener("click",function(e){var c=e.target.closest(".fc");if(c)c.classList.toggle("open");});
+  document.getElementById("fc-shuffle").onclick=function(){for(var i=order.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=order[i];order[i]=order[j];order[j]=t;}render();};
+  var allOpen=false;
+  document.getElementById("fc-all").onclick=function(){allOpen=!allOpen;box.querySelectorAll(".fc").forEach(function(c){c.classList.toggle("open",allOpen);});};
+})();
+</script>
+</body>
+</html>
