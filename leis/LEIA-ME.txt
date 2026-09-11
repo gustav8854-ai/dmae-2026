@@ -1,18 +1,25 @@
-Textos de lei para o tutor citar artigo e prazo sem inventar.
+Textos oficiais para o tutor citar artigo, prazo e programa sem inventar.
 
 JA INCLUIDOS (extraidos das fontes oficiais):
-- Lei-Organica-Uberlandia.txt              (Camara Municipal de Uberlandia)
-- LC-040-1992-Estatuto-Servidores.txt      (Camara/leismunicipais - com alteracoes)
-- Codigo-de-Etica-Decreto-20179-2023.txt   (docs.uberlandia.mg.gov.br)
+- Edital-01-2026-DMAE.txt                   (EDITAL OFICIAL 01/2026 - conteudo programatico,
+                                             criterio de aprovacao, desempate, quadro de provas)
+- Lei-Organica-Uberlandia.txt               (Camara Municipal de Uberlandia)
+- LC-040-1992-Estatuto-Servidores.txt       (Camara/leismunicipais - com alteracoes)
+- Codigo-de-Etica-Decreto-20179-2023.txt    (docs.uberlandia.mg.gov.br)
 
-AINDA FALTAM (coloque aqui quando tiver):
-- Lei 12.048-2014 (Plano de Carreira do DMAE) -> todas as fontes online bloquearam
-  (leismunicipais/leis.org = 403). Baixe o PDF e solte aqui.
-- Estrutura do Executivo / Estrutura do DMAE
-- Lei 14.133-2021 e Manual de Redacao da Presidencia
-- Edital Consolidado 01-2026
-- PROVA (caderno de questoes) DMAE 2020 Oficial Administrativo -> o que temos e so
-  o GABARITO (letras); para virar simulado, precisa do PDF com os enunciados.
+CONFIRMADO NO EDITAL 01/2026:
+- Aprovacao: nao zerar nenhum conteudo + minimo 25 de 50 pontos.
+- Pesos: Especificos vale 2 pontos/questao (20 pts = 40%); Portugues, Matematica,
+  Gerais e Legislacao valem 1 ponto. Total 50 pontos.
+- Desempate (nivel medio): idade 60+ > Especificos > Portugues > Matematica > Legislacao.
+- Informatica NAO esta no programa do Oficial Administrativo (e do Agente Comercial).
+- Estrutura do Executivo = LC 751/2023; Estrutura do DMAE = Decreto 20.288/2023.
 
-Obs.: os .txt foram extraidos de PDF (pdftotext). Confira sempre a redacao
-vigente ate 10/06/2026 (item 1.5 do edital) antes de decorar prazos.
+AINDA FALTAM (coloque aqui quando tiver o PDF):
+- Lei 12.048/2014 (Plano de Carreira DMAE) - texto integral. Fontes online bloquearam
+  (403). O site ja tem o resumo confirmado (5 niveis A-E, progressao por merito a cada
+  2 anos, jornada 12x36 ou 8h, alterada pela Lei 13.179/2019).
+- LC 751/2023 (Estrutura do Executivo) e Decreto 20.288/2023 (Estrutura do DMAE) - textos.
+- PROVA (caderno de questoes) DMAE 2020 Oficial Administrativo - so temos o GABARITO (letras).
+
+Obs.: .txt extraidos de PDF (pdftotext). Vale a legislacao vigente ate 10/06/2026.
