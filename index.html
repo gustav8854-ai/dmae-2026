@@ -296,6 +296,14 @@
     section{margin:16px 0}
   }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
+<script>
+  try{ window.sb = window.supabase.createClient(
+    "https://eruszwjnekrvfbtylbuv.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydXN6d2puZWtydmZidHlsYnV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxOTM3MTksImV4cCI6MjEwNDc2OTcxOX0.XfxqmgTu9OLI6moAk6XhasQc9RmgI9w-lpbzbHSJqqo",
+    {auth:{persistSession:true,autoRefreshToken:true}}
+  ); }catch(e){ window.sb=null; }
+</script>
 </head>
 <body>
 <div id="authwall" class="authwall">
@@ -310,45 +318,57 @@
       <button type="button" class="pwtoggle" id="au-eye" aria-label="Mostrar senha">Mostrar</button>
     </div>
     <button class="btn" id="au-btn" type="button">Entrar / Criar minha conta</button>
-    <p class="authnote">Seu progresso (simulados, caderno de erros, cronograma) fica salvo <strong>só neste aparelho</strong> e é privado da sua conta — ninguém vê o que você errou ou acertou. Não é um sistema bancário: use uma senha simples e que você não use em outros lugares importantes. Se esquecer a senha, é só criar uma conta nova.</p>
+    <p class="authnote">Sua conta funciona em <strong>qualquer aparelho</strong> (celular e computador): o progresso fica salvo <strong>na nuvem</strong> e é privado — ninguém vê o que você errou ou acertou. Use uma senha só para este site (não repita a do banco/e-mail).</p>
   </div>
 </div>
 <script>
-/* ===== Perfis (e-mail + senha) — dados isolados por usuário ===== */
-window.DMAE_KEY=function(k){var u="";try{u=localStorage.getItem("dmae:currentUser")||"";}catch(e){}return "dmae:u:"+u+":"+k;};
-window.DMAE_logout=function(){try{localStorage.removeItem("dmae:currentUser");}catch(e){}location.reload();};
+/* ===== Autenticação Supabase (contas reais, sincroniza entre aparelhos) ===== */
+window.DMAE_KEY=function(k){var u="";try{u=localStorage.getItem("dmae:uid")||"";}catch(e){}return "dmae:u:"+u+":"+k;};
+window.DMAE_logout=function(){var done=function(){try{localStorage.removeItem("dmae:uid");}catch(e){}location.reload();};if(window.sb){window.sb.auth.signOut().then(done,done);}else{done();}};
 (function(){
-  function hash(s){var x=5381;for(var i=0;i<s.length;i++){x=((x*33)^s.charCodeAt(i))>>>0;}return x.toString(16);}
-  function getP(){try{return JSON.parse(localStorage.getItem("dmae:profiles")||"{}");}catch(e){return{};}}
-  function setP(p){try{localStorage.setItem("dmae:profiles",JSON.stringify(p));}catch(e){}}
-  function storageOK(){try{localStorage.setItem("dmae:__t","1");localStorage.removeItem("dmae:__t");return true;}catch(e){return false;}}
-  var cur="";try{cur=localStorage.getItem("dmae:currentUser")||"";}catch(e){}
   var wall=document.getElementById("authwall");
-  if(cur){ if(wall){wall.hidden=true;wall.style.display="none";} return; }
-  document.documentElement.classList.add("authlock");
-  function msg(t){var m=document.getElementById("auth-msg"); if(m){m.textContent=t;m.hidden=false;}}
-  if(!storageOK()){msg("Seu navegador está bloqueando o salvamento (modo anônimo, ou navegador de dentro de um app como WhatsApp/Instagram). Abra o link no Chrome ou Safari para criar/entrar na sua conta.");}
-  function enter(e){
-    try{localStorage.setItem("dmae:currentUser",e);}catch(x){}
-    var ok=false;try{ok=localStorage.getItem("dmae:currentUser")===e;}catch(x){}
-    if(!ok){msg("Não consegui salvar sua sessão neste navegador. Saia do modo anônimo ou do navegador de dentro do app e abra no Chrome ou Safari.");return;}
-    location.reload();
+  function show(){if(wall){wall.hidden=false;wall.style.display="";}document.documentElement.classList.add("authlock");}
+  function hide(){if(wall){wall.hidden=true;wall.style.display="none";}document.documentElement.classList.remove("authlock");}
+  function msg(t){var m=document.getElementById("auth-msg");if(m){m.textContent=t;m.hidden=!t;}}
+  function busy(b){var x=document.getElementById("au-btn");if(x){x.disabled=b;x.textContent=b?"Entrando…":"Entrar / Criar minha conta";}}
+  show();
+  if(!window.sb){msg("Não consegui conectar ao servidor de contas. Confira sua internet e recarregue a página.");return;}
+  function onLogin(session){
+    try{localStorage.setItem("dmae:uid",session.user.id);}catch(e){}
+    var md=session.user.user_metadata||{};
+    var nome=md.name||md.nome||session.user.email;
+    var who=document.getElementById("whoami"),box=document.getElementById("userbox");
+    if(who)who.textContent=nome; if(box)box.hidden=false;
+    var lo=document.getElementById("logout"); if(lo)lo.onclick=window.DMAE_logout;
+    hide();
+    if(window.DMAE_syncPull)window.DMAE_syncPull();
   }
-  function go(){
+  async function go(){
     var n=(document.getElementById("au-name").value||"").trim();
     var e=(document.getElementById("au-email").value||"").trim().toLowerCase();
     var pw=document.getElementById("au-pass").value||"";
     if(!e||e.indexOf("@")<0){msg("Digite um e-mail válido.");return;}
     if(pw.length<4){msg("A senha precisa ter pelo menos 4 caracteres.");return;}
-    var all=getP(),p=all[e];
-    if(p){ if(p.h!==hash(pw)){msg("Essa conta já existe, mas a senha não confere. Use a senha correta — ou entre com outro e-mail.");return;} }
-    else { all[e]={n:(n||e.split("@")[0]),h:hash(pw)}; setP(all); }
-    enter(e);
+    msg("");busy(true);
+    try{
+      var r=await window.sb.auth.signInWithPassword({email:e,password:pw});
+      if(r.data&&r.data.session){onLogin(r.data.session);return;}
+      var su=await window.sb.auth.signUp({email:e,password:pw,options:{data:{name:(n||e.split("@")[0])}}});
+      if(su.error){
+        var t=(su.error.message||"").toLowerCase();
+        if(t.indexOf("already")>=0||t.indexOf("registered")>=0){msg("Essa conta já existe, mas a senha não confere. Tente a senha correta.");}
+        else{msg("Não foi possível entrar: "+su.error.message);}
+        busy(false);return;
+      }
+      if(su.data&&su.data.session){onLogin(su.data.session);return;}
+      msg("Conta criada — confirme pelo link no seu e-mail para entrar.");busy(false);
+    }catch(err){msg("Erro de conexão. Tente novamente.");busy(false);}
   }
-  var _b=document.getElementById("au-btn"); if(_b)_b.onclick=go;
+  var b=document.getElementById("au-btn"); if(b)b.onclick=go;
   ["au-email","au-pass","au-name"].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener("keydown",function(ev){if(ev.key==="Enter")go();});});
-  var _eye=document.getElementById("au-eye"),_pw=document.getElementById("au-pass");
-  if(_eye&&_pw)_eye.onclick=function(){var s=_pw.type==="password";_pw.type=s?"text":"password";_eye.textContent=s?"Ocultar":"Mostrar";_pw.focus();};
+  var eye=document.getElementById("au-eye"),pwf=document.getElementById("au-pass");
+  if(eye&&pwf)eye.onclick=function(){var s=pwf.type==="password";pwf.type=s?"text":"password";eye.textContent=s?"Ocultar":"Mostrar";pwf.focus();};
+  window.sb.auth.getSession().then(function(r){if(r.data&&r.data.session)onLogin(r.data.session);});
 })();
 </script>
 <header class="top">
@@ -1364,7 +1384,8 @@ window.DMAE_logout=function(){try{localStorage.removeItem("dmae:currentUser");}c
 })();
 /* ---------- plano checklist ---------- */
 (function(){
-  var key=window.DMAE_KEY("plano");var st={};try{st=JSON.parse(localStorage.getItem(key)||"{}");}catch(e){}
+  function K(){return window.DMAE_KEY("plano");}
+  function readSt(){try{return JSON.parse(localStorage.getItem(K())||"{}");}catch(e){return{};}}
   function renderProg(){
     var boxes=document.querySelectorAll("#diario-list input");
     var total=boxes.length,done=0;[].forEach.call(boxes,function(c){if(c.checked)done++;});
@@ -1372,18 +1393,29 @@ window.DMAE_logout=function(){try{localStorage.removeItem("dmae:currentUser");}c
     var el=document.getElementById("crono-prog");
     if(el)el.innerHTML='<div class="cprow"><span><b>Progresso do plano diário</b></span><span class="cbar"><i style="width:'+pct+'%"></i></span><span>'+done+'/'+total+' dias ('+pct+'%)</span></div>';
   }
+  window.DMAE_planoApply=function(){
+    var st=readSt();
+    document.querySelectorAll("#plano-list input, #diario-list input").forEach(function(c){
+      var on=!!st[c.id];c.checked=on;c.closest(".chk").classList.toggle("done",on);
+    });
+    renderProg();
+  };
   document.querySelectorAll("#plano-list input, #diario-list input").forEach(function(c){
-    if(st[c.id]){c.checked=true;c.closest(".chk").classList.add("done");}
-    c.onchange=function(){st[c.id]=c.checked;c.closest(".chk").classList.toggle("done",c.checked);try{localStorage.setItem(key,JSON.stringify(st));}catch(e){}renderProg();};
+    c.onchange=function(){
+      var st=readSt();st[c.id]=c.checked;try{localStorage.setItem(K(),JSON.stringify(st));}catch(e){}
+      c.closest(".chk").classList.toggle("done",c.checked);renderProg();
+      if(window.DMAE_syncPush)window.DMAE_syncPush();
+    };
   });
   var pr=document.getElementById("plano-reset");
   if(pr)pr.onclick=function(){
     if(!confirm("Desmarcar todos os dias e semanas do cronograma?"))return;
-    st={};try{localStorage.removeItem(key);}catch(e){}
+    try{localStorage.removeItem(K());}catch(e){}
     document.querySelectorAll("#plano-list input, #diario-list input").forEach(function(c){c.checked=false;c.closest(".chk").classList.remove("done");});
     renderProg();
+    if(window.DMAE_syncPush)window.DMAE_syncPush();
   };
-  renderProg();
+  window.DMAE_planoApply();
 })();
 
 /* ---------- SIMULADO ---------- */
@@ -1496,6 +1528,7 @@ window.recordScore=function(key,label,pct,ac,total,pts,mp,bymat){
   try{localStorage.setItem(K,JSON.stringify(arr));}catch(e){}
   if(window.renderDesempenho)window.renderDesempenho();
   if(window.renderProxima)window.renderProxima();
+  if(window.DMAE_syncPush)window.DMAE_syncPush();
 };
 /* agrega acerto por matéria a partir do histórico */
 window.DMAE_fraca=function(scores){
@@ -1788,6 +1821,7 @@ var FC=[
     if(arr.length>200)arr=arr.slice(-200);
     try{localStorage.setItem(K,JSON.stringify(arr));}catch(e){}
     if(window.renderCaderno)window.renderCaderno();
+    if(window.DMAE_syncPush)window.DMAE_syncPush();
   };
   window.renderCaderno=function(){
     var host=document.getElementById("caderno-list");if(!host)return;
@@ -1811,12 +1845,14 @@ var FC=[
       });
       try{localStorage.setItem(window.DMAE_KEY("cadernoerros"),JSON.stringify(keep));}catch(e){}
       window.renderCaderno();
+      if(window.DMAE_syncPush)window.DMAE_syncPush();
       var host=document.getElementById("caderno");if(host)host.scrollIntoView({behavior:"smooth",block:"start"});
     };
     if(cl)cl.onclick=function(){
       if(!confirm("Apagar todas as questões do caderno de erros?"))return;
       try{localStorage.removeItem(window.DMAE_KEY("cadernoerros"));}catch(e){}
       window.renderCaderno();
+      if(window.DMAE_syncPush)window.DMAE_syncPush();
     };
     var dl=document.getElementById("cad-download");
     if(dl)dl.onclick=function(){
@@ -2309,16 +2345,46 @@ var FC=[
 })();
 </script>
 <script>
-/* cabeçalho: nome do usuário logado + Sair */
+/* ===== Sincronização do progresso com a nuvem (Supabase) ===== */
+window.DMAE_syncPull=async function(){
+  if(!window.sb)return;
+  var uid="";try{uid=localStorage.getItem("dmae:uid")||"";}catch(e){}
+  if(!uid)return;
+  try{
+    var r=await window.sb.from("progress").select("data").eq("user_id",uid).maybeSingle();
+    if(r.error)return;
+    if(r.data&&r.data.data){
+      var d=r.data.data;
+      try{
+        if(d.scores)localStorage.setItem(window.DMAE_KEY("scores"),JSON.stringify(d.scores));
+        if(d.caderno)localStorage.setItem(window.DMAE_KEY("cadernoerros"),JSON.stringify(d.caderno));
+        if(d.plano)localStorage.setItem(window.DMAE_KEY("plano"),JSON.stringify(d.plano));
+      }catch(e){}
+      if(window.renderDesempenho)window.renderDesempenho();
+      if(window.renderCaderno)window.renderCaderno();
+      if(window.renderProxima)window.renderProxima();
+      if(window.DMAE_planoApply)window.DMAE_planoApply();
+    } else {
+      /* sem linha na nuvem: sobe o que já existir localmente (migração) */
+      if(window.DMAE_syncPush)window.DMAE_syncPush(true);
+    }
+  }catch(e){}
+};
 (function(){
-  var cur="";try{cur=localStorage.getItem("dmae:currentUser")||"";}catch(e){}
-  if(!cur)return;
-  var box=document.getElementById("userbox"),who=document.getElementById("whoami");
-  var p={};try{p=JSON.parse(localStorage.getItem("dmae:profiles")||"{}");}catch(e){}
-  var nome=(p[cur]&&p[cur].n)?p[cur].n:cur;
-  if(who)who.textContent=nome;
-  if(box)box.hidden=false;
-  var lo=document.getElementById("logout"); if(lo)lo.onclick=window.DMAE_logout;
+  var t=null;
+  window.DMAE_syncPush=function(now){
+    if(!window.sb)return;
+    clearTimeout(t);
+    t=setTimeout(function(){
+      var uid="";try{uid=localStorage.getItem("dmae:uid")||"";}catch(e){}
+      if(!uid)return;
+      var scores=[],caderno=[],plano={};
+      try{scores=JSON.parse(localStorage.getItem(window.DMAE_KEY("scores"))||"[]");}catch(e){}
+      try{caderno=JSON.parse(localStorage.getItem(window.DMAE_KEY("cadernoerros"))||"[]");}catch(e){}
+      try{plano=JSON.parse(localStorage.getItem(window.DMAE_KEY("plano"))||"{}");}catch(e){}
+      window.sb.from("progress").upsert({user_id:uid,data:{scores:scores,caderno:caderno,plano:plano},updated_at:new Date().toISOString()}).then(function(){},function(){});
+    }, now?0:900);
+  };
 })();
 </script>
 </body>
