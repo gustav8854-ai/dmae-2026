@@ -241,6 +241,7 @@
   .authwall{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:flex-start;justify-content:center;padding:24px 18px;overflow-y:auto;-webkit-overflow-scrolling:touch}
   .authcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:26px 24px;max-width:390px;width:100%;margin:auto}
   :root.authlock,:root.authlock body{overflow:hidden;height:100%}
+  .authwall[hidden]{display:none!important}
   .authbrand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;font-family:"Lora",serif}
   .authbrand b{color:var(--blue)}
   .authbrand .drop{width:24px;height:24px;border-radius:50% 50% 50% 8px;transform:rotate(45deg);background:linear-gradient(135deg,var(--blue-2),var(--teal))}
@@ -252,6 +253,7 @@
   .authmsg{background:var(--red-soft);color:var(--red);border-radius:8px;padding:8px 11px;font-size:13.5px;margin-bottom:10px}
   .authnote{font-size:11.5px;color:var(--muted);margin:16px 0 0;line-height:1.5}
   .userbox{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-2)}
+  .userbox[hidden]{display:none!important}
   .userbox #whoami{font-weight:700;color:var(--ink);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   @media(max-width:560px){.userbox #whoami{max-width:80px}}
 
@@ -307,7 +309,7 @@ window.DMAE_logout=function(){try{localStorage.removeItem("dmae:currentUser");}c
   function storageOK(){try{localStorage.setItem("dmae:__t","1");localStorage.removeItem("dmae:__t");return true;}catch(e){return false;}}
   var cur="";try{cur=localStorage.getItem("dmae:currentUser")||"";}catch(e){}
   var wall=document.getElementById("authwall");
-  if(cur){ if(wall)wall.hidden=true; return; }
+  if(cur){ if(wall){wall.hidden=true;wall.style.display="none";} return; }
   document.documentElement.classList.add("authlock");
   function msg(t){var m=document.getElementById("auth-msg"); if(m){m.textContent=t;m.hidden=false;}}
   if(!storageOK()){msg("Seu navegador está bloqueando o salvamento (modo anônimo, ou navegador de dentro de um app como WhatsApp/Instagram). Abra o link no Chrome ou Safari para criar/entrar na sua conta.");}
