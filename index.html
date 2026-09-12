@@ -238,8 +238,9 @@
   .back{position:fixed;right:16px;bottom:16px;z-index:40;background:var(--blue);color:#fff;border:0;border-radius:50%;width:44px;height:44px;font-size:18px;cursor:pointer;box-shadow:var(--shadow);display:none}
   .back.show{display:block}
   /* login / perfis */
-  .authwall{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;overflow:auto}
-  .authcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:26px 24px;max-width:390px;width:100%}
+  .authwall{position:fixed;inset:0;z-index:100;background:var(--bg);display:flex;align-items:flex-start;justify-content:center;padding:24px 18px;overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .authcard{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:26px 24px;max-width:390px;width:100%;margin:auto}
+  :root.authlock,:root.authlock body{overflow:hidden;height:100%}
   .authbrand{display:flex;align-items:center;gap:9px;font-weight:800;font-size:18px;font-family:"Lora",serif}
   .authbrand b{color:var(--blue)}
   .authbrand .drop{width:24px;height:24px;border-radius:50% 50% 50% 8px;transform:rotate(45deg);background:linear-gradient(135deg,var(--blue-2),var(--teal))}
@@ -280,15 +281,15 @@
     <p class="authsub">Cada pessoa tem a <strong>sua conta e o seu progresso</strong>, totalmente separados. Entre com seu e-mail e senha para estudar no seu ritmo.</p>
     <div id="auth-msg" class="authmsg" hidden></div>
     <div id="auth-login">
-      <input id="li-email" type="email" placeholder="Seu e-mail" autocomplete="username" inputmode="email">
-      <input id="li-pass" type="password" placeholder="Sua senha" autocomplete="current-password">
+      <input id="li-email" type="email" placeholder="Seu e-mail" autocomplete="username" inputmode="email" autocapitalize="none" autocorrect="off" spellcheck="false">
+      <input id="li-pass" type="password" placeholder="Sua senha" autocomplete="current-password" autocapitalize="none" autocorrect="off" spellcheck="false">
       <button class="btn" id="li-btn" type="button">Entrar</button>
       <p class="authtoggle">Ainda não tem conta? <a href="#" id="to-signup">Criar minha conta</a></p>
     </div>
     <div id="auth-signup" hidden>
       <input id="su-name" type="text" placeholder="Seu nome" autocomplete="name">
-      <input id="su-email" type="email" placeholder="Seu e-mail" autocomplete="username" inputmode="email">
-      <input id="su-pass" type="password" placeholder="Crie uma senha (mín. 4 caracteres)" autocomplete="new-password">
+      <input id="su-email" type="email" placeholder="Seu e-mail" autocomplete="username" inputmode="email" autocapitalize="none" autocorrect="off" spellcheck="false">
+      <input id="su-pass" type="password" placeholder="Crie uma senha (mín. 4 caracteres)" autocomplete="new-password" autocapitalize="none" autocorrect="off" spellcheck="false">
       <button class="btn" id="su-btn" type="button">Criar conta e entrar</button>
       <p class="authtoggle">Já tem conta? <a href="#" id="to-login">Entrar</a></p>
     </div>
@@ -303,10 +304,19 @@ window.DMAE_logout=function(){try{localStorage.removeItem("dmae:currentUser");}c
   function hash(s){var x=5381;for(var i=0;i<s.length;i++){x=((x*33)^s.charCodeAt(i))>>>0;}return x.toString(16);}
   function getP(){try{return JSON.parse(localStorage.getItem("dmae:profiles")||"{}");}catch(e){return{};}}
   function setP(p){try{localStorage.setItem("dmae:profiles",JSON.stringify(p));}catch(e){}}
+  function storageOK(){try{localStorage.setItem("dmae:__t","1");localStorage.removeItem("dmae:__t");return true;}catch(e){return false;}}
   var cur="";try{cur=localStorage.getItem("dmae:currentUser")||"";}catch(e){}
   var wall=document.getElementById("authwall");
   if(cur){ if(wall)wall.hidden=true; return; }
+  document.documentElement.classList.add("authlock");
   function msg(t){var m=document.getElementById("auth-msg"); if(m){m.textContent=t;m.hidden=false;}}
+  if(!storageOK()){msg("Seu navegador está bloqueando o salvamento (modo anônimo, ou navegador de dentro de um app como WhatsApp/Instagram). Abra o link no Chrome ou Safari para criar/entrar na sua conta.");}
+  function enter(e){
+    try{localStorage.setItem("dmae:currentUser",e);}catch(x){}
+    var ok=false;try{ok=localStorage.getItem("dmae:currentUser")===e;}catch(x){}
+    if(!ok){msg("Não consegui salvar sua sessão neste navegador. Saia do modo anônimo ou do navegador de dentro do app e abra no Chrome ou Safari.");return;}
+    location.reload();
+  }
   function login(){
     var e=(document.getElementById("li-email").value||"").trim().toLowerCase();
     var pw=document.getElementById("li-pass").value||"";
@@ -314,8 +324,7 @@ window.DMAE_logout=function(){try{localStorage.removeItem("dmae:currentUser");}c
     var p=getP()[e];
     if(!p){msg("E-mail não encontrado. Crie sua conta.");return;}
     if(p.h!==hash(pw)){msg("Senha incorreta.");return;}
-    try{localStorage.setItem("dmae:currentUser",e);}catch(x){}
-    location.reload();
+    enter(e);
   }
   function signup(){
     var n=(document.getElementById("su-name").value||"").trim();
@@ -326,8 +335,7 @@ window.DMAE_logout=function(){try{localStorage.removeItem("dmae:currentUser");}c
     var all=getP();
     if(all[e]){msg("Já existe uma conta com esse e-mail. Faça login.");return;}
     all[e]={n:n,h:hash(pw)}; setP(all);
-    try{localStorage.setItem("dmae:currentUser",e);}catch(x){}
-    location.reload();
+    enter(e);
   }
   document.getElementById("li-btn").onclick=login;
   document.getElementById("su-btn").onclick=signup;
