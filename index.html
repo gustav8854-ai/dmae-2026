@@ -299,6 +299,7 @@
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
 <script>
+  window.DMAE_SLUG="dmae"; /* identifica ESTE concurso no backend compartilhado */
   try{ window.sb = window.supabase.createClient(
     "https://eruszwjnekrvfbtylbuv.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVydXN6d2puZWtydmZidHlsYnV2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODkxOTM3MTksImV4cCI6MjEwNDc2OTcxOX0.XfxqmgTu9OLI6moAk6XhasQc9RmgI9w-lpbzbHSJqqo",
@@ -2352,7 +2353,7 @@ window.DMAE_syncPull=async function(){
   var uid="";try{uid=localStorage.getItem("dmae:uid")||"";}catch(e){}
   if(!uid)return;
   try{
-    var r=await window.sb.from("progress").select("data").eq("user_id",uid).maybeSingle();
+    var r=await window.sb.from("progress").select("data").eq("user_id",uid).eq("slug",window.DMAE_SLUG||"dmae").maybeSingle();
     if(r.error)return;
     if(r.data&&r.data.data){
       var d=r.data.data;
@@ -2383,7 +2384,7 @@ window.DMAE_syncPull=async function(){
       try{scores=JSON.parse(localStorage.getItem(window.DMAE_KEY("scores"))||"[]");}catch(e){}
       try{caderno=JSON.parse(localStorage.getItem(window.DMAE_KEY("cadernoerros"))||"[]");}catch(e){}
       try{plano=JSON.parse(localStorage.getItem(window.DMAE_KEY("plano"))||"{}");}catch(e){}
-      window.sb.from("progress").upsert({user_id:uid,data:{scores:scores,caderno:caderno,plano:plano},updated_at:new Date().toISOString()}).then(function(){},function(){});
+      window.sb.from("progress").upsert({user_id:uid,slug:(window.DMAE_SLUG||"dmae"),data:{scores:scores,caderno:caderno,plano:plano},updated_at:new Date().toISOString()},{onConflict:"user_id,slug"}).then(function(){},function(){});
     }, now?0:900);
   };
 })();
