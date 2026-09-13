@@ -1751,7 +1751,13 @@ var FC=[
 ["Negação de 'Se p então q'","p e não q (não é 'se não p então não q')."],
 ["Aumentos sucessivos de 10% e 20%","32% (1,1×1,2), não 30%."],
 ["Vírgula pode separar sujeito do verbo?","Nunca."],
-["Explicativa × restritiva (vírgula)","Com vírgula = todos; sem vírgula = só alguns."]
+["Explicativa × restritiva (vírgula)","Com vírgula = todos; sem vírgula = só alguns."],
+["PPA / LDO / LOA","PPA planeja (4 anos) · LDO orienta (anual) · LOA executa (anual)."],
+["Estágios da despesa","Empenho → Liquidação → Pagamento."],
+["Demissão × exoneração","Demissão = punição; exoneração = não é punição."],
+["Vírgula e sujeito","A vírgula nunca separa o sujeito do verbo."],
+["Probabilidade","Casos favoráveis ÷ casos possíveis; 'pelo menos um' = 1 − P(nenhum)."],
+["Provimento originário","Nomeação."]
 ];
 (function(){
   var box=document.getElementById("fcs"); if(!box||typeof FC==="undefined")return;
@@ -2363,8 +2369,32 @@ var FC=[
     {t:"A progressão por MÉRITO no Plano de Carreira do DMAE depende de",o:["sorteio.","avaliação de desempenho.","indicação política.","tempo de casa apenas."],c:1,e:"A progressão por mérito ocorre mediante avaliação de desempenho (a cada 2 anos de efetivo exercício)."},
     {t:"A jornada prevista para cargos do DMAE pode ser",o:["somente 6 horas.","12×36 ou 8 horas diárias.","apenas aos sábados.","44 horas ininterruptas."],c:1,e:"Conforme a necessidade do serviço: escala 12×36 (diurna/noturna) ou 8 horas diárias."},
     {t:"A lei que dispõe sobre o Plano de Carreira dos servidores do DMAE é a",o:["LC 040/1992.","Lei 12.048/2014.","Lei 14.133/2021.","Decreto 20.179/2023."],c:1,e:"Lei nº 12.048/2014 (alterada pela Lei 13.179/2019). A LC 040 é o Estatuto; a 14.133 é licitações; o Decreto 20.179 é o Código de Ética."}
+  ]},
+  {mat:"Português",titulo:"Aula + treino: Pontuação (a vírgula)",aula:"A vírgula organiza a frase, mas <b>nunca separa o sujeito do verbo</b> nem o verbo do seu complemento. Ela é usada para: isolar o <b>vocativo</b> (“Senhores, atenção”) e o <b>aposto</b> (“João, o gerente, saiu”), separar a <b>oração adverbial deslocada</b> (“Quando chove, a rua alaga”) e a <b>oração adjetiva explicativa</b> (entre vírgulas = fala de todos).",qs:[
+    {t:"Assinale a frase corretamente pontuada.",o:["O servidor, entregou o relatório.","Entregue o relatório, o servidor saiu.","Concluído o expediente, o servidor saiu.","O setor de compras, aprovou o pedido."],c:2,e:"Oração adverbial/reduzida deslocada pede vírgula (C). A/D separam sujeito do verbo (erro)."},
+    {t:"A oração destacada em “Os servidores, que passaram no concurso, tomaram posse” é:",o:["restritiva (só alguns)","explicativa (todos passaram)","objetiva direta","adverbial de causa"],c:1,e:"Entre vírgulas = explicativa: refere-se a todos. Sem vírgula seria restritiva."},
+    {t:"Em qual alternativa a vírgula está INCORRETA?",o:["Comprei canetas, papéis e grampos.","Ana, venha aqui.","O diretor, analisou o caso.","Em 2026, haverá concurso."],c:2,e:"A vírgula não pode separar o sujeito (“O diretor”) do verbo (“analisou”)."},
+    {t:"A vírgula é obrigatória em:",o:["entre artigo e substantivo","antes da conjunção “e” aditiva com mesmo sujeito","para isolar o vocativo","entre verbo e objeto direto"],c:2,e:"Vocativo é sempre isolado por vírgula."}
+  ]},
+  {mat:"Matemática",titulo:"Aula + treino: Probabilidade",aula:"Probabilidade é a chance de algo acontecer: <b>casos favoráveis ÷ casos possíveis</b>. Ex.: num dado, a chance de sair “5” é 1/6. Para eventos independentes, multiplique as chances. Para “<b>pelo menos um</b>”, use o atalho: 1 − P(nenhum).",qs:[
+    {t:"A probabilidade de, num dado honesto, sair número maior que 4 é:",o:["1/6","1/3","1/2","2/3"],c:1,e:"Maiores que 4 = {5,6} = 2 em 6 = 1/3."},
+    {t:"Numa urna com 3 bolas brancas e 2 pretas, a probabilidade de tirar uma branca é:",o:["2/5","3/5","1/2","3/2"],c:1,e:"3 favoráveis ÷ 5 possíveis = 3/5."},
+    {t:"Jogando duas moedas, a probabilidade de sair duas caras é:",o:["1/2","1/3","1/4","2/4"],c:2,e:"Eventos independentes: 1/2 × 1/2 = 1/4."},
+    {t:"A probabilidade de um evento certo é:",o:["0","0,5","1","depende"],c:2,e:"Evento certo tem probabilidade 1 (100%)."}
+  ]},
+  {mat:"Específicos",titulo:"Aula + treino: Orçamento público (PPA, LDO, LOA)",aula:"O dinheiro público é planejado em 3 leis: <b>PPA</b> (Plano Plurianual, 4 anos, o planejamento grande), <b>LDO</b> (Lei de Diretrizes Orçamentárias, anual, define as metas e orienta a LOA) e <b>LOA</b> (Lei Orçamentária Anual, o orçamento do ano). A despesa segue 3 estágios: <b>empenho → liquidação → pagamento</b>.",qs:[
+    {t:"O planejamento de médio prazo, com vigência de 4 anos, é o:",o:["PPA","LDO","LOA","LRF"],c:0,e:"PPA = Plano Plurianual (4 anos)."},
+    {t:"Os estágios da despesa pública, na ordem correta, são:",o:["pagamento, empenho, liquidação","empenho, liquidação, pagamento","liquidação, empenho, pagamento","empenho, pagamento, liquidação"],c:1,e:"Empenho → liquidação → pagamento (Lei 4.320/64)."},
+    {t:"A lei que orienta a elaboração da LOA e define metas anuais é a:",o:["PPA","LDO","LOA","Lei 8.666"],c:1,e:"LDO orienta a LOA."},
+    {t:"Assinale a INCORRETA sobre orçamento público.",o:["A LOA é anual.","O PPA vigora por 4 anos.","A LDO é plurianual.","A despesa passa por empenho, liquidação e pagamento."],c:2,e:"A LDO é ANUAL (não plurianual)."}
+  ]},
+  {mat:"Legislação",titulo:"Aula + treino: Estatuto — provimento e vacância",aula:"<b>Provimento</b> é o ato de PREENCHER um cargo (ex.: nomeação); <b>vacância</b> é quando o cargo FICA VAGO (ex.: exoneração, demissão, aposentadoria). Atenção à diferença: <b>demissão</b> é penalidade (por falta grave); <b>exoneração</b> não é punição (a pedido ou de ofício). Após a nomeação, há prazos para <b>posse</b> e <b>exercício</b>, e o <b>estágio probatório</b> avalia o servidor.",qs:[
+    {t:"A forma originária de provimento de cargo público é a:",o:["promoção","nomeação","readaptação","reintegração"],c:1,e:"Nomeação é o provimento originário."},
+    {t:"Assinale a alternativa que indica uma forma de VACÂNCIA.",o:["nomeação","posse","exoneração","reversão"],c:2,e:"Exoneração vaga o cargo (vacância)."},
+    {t:"A diferença entre demissão e exoneração é que:",o:["são sinônimos","demissão é penalidade; exoneração não é","exoneração é penalidade; demissão não é","ambas são penalidades"],c:1,e:"Demissão = punição; exoneração = não punitiva."},
+    {t:"Assinale a correta.",o:["Posse e exercício são a mesma coisa.","O estágio probatório avalia o servidor no início da carreira.","A aposentadoria é forma de provimento.","Promoção é forma de vacância."],c:1,e:"Estágio probatório avalia o novo servidor. Aposentadoria é vacância; promoção é provimento derivado."}
   ]}
-  ];
+];
 
   var tv=document.getElementById("treinos"), lastMat="";
   TREINOS.forEach(function(tr,ti){
